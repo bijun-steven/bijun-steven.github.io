@@ -17,7 +17,7 @@
 <!--<![endif]-->
 
 <head>
-  <title>第一篇博客 | 前端进击之路</title>
+  <title>JS阻止冒泡方法 | 前端进击之路</title>
   <!-- Meta data -->
     <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -202,11 +202,36 @@
       </time>
     
 </span>
-                <h1>第一篇博客</h1>
+                <h1>JS阻止冒泡方法</h1>
             </div>
         </div>
         <div class="col-md-8 col-md-offset-2">
-      		<h2 id="国庆前的一天"><a href="#国庆前的一天" class="headerlink" title="国庆前的一天"></a>国庆前的一天</h2><p>这是一个段落</p>
+      		<p></p><p>JS事件流其中一种是冒泡事件，当一个元素被触发一个事件时，该目标元素的事件会优先被执行，然后向外传播到每个祖先元素，恰如水里的一个泡泡似的，从产生就一直往上浮，到在水平面时，它才消失。在这个过程中，如果你只希望事件发生在目标元素，而不想它传播到祖先元素上去，那么你需要在“泡泡”离开对象之前刺破它。 </p><p></p>
+<p></p><p>我在文档中写了一个层，<code>&lt;div id=&quot;need_hide&quot;&gt;</code>点击以外隐藏该层<code>&lt;/div&gt;</code>，并为之设置了简单的样式，现在我希望点击该层以外的地方使之隐藏，那么我给根元素绑定了一个click事件，一点击html就隐藏该DIV，代码如下</p><p></p>
+<p></p><p>Javascript代码</p><p></p>
+<p></p><p><br><code>document.documentElement.onclick = function() {  
+        document.getElementById(&#39;need_hide&#39;).style.display = &#39;none&#39;;  
+    }</code><br></p><p></p>
+<p></p><p>但是点击该层后，也使之隐藏了，这不是我希望得到的效果。由于该层属于根元素的子节点，所以它也被绑定了这个click事件，那么需在该元素被click时阻止冒泡事件的发生，加上以下代码： </p><p></p>
+<p></p><p>Javascript代码</p><p></p>
+<p></p><p><br><code>function stopPropagation(e) {  
+        e = e || window.event;  
+        if(e.stopPropagation) { //W3C阻止冒泡方法  
+            e.stopPropagation();  
+        } else {  
+            e.cancelBubble = true; //IE阻止冒泡方法  
+        }  
+    }  
+    document.getElementById(&#39;need_hide&#39;).onclick = function(e) {  
+        stopPropagation(e);  
+    }</code><br></p><p></p>
+<p></p><p>如果还想增加一个链接：<a href="#" id="btn_show">显示层</a>，用它来控制该层显示出来，那么仍然需要在该链接被点击时阻止冒泡事件的发生，加上以下代码： </p><p></p>
+<p></p><p>Javascript代码</p><p></p>
+<p></p><p><br><code>document.getElementById(&#39;btn_show&#39;).onclick = function(e) {  
+        document.getElementById(&#39;need_hide&#39;).style.display = &#39;block&#39;;  
+        stopPropagation(e);  
+    }</code></p>
+
             <div class="clearfix"></div>
             <hr class="nogutter">
         </div>
@@ -220,7 +245,7 @@
 </nav>
 
         <div class="duoshuo">
-<div class="ds-thread" data-thread-key="2016/01/10/第一篇博客/" data-title="第一篇博客" data-url="http://yoursite.com/2016/01/10/第一篇博客/"></div>
+<div class="ds-thread" data-thread-key="2016/01/10/第一篇博客/" data-title="JS阻止冒泡方法" data-url="http://yoursite.com/2016/01/10/第一篇博客/"></div>
 <script type="text/javascript">
 var duoshuoQuery = {short_name:"duoshuo_name"};
 (function() {
