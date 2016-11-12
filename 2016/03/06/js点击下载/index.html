@@ -7,13 +7,16 @@
 
     
 
-    <title>归档：2016/1 | 梦开始的地方</title>
+    <title>使用js实现点击按钮下载文件 | 梦开始的地方</title>
     <meta name="author" content="steven">
+    
+    <meta name="description" content="有时候我们在网页上需要增加一个下载按钮，让用户能够点击后下载页面上的资料，那么怎样才能实现功能呢？这里有两种方法：
+1.下载项目中的文件如果要下载的是一个excel文件模板，可以先将该文件放在项目文件夹下面，然后在页面下载按钮上加上onclick事件：1&amp;lt;i class=&quot;fa fa-down">
     
     
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-    
+    <meta property="og:title" content="使用js实现点击按钮下载文件"/>
     <meta property="og:site_name" content="勿忘初心"/>
 
     
@@ -175,40 +178,88 @@
 
     <main>
         <div class="container main-container">
-    
-
-<nav class="page-nav hide-on-small-only">
+    <nav class="page-nav hide-on-small-only">
     <div class="nav-wrapper indigo">
-        <span class="breadcrumb">当前位置（标签）</span>
+        <span class="breadcrumb">当前位置（分类目录）</span>
+        
+            
+
         
 
         
     </div>
 </nav>
 
+<article>
+    <div class="card">
+        <div class="card-content">
+            
+
+            <div class="article-title">
+                
+    
+        <h1>使用js实现点击按钮下载文件</h1>
+    
 
 
-    <ul class="collapsible mt-0" data-collapsible="accordion">
+            </div>
+            <time class="pink-link-context" datetime="2016-03-06T13:06:08.000Z"><a href="/2016/03/06/js点击下载/">2016-03-06</a></time>
+
+            
+    <div class="tags-row">
         
+            <a href="/tags/js/" class="chip pink lighten-1">js</a>
         
-            <li>
-                <div class="collapsible-header active">
-                    <i class="fa fa-archive"></i>2016
-                </div>
-                <div class="collapsible-body">
-                    <div class="collection">
-                        
-                            <a href="/2016/01/10/js冒泡/" class="collection-item grey-text text-darken-1">
-                                <time datetime="2016-01-10T03:08:37.000Z">2016-01-10</time>
-                                <span>&nbsp;&nbsp;&nbsp;</span>
-                                JS阻止冒泡方法
-                            </a>
-                        
-                    </div>
-                </div>
-            </li>
-        
-    </ul>
+    </div>
+
+
+            <div class="toc pink-link-context hide-on-med-and-down">
+    <ol class="section table-of-contents"><li class="section table-of-contents-item section table-of-contents-level-4"><a class="section table-of-contents-link" href="#1-下载项目中的文件"><span class="section table-of-contents-text">1.下载项目中的文件</span></a></li><li class="section table-of-contents-item section table-of-contents-level-4"><a class="section table-of-contents-link" href="#2-发送请求地址下载文件"><span class="section table-of-contents-text">2.发送请求地址下载文件</span></a><ol class="section table-of-contents-child"><li class="section table-of-contents-item section table-of-contents-level-5"><a class="section table-of-contents-link" href="#1）get请求"><span class="section table-of-contents-text">1）get请求</span></a></li><li class="section table-of-contents-item section table-of-contents-level-5"><a class="section table-of-contents-link" href="#2）post请求"><span class="section table-of-contents-text">2）post请求</span></a></li></ol></li></ol>
+</div>
+
+
+            <div class="entry pink-link-context">
+                <p></p><p>有时候我们在网页上需要增加一个下载按钮，让用户能够点击后下载页面上的资料，那么怎样才能实现功能呢？这里有两种方法：</p><p></p>
+<h4 id="1-下载项目中的文件"><a href="#1-下载项目中的文件" class="headerlink" title="1.下载项目中的文件"></a>1.下载项目中的文件</h4><p></p><p>如果要下载的是一个excel文件模板，可以先将该文件放在项目文件夹下面，然后在页面下载按钮上加上onclick事件：</p><br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;i <span class="class"><span class="keyword">class</span></span>=<span class="string">"fa fa-download"</span> aria-hidden=<span class="string">"true"</span> title=<span class="string">"下载"</span> onclick=<span class="string">"window.open('file/user.xlsx')"</span>&gt;&lt;/i&gt;</div></pre></td></tr></table></figure><p></p>
+<p></p><p>这样在点击图标之后，文件就会自动下载了。</p><p></p>
+<h4 id="2-发送请求地址下载文件"><a href="#2-发送请求地址下载文件" class="headerlink" title="2.发送请求地址下载文件"></a>2.发送请求地址下载文件</h4><p></p><p>JQuery的ajax函数的返回类型只有xml、text、json、html等类型，没有“流”类型，所以我们要实现ajax下载，不能够使用相应的ajax函数进行文件下载。但可以用js生成一个form，用这个form提交参数，并返回“流”类型的数据。在实现过程中，页面也没有进行刷新。</p><p></p>
+<h5 id="1）get请求"><a href="#1）get请求" class="headerlink" title="1）get请求"></a>1）get请求</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div></pre></td><td class="code"><pre><div class="line">	$(<span class="string">'.download'</span>).click(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">var</span> tt = <span class="keyword">new</span> <span class="built_in">Date</span>().getTime();</div><div class="line">    <span class="keyword">var</span> url = <span class="string">'http://192.168.1.231:8080/91survey/ws/excel/download'</span>;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 使用form表单来发送请求</div><div class="line">    * 1.method属性用来设置请求的类型——post还是get</div><div class="line">    * 2.action属性用来设置请求路径。</div><div class="line">    * </div><div class="line">     */</div><div class="line">    <span class="keyword">var</span> form=$(<span class="string">"&lt;form&gt;"</span>);<span class="comment">//定义一个form表单</span></div><div class="line">    form.attr(<span class="string">"style"</span>,<span class="string">"display:none"</span>);</div><div class="line">    form.attr(<span class="string">"target"</span>,<span class="string">""</span>);</div><div class="line">    form.attr(<span class="string">"method"</span>,<span class="string">"get"</span>);  <span class="comment">//请求类型</span></div><div class="line">    form.attr(<span class="string">"action"</span>,url);   <span class="comment">//请求地址</span></div><div class="line">    $(<span class="string">"body"</span>).append(form);<span class="comment">//将表单放置在web中</span></div><div class="line"></div><div class="line">    　　<span class="comment">/**</span></div><div class="line">         * input标签主要用来传递请求所需的参数：</div><div class="line">         *</div><div class="line">         * 1.name属性是传递请求所需的参数名.</div><div class="line">         * 2.value属性是传递请求所需的参数值.</div><div class="line">         *</div><div class="line">         * 3.当为get类型时，请求所需的参数用input标签来传递，直接写在URL后面是无效的。</div><div class="line">         * 4.当为post类型时，queryString参数直接写在URL后面，formData参数则用input标签传递</div><div class="line">         *       有多少数据则使用多少input标签</div><div class="line">         *</div><div class="line">    　　　*/</div><div class="line">    <span class="keyword">var</span> input1=$(<span class="string">"&lt;input&gt;"</span>);</div><div class="line">    input1.attr(<span class="string">"type"</span>,<span class="string">"hidden"</span>);</div><div class="line">    input1.attr(<span class="string">"name"</span>,<span class="string">"tt"</span>);</div><div class="line">    input1.attr(<span class="string">"value"</span>,tt);</div><div class="line">    form.append(input1);</div><div class="line"></div><div class="line">    <span class="keyword">var</span> input2=$(<span class="string">"&lt;input&gt;"</span>);</div><div class="line">    input2.attr(<span class="string">"type"</span>,<span class="string">"hidden"</span>);</div><div class="line">    input2.attr(<span class="string">"name"</span>,<span class="string">"companyId"</span>);</div><div class="line">    input2.attr(<span class="string">"value"</span>,companyId);</div><div class="line">    form.append(input2);</div><div class="line"></div><div class="line">    form.submit();<span class="comment">//表单提交</span></div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+<h5 id="2）post请求"><a href="#2）post请求" class="headerlink" title="2）post请求"></a>2）post请求</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">	$(<span class="string">'.download'</span>).click(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="keyword">var</span> tt =newDate().getTime();</div><div class="line">    <span class="keyword">var</span> url = restUrl +<span class="string">'/excel/download?userId='</span>+ userId;</div><div class="line">    <span class="keyword">var</span> form=$(<span class="string">"&lt;form&gt;"</span>);<span class="comment">//定义一个form表单</span></div><div class="line">    form.attr(<span class="string">"style"</span>,<span class="string">"display:none"</span>);</div><div class="line">    form.attr(<span class="string">"target"</span>,<span class="string">""</span>);</div><div class="line">    form.attr(<span class="string">"method"</span>,<span class="string">"post"</span>);<span class="comment">//请求类型</span></div><div class="line">    form.attr(<span class="string">"action"</span>,url);<span class="comment">//请求地址</span></div><div class="line">    $(<span class="string">"body"</span>).append(form);<span class="comment">//将表单放置在web中</span></div><div class="line"></div><div class="line">    <span class="keyword">var</span> input1=$(<span class="string">"&lt;input&gt;"</span>);</div><div class="line">    input1.attr(<span class="string">"type"</span>,<span class="string">"hidden"</span>);</div><div class="line">    input1.attr(<span class="string">"name"</span>,<span class="string">"tt"</span>);</div><div class="line">    input1.attr(<span class="string">"value"</span>,tt);</div><div class="line">    form.append(input1);</div><div class="line"></div><div class="line">    <span class="keyword">var</span> input2=$(<span class="string">"&lt;input&gt;"</span>);</div><div class="line">    input2.attr(<span class="string">"type"</span>,<span class="string">"hidden"</span>);</div><div class="line">    input2.attr(<span class="string">"name"</span>,<span class="string">"companyId"</span>);</div><div class="line">    input2.attr(<span class="string">"value"</span>,companyId);</div><div class="line">    form.append(input2);</div><div class="line">    form.submit();<span class="comment">//表单提交</span></div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+    <section id="comment">
+        <div class="card">
+            <div class="card-content">
+                <!-- Duoshuo Comment BEGIN -->
+                <div class="ds-thread" data-thread-key="2016/03/06/js点击下载/" data-title="使用js实现点击按钮下载文件" data-url="http://bijun-steven.github.io/2016/03/06/js点击下载/"></div>
+
+                <script type="text/javascript">
+                    console.log(document.querySelector('.ds-thread'));
+                    var duoshuoQuery = {
+                        short_name: 'bijun-steven'
+                    };
+                    (function() {
+                        var ds = document.createElement('script');
+                        ds.type = 'text/javascript';
+                        ds.async = true;
+                        ds.src = (document.location.protocol == 'https:'
+                            ? 'https:'
+                            : 'http:') + '//static.duoshuo.com/embed.js';
+                        ds.charset = 'UTF-8';
+                        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);
+                    })();
+                </script>
+                <!-- Duoshuo Comment END -->
+            </div>
+        </div>
+    </section>
+
 
 
 </div>
