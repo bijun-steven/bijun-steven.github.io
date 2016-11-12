@@ -17,7 +17,7 @@
 <!--<![endif]-->
 
 <head>
-  <title>Archives | 前端进击之路</title>
+  <title>JS阻止冒泡方法 | 前端进击之路</title>
   <!-- Meta data -->
     <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -84,7 +84,7 @@
 </head>
 
 <!--
-<body class="home-template">
+<body class="post-template">
 -->
 <body id="index" class="lightnav animsition">
 
@@ -191,87 +191,77 @@
         <!-- ============================ Header & Logo bar =========================== -->
 
 
-      <!-- ============================ Hero Image =========================== -->
-
-<section id="hero" class="scrollme">
-    <div class="container-fluid element-img" style="background: url(/img/bg_img.jpg) no-repeat center center fixed;background-size: cover">
-        <div class="row">
-            <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-8 col-md-offset-2 vertical-align cover boost text-center">
-                <div class="center-me animateme" data-when="exit" data-from="0" data-to="0.6" data-opacity="0" data-translatey="100">
-                    <div>
-                        
-                        <h2>YOU'VE MADE A <span>BRAVE</span> DECISION, WELCOME.</h2>
-                        <p></p>
-                        
-                        <h2></h2>
-                        <p>每一个不曾起舞的日子都是对生命的辜负。</p>
-                        
-
-                    </div>
-                </div>
-            </div>
-            <!-- // .col-md-12 -->
-        </div>
-        <div class="herofade beige-dk"></div>
-    </div>
-</section>
-
-<!-- Height spacing helper -->
-<div class="heightblock"></div>
-<!-- // End height spacing helper -->
-
-<!-- ============================ END Hero Image =========================== -->
-
-
-
-
-<section id="services">
+      
+<section id="intro">
     <div class="container">
-        <div class="row">
-            <div class="col-md-10 col-md-offset-1">
-                <div class="row boxes">
-                    
-                    
-                        
-                        
-                        <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 wow fadeInUp" data-wow-delay="0.3s">
-                            
-                              <h4 class="title"><a href="/2016/02/23/cookie/">js中利用cookie实现记住密码功能</a></h4>
-                            
-                            <p><time datetime="2016-02-23T01:37:42.000Z"><a href="/2016/02/23/cookie/">2016-02-23</a></time></p>
-                        </div>
-                    
-                        
-                        
-                        <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 wow fadeInUp" data-wow-delay="0.3s">
-                            
-                              <h4 class="title"><a href="/2016/02/11/正则表达式/">9个常用的正则表达式</a></h4>
-                            
-                            <p><time datetime="2016-02-11T13:30:02.000Z"><a href="/2016/02/11/正则表达式/">2016-02-11</a></time></p>
-                        </div>
-                    
-                        
-                        
-                        <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 wow fadeInUp" data-wow-delay="0.3s">
-                            
-                              <h4 class="title"><a href="/2016/01/10/js冒泡/">JS阻止冒泡方法</a></h4>
-                            
-                            <p><time datetime="2016-01-10T03:08:37.000Z"><a href="/2016/01/10/js冒泡/">2016-01-10</a></time></p>
-                        </div>
-                    
-                </div>
-            </div>    
+        <div class="row col-md-offset-2">
+            <div class="col-md-8">
+    			<span class="post-meta">
+      <time datetime="2016-01-10T03:08:37.000Z" itemprop="datePublished">
+          2016-01-10
+      </time>
+    
+</span>
+                <h1>JS阻止冒泡方法</h1>
+            </div>
         </div>
-    </div>
-</section> 
+        <div class="col-md-8 col-md-offset-2">
+      		<p></p><p>JS事件流其中一种是冒泡事件，当一个元素被触发一个事件时，该目标元素的事件会优先被执行，然后向外传播到每个祖先元素，恰如水里的一个泡泡似的，从产生就一直往上浮，到在水平面时，它才消失。在这个过程中，如果你只希望事件发生在目标元素，而不想它传播到祖先元素上去，那么你需要在“泡泡”离开对象之前刺破它。 </p><p></p>
+<p></p><p>我在文档中写了一个层，<code>&lt;div id=&quot;need_hide&quot;&gt;</code>点击以外隐藏该层<code>&lt;/div&gt;</code>，并为之设置了简单的样式，现在我希望点击该层以外的地方使之隐藏，那么我给根元素绑定了一个click事件，一点击html就隐藏该DIV，代码如下</p><p></p>
+<p></p><p>Javascript代码</p><p></p>
+<p></p><p><br><code>document.documentElement.onclick = function() {  
+        document.getElementById(&#39;need_hide&#39;).style.display = &#39;none&#39;;  
+    }</code><br></p><p></p>
+<p></p><p>但是点击该层后，也使之隐藏了，这不是我希望得到的效果。由于该层属于根元素的子节点，所以它也被绑定了这个click事件，那么需在该元素被click时阻止冒泡事件的发生，加上以下代码： </p><p></p>
+<p></p><p>Javascript代码</p><p></p>
+<p></p><p><br><code>function stopPropagation(e) {  
+        e = e || window.event;  
+        if(e.stopPropagation) { //W3C阻止冒泡方法  
+            e.stopPropagation();  
+        } else {  
+            e.cancelBubble = true; //IE阻止冒泡方法  
+        }  
+    }  
+    document.getElementById(&#39;need_hide&#39;).onclick = function(e) {  
+        stopPropagation(e);  
+    }</code><br></p><p></p>
+<p></p><p>如果还想增加一个链接：<a href="#" id="btn_show">显示层</a>，用它来控制该层显示出来，那么仍然需要在该链接被点击时阻止冒泡事件的发生，加上以下代码： </p><p></p>
+<p></p><p>Javascript代码</p><p></p>
+<p></p><p><br><code>document.getElementById(&#39;btn_show&#39;).onclick = function(e) {  
+        document.getElementById(&#39;need_hide&#39;).style.display = &#39;block&#39;;  
+        stopPropagation(e);  
+    }</code></p>
 
-<section id="statement">
-    <div class="container text-center wow fadeInUp" data-wow-delay="0.5s">
-        <div class="row">
-            <p>生命不息，学无止境。</p>
+            <div class="clearfix"></div>
+            <hr class="nogutter">
         </div>
+        <nav class="pagination" role="pagination">
+    
+    <a class="pull-left" href="/2016/02/11/正则表达式/" style="float: left;">
+        ← 9个常用的正则表达式
+    </a>
+    
+    
+</nav>
+
+        <div class="duoshuo">
+<div class="ds-thread" data-thread-key="2016/01/10/js冒泡/" data-title="JS阻止冒泡方法" data-url="http://yoursite.com/2016/01/10/js冒泡/"></div>
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"duoshuo_name"};
+(function() {
+	var ds = document.createElement('script');
+	ds.type = 'text/javascript';ds.async = true;
+	ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+	ds.charset = 'UTF-8';
+	(document.getElementsByTagName('head')[0] 
+	 || document.getElementsByTagName('body')[0]).appendChild(ds);
+})();
+</script>
+</div>
     </div>
 </section>
+
+
       
 <!-- ============================ Footer =========================== -->
 
