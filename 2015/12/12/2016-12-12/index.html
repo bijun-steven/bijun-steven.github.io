@@ -7,13 +7,16 @@
 
     
 
-    <title>归档 | 梦开始的地方</title>
+    <title>css中input与button高度不一致的原因及解决方法 | 梦开始的地方</title>
     <meta name="author" content="steven">
+    
+    <meta name="description" content="【css文本框与按钮不对齐解决方案 】button在高度计算上始终使用了Quirks模式。在Quirks模式下，边框的计算是在元素的宽度内的，而不像标准模式一样计算在外部（button的高度包含边框的高度，而文本框text则不包含边框高度。）
+表单是网页中的重要元素，以及高频率出现的元素，如何把表单">
     
     
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-    
+    <meta property="og:title" content="css中input与button高度不一致的原因及解决方法"/>
     <meta property="og:site_name" content="勿忘初心"/>
 
     
@@ -175,93 +178,93 @@
 
     <main>
         <div class="container main-container">
-    
-
-<nav class="page-nav hide-on-small-only">
+    <nav class="page-nav hide-on-small-only">
     <div class="nav-wrapper indigo">
-        <span class="breadcrumb">当前位置（归档）</span>
+        <span class="breadcrumb">当前位置（分类目录）</span>
+        
+            
+
         
 
         
     </div>
 </nav>
 
+<article>
+    <div class="card">
+        <div class="card-content">
+            
+
+            <div class="article-title">
+                
+    
+        <h1>css中input与button高度不一致的原因及解决方法</h1>
+    
 
 
-    <ul class="collapsible mt-0" data-collapsible="accordion">
+            </div>
+            <time class="pink-link-context" datetime="2015-12-12T08:44:43.000Z"><a href="/2015/12/12/2016-12-12/">2015-12-12</a></time>
+
+            
+    <div class="tags-row">
         
+            <a href="/tags/css/" class="chip pink lighten-1">css</a>
         
-            <li>
-                <div class="collapsible-header active">
-                    <i class="fa fa-archive"></i>2016
-                </div>
-                <div class="collapsible-body">
-                    <div class="collection">
-                        
-                            <a href="/2016/03/06/js点击下载/" class="collection-item grey-text text-darken-1">
-                                <time datetime="2016-03-06T13:06:08.000Z">2016-03-06</time>
-                                <span>&nbsp;&nbsp;&nbsp;</span>
-                                使用js实现点击按钮下载文件
-                            </a>
-                        
-                            <a href="/2016/02/23/cookie/" class="collection-item grey-text text-darken-1">
-                                <time datetime="2016-02-23T01:37:42.000Z">2016-02-23</time>
-                                <span>&nbsp;&nbsp;&nbsp;</span>
-                                js中利用cookie实现记住密码功能
-                            </a>
-                        
-                            <a href="/2016/02/11/正则表达式/" class="collection-item grey-text text-darken-1">
-                                <time datetime="2016-02-11T13:30:02.000Z">2016-02-11</time>
-                                <span>&nbsp;&nbsp;&nbsp;</span>
-                                9个常用的正则表达式
-                            </a>
-                        
-                            <a href="/2016/01/10/js冒泡/" class="collection-item grey-text text-darken-1">
-                                <time datetime="2016-01-10T03:08:37.000Z">2016-01-10</time>
-                                <span>&nbsp;&nbsp;&nbsp;</span>
-                                JS阻止冒泡方法
-                            </a>
-                        
-                            <a href="/2016/01/04/2016-01-04/" class="collection-item grey-text text-darken-1">
-                                <time datetime="2016-01-04T02:58:24.000Z">2016-01-04</time>
-                                <span>&nbsp;&nbsp;&nbsp;</span>
-                                移动端1px的边框
-                            </a>
-                        
-                    </div>
-                </div>
-            </li>
-        
-            <li>
-                <div class="collapsible-header ">
-                    <i class="fa fa-archive"></i>2015
-                </div>
-                <div class="collapsible-body">
-                    <div class="collection">
-                        
-                            <a href="/2015/12/21/scroll/" class="collection-item grey-text text-darken-1">
-                                <time datetime="2015-12-21T12:31:05.000Z">2015-12-21</time>
-                                <span>&nbsp;&nbsp;&nbsp;</span>
-                                js判断鼠标向上滚动并浮动导航
-                            </a>
-                        
-                            <a href="/2015/12/12/2016-12-12/" class="collection-item grey-text text-darken-1">
-                                <time datetime="2015-12-12T08:44:43.000Z">2015-12-12</time>
-                                <span>&nbsp;&nbsp;&nbsp;</span>
-                                css中input与button高度不一致的原因及解决方法
-                            </a>
-                        
-                            <a href="/2015/11/21/createBlog/" class="collection-item grey-text text-darken-1">
-                                <time datetime="2015-11-21T11:55:51.000Z">2015-11-21</time>
-                                <span>&nbsp;&nbsp;&nbsp;</span>
-                                hexo + github + 多说 来搭建免费博客
-                            </a>
-                        
-                    </div>
-                </div>
-            </li>
-        
-    </ul>
+    </div>
+
+
+            <div class="toc pink-link-context hide-on-med-and-down">
+    
+</div>
+
+
+            <div class="entry pink-link-context">
+                <p>【css文本框与按钮不对齐解决方案 】button在高度计算上始终使用了Quirks模式。在Quirks模式下，边框的计算是在元素的宽度内的，而不像标准模式一样计算在外部（button的高度包含边框的高度，而文本框text则不包含边框高度。）</p>
+<p>表单是网页中的重要元素，以及高频率出现的元素，如何把表单做的漂亮非常重要。首先我们需要解决一个实际的问题，就是文本框与按钮不对齐的问题。这个看似简单的问题追究到底可以发现很多我们未尝想到的原理。按钮(button)的高的解析问题导致了不对其问题的根本原因。下面演示正确的代码示范。</p>
+<p>文字要包含在label标签中，并设置行高，否则文字会与文本框的顶 端对齐。文本框要设置vertical-align:middle;否则文本框与button顶端对齐。button中文字垂直居中，要设置高和行高，行高要小于高。</p>
+<p>对input标记设定样式，代码如下：</p>
+<p>html 代码<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;form&gt; &lt;input type=”text” name=”textfield” id=”textfield” /&gt;</div><div class="line">&lt;input type=”submit” name=”button” id=”button” value=”提交” /&gt;</div><div class="line">&lt;/form&gt;</div></pre></td></tr></table></figure></p>
+<p>CSS 代码<br><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">#textfield&#123;border:1px solid #000;height:16px;&#125;</div><div class="line">#button&#123;background:#FFF;color:#000;border:1px solid #000;height:20px;&#125;</div></pre></td></tr></table></figure></p>
+<p>文本域设置高度 16px，按钮高度需要设置 20px。按照 IE 的标准正常对齐，但在 Firefox 中文本域和按钮高度是错开的。</p>
+<p>此时通过对 input 标记设定左浮动 (float:left)，即可兼容 Firefox，CSS 代码如下：<br><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">#textfield&#123;border:1px solid #000;height:16px;float:left;&#125;</div><div class="line">#button&#123;background:#FFF;color:#000;border:1px solid #000;height:20px;float:left;&#125;</div></pre></td></tr></table></figure></p>
+<p>当然，可以使用CSS Hack以更有针对性地控制浏览器表现。</p>
+<p>小结：button在高度计算上始终使用了Quirks模式。在Quirks模式下，边框的计算是在元素的宽度内的，而不像标准模式一样计算在外部，所以在text和button上同时设置边框就会得到button的高度比text小的现象。所以文本框要与button按钮对齐，button的高度是要高于文本text</p>
+
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+    <section id="comment">
+        <div class="card">
+            <div class="card-content">
+                <!-- Duoshuo Comment BEGIN -->
+                <div class="ds-thread" data-thread-key="2015/12/12/2016-12-12/" data-title="css中input与button高度不一致的原因及解决方法" data-url="http://bijun-steven.github.io/2015/12/12/2016-12-12/"></div>
+
+                <script type="text/javascript">
+                    console.log(document.querySelector('.ds-thread'));
+                    var duoshuoQuery = {
+                        short_name: 'bijun-steven'
+                    };
+                    (function() {
+                        var ds = document.createElement('script');
+                        ds.type = 'text/javascript';
+                        ds.async = true;
+                        ds.src = (document.location.protocol == 'https:'
+                            ? 'https:'
+                            : 'http:') + '//static.duoshuo.com/embed.js';
+                        ds.charset = 'UTF-8';
+                        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);
+                    })();
+                </script>
+                <!-- Duoshuo Comment END -->
+            </div>
+        </div>
+    </section>
+
 
 
 </div>

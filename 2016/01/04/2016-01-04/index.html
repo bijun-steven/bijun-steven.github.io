@@ -7,13 +7,17 @@
 
     
 
-    <title>归档 | 梦开始的地方</title>
+    <title>移动端1px的边框 | 梦开始的地方</title>
     <meta name="author" content="steven">
+    
+    <meta name="description" content="本文主要介绍几种 移动端视网膜（Retina）屏幕下1px边框线的解决方法。
+1、通过viewport + rem的方式来兼容。目前这种兼容方案相对比较完美，适合新项目（老项目改用REM单位成本会比较高)。在devicePixelRatio = 2 时，输出viewport
+在devicePixel">
     
     
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-    
+    <meta property="og:title" content="移动端1px的边框"/>
     <meta property="og:site_name" content="勿忘初心"/>
 
     
@@ -175,93 +179,103 @@
 
     <main>
         <div class="container main-container">
-    
-
-<nav class="page-nav hide-on-small-only">
+    <nav class="page-nav hide-on-small-only">
     <div class="nav-wrapper indigo">
-        <span class="breadcrumb">当前位置（归档）</span>
+        <span class="breadcrumb">当前位置（分类目录）</span>
+        
+            
+
         
 
         
     </div>
 </nav>
 
+<article>
+    <div class="card">
+        <div class="card-content">
+            
+
+            <div class="article-title">
+                
+    
+        <h1>移动端1px的边框</h1>
+    
 
 
-    <ul class="collapsible mt-0" data-collapsible="accordion">
+            </div>
+            <time class="pink-link-context" datetime="2016-01-04T02:58:24.000Z"><a href="/2016/01/04/2016-01-04/">2016-01-04</a></time>
+
+            
+    <div class="tags-row">
         
+            <a href="/tags/移动端/" class="chip pink lighten-1">移动端</a>
         
-            <li>
-                <div class="collapsible-header active">
-                    <i class="fa fa-archive"></i>2016
-                </div>
-                <div class="collapsible-body">
-                    <div class="collection">
-                        
-                            <a href="/2016/03/06/js点击下载/" class="collection-item grey-text text-darken-1">
-                                <time datetime="2016-03-06T13:06:08.000Z">2016-03-06</time>
-                                <span>&nbsp;&nbsp;&nbsp;</span>
-                                使用js实现点击按钮下载文件
-                            </a>
-                        
-                            <a href="/2016/02/23/cookie/" class="collection-item grey-text text-darken-1">
-                                <time datetime="2016-02-23T01:37:42.000Z">2016-02-23</time>
-                                <span>&nbsp;&nbsp;&nbsp;</span>
-                                js中利用cookie实现记住密码功能
-                            </a>
-                        
-                            <a href="/2016/02/11/正则表达式/" class="collection-item grey-text text-darken-1">
-                                <time datetime="2016-02-11T13:30:02.000Z">2016-02-11</time>
-                                <span>&nbsp;&nbsp;&nbsp;</span>
-                                9个常用的正则表达式
-                            </a>
-                        
-                            <a href="/2016/01/10/js冒泡/" class="collection-item grey-text text-darken-1">
-                                <time datetime="2016-01-10T03:08:37.000Z">2016-01-10</time>
-                                <span>&nbsp;&nbsp;&nbsp;</span>
-                                JS阻止冒泡方法
-                            </a>
-                        
-                            <a href="/2016/01/04/2016-01-04/" class="collection-item grey-text text-darken-1">
-                                <time datetime="2016-01-04T02:58:24.000Z">2016-01-04</time>
-                                <span>&nbsp;&nbsp;&nbsp;</span>
-                                移动端1px的边框
-                            </a>
-                        
-                    </div>
-                </div>
-            </li>
-        
-            <li>
-                <div class="collapsible-header ">
-                    <i class="fa fa-archive"></i>2015
-                </div>
-                <div class="collapsible-body">
-                    <div class="collection">
-                        
-                            <a href="/2015/12/21/scroll/" class="collection-item grey-text text-darken-1">
-                                <time datetime="2015-12-21T12:31:05.000Z">2015-12-21</time>
-                                <span>&nbsp;&nbsp;&nbsp;</span>
-                                js判断鼠标向上滚动并浮动导航
-                            </a>
-                        
-                            <a href="/2015/12/12/2016-12-12/" class="collection-item grey-text text-darken-1">
-                                <time datetime="2015-12-12T08:44:43.000Z">2015-12-12</time>
-                                <span>&nbsp;&nbsp;&nbsp;</span>
-                                css中input与button高度不一致的原因及解决方法
-                            </a>
-                        
-                            <a href="/2015/11/21/createBlog/" class="collection-item grey-text text-darken-1">
-                                <time datetime="2015-11-21T11:55:51.000Z">2015-11-21</time>
-                                <span>&nbsp;&nbsp;&nbsp;</span>
-                                hexo + github + 多说 来搭建免费博客
-                            </a>
-                        
-                    </div>
-                </div>
-            </li>
-        
-    </ul>
+    </div>
+
+
+            <div class="toc pink-link-context hide-on-med-and-down">
+    <ol class="section table-of-contents"><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#1、通过viewport-rem的方式来兼容。"><span class="section table-of-contents-text">1、通过viewport + rem的方式来兼容。</span></a></li><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#3、box-shadow"><span class="section table-of-contents-text">3、box-shadow</span></a></li><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#4、background-image"><span class="section table-of-contents-text">4、background-image</span></a></li></ol>
+</div>
+
+
+            <div class="entry pink-link-context">
+                <p>本文主要介绍几种 移动端视网膜（Retina）屏幕下1px边框线的解决方法。</p>
+<h2 id="1、通过viewport-rem的方式来兼容。"><a href="#1、通过viewport-rem的方式来兼容。" class="headerlink" title="1、通过viewport + rem的方式来兼容。"></a>1、通过viewport + rem的方式来兼容。</h2><p>目前这种兼容方案相对比较完美，适合新项目（老项目改用REM单位成本会比较高)。<br>在devicePixelRatio = 2 时，输出viewport</p>
+<p><pre><meta name="viewport" content="initial-scale=0.5, maximum-scale=0.5, minimum-scale=0.5, user-scalable=no"></pre><br>在devicePixelRatio = 3 时，输出viewport</p>
+<p><pre><meta name="viewport" content="initial-scale=0.3333333333333333, maximum-scale=0.3333333333333333, minimum-scale=0.3333333333333333, user-scalable=no"></pre><br>同时通过设置对应viewport的rem基准值，这种方式就可以像以前一样轻松愉快的写1px了。</p>
+<p>##2、transform: scale(0.5)<br>实现方式<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">height:<span class="number">1</span>px;</div><div class="line">-webkit-transform: scaleY(<span class="number">0.5</span>);</div><div class="line">-webkit-transform-origin:<span class="number">0</span> <span class="number">0</span>;</div><div class="line">overflow: hidden;</div></pre></td></tr></table></figure></p>
+<p>优点</p>
+<p>圆角无法实现，hack代码多，实现4条边框比较闹心</p>
+<p>缺点</p>
+<p>只能单独使用，如果嵌套，scale的作用也会对包含的元素产生，不想要的影响，所以此种方案配合:after和:before独立使用较多，比如画一个商品的边框四条线，容器的after和before可以画2条线，利用容器的父元素的after、before再画2条线。<br><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">.after-scale&#123;</div><div class="line">  position: relative;</div><div class="line">&#125;</div><div class="line">.after-scale:after&#123;</div><div class="line">  content:"";</div><div class="line">  position: absolute;</div><div class="line">  bottom:0px;</div><div class="line">  left:0px;</div><div class="line">  right:0px;</div><div class="line">  border-bottom:1px solid #c8c7cc;</div><div class="line">  -webkit-transform:scaleY(.5);</div><div class="line">  -webkit-transform-origin:0 0;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h2 id="3、box-shadow"><a href="#3、box-shadow" class="headerlink" title="3、box-shadow"></a>3、box-shadow</h2><p>实现方式</p>
+<p>利用css 对阴影处理的方式实现0.5px的效果</p>
+<p>底部一条线</p>
+<p><pre>-webkit-box-shadow:0 1px 1px -1px rgba(0, 0, 0, 0.5);</pre><br>著作权归作者所有。<br>商业转载请联系作者获得授权,非商业转载请注明出处。<br>链接:<a href="http://caibaojian.com/mobile-1px-border.html" target="_blank" rel="external">http://caibaojian.com/mobile-1px-border.html</a><br>来源:<a href="http://caibaojian.com" target="_blank" rel="external">http://caibaojian.com</a></p>
+<p>优点基本所有场景都能满足，包含圆角的button，单条，多条线，</p>
+<p>缺点</p>
+<p>颜色不好处理， 黑色 rgba(0,0,0,1) 最浓的情况了。有阴影出现，不好用。</p>
+<h2 id="4、background-image"><a href="#4、background-image" class="headerlink" title="4、background-image"></a>4、background-image</h2><p>实现方式</p>
+<p>设置1px通过css 实现的image，50%有颜色，50%透明<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">.border &#123;</div><div class="line">  background-image:linear-gradient(<span class="number">180</span>deg, red, red <span class="number">50</span>%, transparent <span class="number">50</span>%),</div><div class="line">  linear-gradient(<span class="number">270</span>deg, red, red <span class="number">50</span>%, transparent <span class="number">50</span>%),</div><div class="line">  linear-gradient(<span class="number">0</span>deg, red, red <span class="number">50</span>%, transparent <span class="number">50</span>%),</div><div class="line">  linear-gradient(<span class="number">90</span>deg, red, red <span class="number">50</span>%, transparent <span class="number">50</span>%);</div><div class="line">  background-size: <span class="number">100</span>% <span class="number">1</span>px,<span class="number">1</span>px <span class="number">100</span>% ,<span class="number">100</span>% <span class="number">1</span>px, <span class="number">1</span>px <span class="number">100</span>%;</div><div class="line">  background-repeat: no-repeat;</div><div class="line">  background-position: top, right top,  bottom, left top;</div><div class="line">  padding: <span class="number">10</span>px;</div><div class="line">    &#125;</div></pre></td></tr></table></figure></p>
+<p>优点</p>
+<p>配合background-image,background-size,background-position 可以实现单条，多条边框。边框的颜色随意设置<br>缺点<br>如果有圆角的效果，很sorry 圆角的地方没有线框的颜色。都要写的代码也不少</p>
+
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+    <section id="comment">
+        <div class="card">
+            <div class="card-content">
+                <!-- Duoshuo Comment BEGIN -->
+                <div class="ds-thread" data-thread-key="2016/01/04/2016-01-04/" data-title="移动端1px的边框" data-url="http://bijun-steven.github.io/2016/01/04/2016-01-04/"></div>
+
+                <script type="text/javascript">
+                    console.log(document.querySelector('.ds-thread'));
+                    var duoshuoQuery = {
+                        short_name: 'bijun-steven'
+                    };
+                    (function() {
+                        var ds = document.createElement('script');
+                        ds.type = 'text/javascript';
+                        ds.async = true;
+                        ds.src = (document.location.protocol == 'https:'
+                            ? 'https:'
+                            : 'http:') + '//static.duoshuo.com/embed.js';
+                        ds.charset = 'UTF-8';
+                        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);
+                    })();
+                </script>
+                <!-- Duoshuo Comment END -->
+            </div>
+        </div>
+    </section>
+
 
 
 </div>

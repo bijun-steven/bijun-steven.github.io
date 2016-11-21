@@ -7,13 +7,15 @@
 
     
 
-    <title>归档 | 梦开始的地方</title>
+    <title>js判断鼠标向上滚动并浮动导航 | 梦开始的地方</title>
     <meta name="author" content="steven">
+    
+    <meta name="description" content="判断鼠标向上滚动，或者向下滚动，可以通过对比用户的上一次滚动的坐标和下一次的坐标，当上一次小于下一次时，即用户在向下滚动，反之，则说明用户在向上滚动。滚动的坐标值可以取窗口的scrollTop。为啥会有这个需求呢？有没有发现在一国外的一些网站，当你向上滚动时，导航条浮动在顶部位置。用户如果是想看内容">
     
     
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-    
+    <meta property="og:title" content="js判断鼠标向上滚动并浮动导航"/>
     <meta property="og:site_name" content="勿忘初心"/>
 
     
@@ -175,93 +177,86 @@
 
     <main>
         <div class="container main-container">
-    
-
-<nav class="page-nav hide-on-small-only">
+    <nav class="page-nav hide-on-small-only">
     <div class="nav-wrapper indigo">
-        <span class="breadcrumb">当前位置（归档）</span>
+        <span class="breadcrumb">当前位置（分类目录）</span>
+        
+            
+
         
 
         
     </div>
 </nav>
 
+<article>
+    <div class="card">
+        <div class="card-content">
+            
+
+            <div class="article-title">
+                
+    
+        <h1>js判断鼠标向上滚动并浮动导航</h1>
+    
 
 
-    <ul class="collapsible mt-0" data-collapsible="accordion">
+            </div>
+            <time class="pink-link-context" datetime="2015-12-21T12:31:05.000Z"><a href="/2015/12/21/scroll/">2015-12-21</a></time>
+
+            
+    <div class="tags-row">
         
+            <a href="/tags/js/" class="chip pink lighten-1">js</a>
         
-            <li>
-                <div class="collapsible-header active">
-                    <i class="fa fa-archive"></i>2016
-                </div>
-                <div class="collapsible-body">
-                    <div class="collection">
-                        
-                            <a href="/2016/03/06/js点击下载/" class="collection-item grey-text text-darken-1">
-                                <time datetime="2016-03-06T13:06:08.000Z">2016-03-06</time>
-                                <span>&nbsp;&nbsp;&nbsp;</span>
-                                使用js实现点击按钮下载文件
-                            </a>
-                        
-                            <a href="/2016/02/23/cookie/" class="collection-item grey-text text-darken-1">
-                                <time datetime="2016-02-23T01:37:42.000Z">2016-02-23</time>
-                                <span>&nbsp;&nbsp;&nbsp;</span>
-                                js中利用cookie实现记住密码功能
-                            </a>
-                        
-                            <a href="/2016/02/11/正则表达式/" class="collection-item grey-text text-darken-1">
-                                <time datetime="2016-02-11T13:30:02.000Z">2016-02-11</time>
-                                <span>&nbsp;&nbsp;&nbsp;</span>
-                                9个常用的正则表达式
-                            </a>
-                        
-                            <a href="/2016/01/10/js冒泡/" class="collection-item grey-text text-darken-1">
-                                <time datetime="2016-01-10T03:08:37.000Z">2016-01-10</time>
-                                <span>&nbsp;&nbsp;&nbsp;</span>
-                                JS阻止冒泡方法
-                            </a>
-                        
-                            <a href="/2016/01/04/2016-01-04/" class="collection-item grey-text text-darken-1">
-                                <time datetime="2016-01-04T02:58:24.000Z">2016-01-04</time>
-                                <span>&nbsp;&nbsp;&nbsp;</span>
-                                移动端1px的边框
-                            </a>
-                        
-                    </div>
-                </div>
-            </li>
-        
-            <li>
-                <div class="collapsible-header ">
-                    <i class="fa fa-archive"></i>2015
-                </div>
-                <div class="collapsible-body">
-                    <div class="collection">
-                        
-                            <a href="/2015/12/21/scroll/" class="collection-item grey-text text-darken-1">
-                                <time datetime="2015-12-21T12:31:05.000Z">2015-12-21</time>
-                                <span>&nbsp;&nbsp;&nbsp;</span>
-                                js判断鼠标向上滚动并浮动导航
-                            </a>
-                        
-                            <a href="/2015/12/12/2016-12-12/" class="collection-item grey-text text-darken-1">
-                                <time datetime="2015-12-12T08:44:43.000Z">2015-12-12</time>
-                                <span>&nbsp;&nbsp;&nbsp;</span>
-                                css中input与button高度不一致的原因及解决方法
-                            </a>
-                        
-                            <a href="/2015/11/21/createBlog/" class="collection-item grey-text text-darken-1">
-                                <time datetime="2015-11-21T11:55:51.000Z">2015-11-21</time>
-                                <span>&nbsp;&nbsp;&nbsp;</span>
-                                hexo + github + 多说 来搭建免费博客
-                            </a>
-                        
-                    </div>
-                </div>
-            </li>
-        
-    </ul>
+    </div>
+
+
+            <div class="toc pink-link-context hide-on-med-and-down">
+    <ol class="section table-of-contents"><li class="section table-of-contents-item section table-of-contents-level-4"><a class="section table-of-contents-link" href="#html"><span class="section table-of-contents-text">html</span></a></li><li class="section table-of-contents-item section table-of-contents-level-4"><a class="section table-of-contents-link" href="#js"><span class="section table-of-contents-text">js</span></a></li><li class="section table-of-contents-item section table-of-contents-level-4"><a class="section table-of-contents-link" href="#css"><span class="section table-of-contents-text">css</span></a></li></ol>
+</div>
+
+
+            <div class="entry pink-link-context">
+                <p>判断鼠标向上滚动，或者向下滚动，可以通过对比用户的上一次滚动的坐标和下一次的坐标，当上一次小于下一次时，即用户在向下滚动，反之，则说明用户在向上滚动。滚动的坐标值可以取窗口的scrollTop。<br>为啥会有这个需求呢？有没有发现在一国外的一些网站，当你向上滚动时，导航条浮动在顶部位置。用户如果是想看内容就可以直接点击到达，省去很多拖动的时间，当然返回顶部也是比较容易。但有时候返回顶部这个按钮往往被人忽略了。下面一起来看看代码和演示（引入jQuery 1.9）。</p>
+<h4 id="html"><a href="#html" class="headerlink" title="html"></a>html</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">&lt;div id=<span class="string">"Jnav"</span>&gt;</div><div class="line">	&lt;ul class="nav"&gt;</div><div class="line">		&lt;li&gt;&lt;a href="http://caibaojian.com/"&gt;WEB前端开发&lt;/a&gt;&lt;/li&gt;</div><div class="line">		&lt;li&gt;&lt;a href="#"&gt;前端开发博客&lt;/a&gt;&lt;/li&gt;</div><div class="line">		&lt;li&gt;&lt;a href="#"&gt;前端开发&lt;/a&gt;&lt;/li&gt;</div><div class="line">		&lt;li&gt;&lt;a href="#"&gt;前端开发&lt;/a&gt;&lt;/li&gt;</div><div class="line">	&lt;/ul&gt;</div><div class="line">&lt;<span class="regexp">/div&gt;</span></div></pre></td></tr></table></figure>
+<h4 id="js"><a href="#js" class="headerlink" title="js"></a>js</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> $nav = $(<span class="string">'#Jnav'</span>), navTop = $nav.offset().top, navH = $nav.outerHeight(),winTop_1=<span class="number">0</span>,winWidth=$(<span class="built_in">window</span>).width(), holder=jQuery(<span class="string">'&lt;div&gt;'</span>);</div><div class="line">$(<span class="built_in">window</span>).on(<span class="string">'scroll'</span>,<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line"><span class="keyword">var</span> winTop_2 = $(<span class="built_in">window</span>).scrollTop();</div><div class="line">holder.css(<span class="string">'height'</span>,navH);</div><div class="line"><span class="comment">//开始浮动，不过不显示</span></div><div class="line"><span class="keyword">if</span>(winTop_2&gt;navTop &amp;&amp; winWidth&gt;<span class="number">980</span>)&#123;</div><div class="line">	holder.show().insertBefore($nav);</div><div class="line">	$nav.addClass(<span class="string">'fixed-nav'</span>);</div><div class="line">&#125;<span class="keyword">else</span>&#123;</div><div class="line">	holder.hide();</div><div class="line">	$nav.removeClass(<span class="string">'fixed-nav'</span>);</div><div class="line">&#125;</div><div class="line"><span class="comment">//判断鼠标向上滚动，显示出来</span></div><div class="line"><span class="keyword">if</span>(winTop_2&gt;winTop_1 &amp;&amp; winWidth&gt;<span class="number">980</span>)&#123;</div><div class="line">	$nav.removeClass(<span class="string">'fixed-nav-appear'</span>);</div><div class="line">&#125;<span class="keyword">else</span> <span class="keyword">if</span>(winTop_2&lt;winTop_1)&#123;</div><div class="line">	$nav.addClass(<span class="string">'fixed-nav-appear'</span>);</div><div class="line">&#125;</div><div class="line">winTop_1 = $(<span class="built_in">window</span>).scrollTop();</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+<h4 id="css"><a href="#css" class="headerlink" title="css"></a>css</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">.nav&#123;<span class="attr">width</span>:<span class="number">980</span>px; margin:<span class="number">0</span> auto;&#125;</div><div class="line">.nav li&#123;<span class="attr">display</span>:inline-block; *display:inline; *zoom:<span class="number">1</span>; margin:<span class="number">0</span> <span class="number">10</span>px;&#125;</div><div class="line">.nav li a&#123;<span class="attr">display</span>:block; padding:<span class="number">5</span>px <span class="number">10</span>px;&#125;</div><div class="line">.fixed-nav&#123;</div><div class="line">	<span class="attr">position</span>: fixed;</div><div class="line">	width:<span class="number">100</span>%;</div><div class="line">	top:<span class="number">-40</span>px; </div><div class="line">	-webkit-transition: top <span class="number">.5</span>s;</div><div class="line">    -moz-transition: top <span class="number">.5</span>s;</div><div class="line">    -o-transition: top <span class="number">.5</span>s;</div><div class="line">    transition: top <span class="number">.5</span>s;</div><div class="line">    -webkit-box-shadow: <span class="number">0</span> <span class="number">2</span>px <span class="number">2</span>px rgba(<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">.1</span>);</div><div class="line">    -moz-box-shadow: <span class="number">0</span> <span class="number">2</span>px <span class="number">2</span>px rgba(<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">.1</span>);</div><div class="line">    box-shadow: <span class="number">0</span> <span class="number">2</span>px <span class="number">2</span>px rgba(<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">.1</span>);</div><div class="line">&#125;</div><div class="line">.fixed-nav-appear&#123;<span class="attr">top</span>:<span class="number">0</span>;&#125;</div></pre></td></tr></table></figure>
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+    <section id="comment">
+        <div class="card">
+            <div class="card-content">
+                <!-- Duoshuo Comment BEGIN -->
+                <div class="ds-thread" data-thread-key="2015/12/21/scroll/" data-title="js判断鼠标向上滚动并浮动导航" data-url="http://bijun-steven.github.io/2015/12/21/scroll/"></div>
+
+                <script type="text/javascript">
+                    console.log(document.querySelector('.ds-thread'));
+                    var duoshuoQuery = {
+                        short_name: 'bijun-steven'
+                    };
+                    (function() {
+                        var ds = document.createElement('script');
+                        ds.type = 'text/javascript';
+                        ds.async = true;
+                        ds.src = (document.location.protocol == 'https:'
+                            ? 'https:'
+                            : 'http:') + '//static.duoshuo.com/embed.js';
+                        ds.charset = 'UTF-8';
+                        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);
+                    })();
+                </script>
+                <!-- Duoshuo Comment END -->
+            </div>
+        </div>
+    </section>
+
 
 
 </div>
