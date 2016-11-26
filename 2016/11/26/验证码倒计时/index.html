@@ -7,13 +7,15 @@
 
     
 
-    <title>归档：2016/3 | 梦开始的地方</title>
+    <title>jQuery发送验证码60秒倒计时 | 梦开始的地方</title>
     <meta name="author" content="steven">
+    
+    <meta name="description" content="平时我们在登录注册时有很多需要发送验证码，今天我就来说说关于发送验证码是的倒计时是如何实现的123456789101112131415161718192021222324252627282930313233&amp;lt;!DOCTYPE html&amp;gt;&amp;lt;html&amp;gt;&amp;lt;head&amp;gt; &amp;">
     
     
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-    
+    <meta property="og:title" content="jQuery发送验证码60秒倒计时"/>
     <meta property="og:site_name" content="勿忘初心"/>
 
     
@@ -175,46 +177,84 @@
 
     <main>
         <div class="container main-container">
-    
-
-<nav class="page-nav hide-on-small-only">
+    <nav class="page-nav hide-on-small-only">
     <div class="nav-wrapper indigo">
-        <span class="breadcrumb">当前位置（归档）</span>
+        <span class="breadcrumb">当前位置（分类目录）</span>
+        
+            
+
         
 
         
     </div>
 </nav>
 
+<article>
+    <div class="card">
+        <div class="card-content">
+            
+
+            <div class="article-title">
+                
+    
+        <h1>jQuery发送验证码60秒倒计时</h1>
+    
 
 
-    <ul class="collapsible mt-0" data-collapsible="accordion">
+            </div>
+            <time class="pink-link-context" datetime="2016-11-26T01:11:15.000Z"><a href="/2016/11/26/验证码倒计时/">2016-11-26</a></time>
+
+            
+    <div class="tags-row">
         
+            <a href="/tags/jquery/" class="chip pink lighten-1">jquery</a>
         
-            <li>
-                <div class="collapsible-header active">
-                    <i class="fa fa-archive"></i>2016
-                </div>
-                <div class="collapsible-body">
-                    <div class="collection">
-                        
-                            <a href="/2016/03/15/shopCar/" class="collection-item grey-text text-darken-1">
-                                <time datetime="2016-03-15T13:43:29.000Z">2016-03-15</time>
-                                <span>&nbsp;&nbsp;&nbsp;</span>
-                                原生JS实现购物车
-                            </a>
-                        
-                            <a href="/2016/03/06/js点击下载/" class="collection-item grey-text text-darken-1">
-                                <time datetime="2016-03-06T13:06:08.000Z">2016-03-06</time>
-                                <span>&nbsp;&nbsp;&nbsp;</span>
-                                使用js实现点击按钮下载文件
-                            </a>
-                        
-                    </div>
-                </div>
-            </li>
-        
-    </ul>
+    </div>
+
+
+            <div class="toc pink-link-context hide-on-med-and-down">
+    
+</div>
+
+
+            <div class="entry pink-link-context">
+                <p></p><p>平时我们在登录注册时有很多需要发送验证码，今天我就来说说关于发送验证码是的倒计时是如何实现的</p><br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line">&lt;!DOCTYPE html&gt;</div><div class="line">&lt;html&gt;</div><div class="line">&lt;head&gt;</div><div class="line"></div><div class="line"> &lt;meta  http-equiv="content-type" content="text/html; charset=UTF-8"&gt;</div><div class="line"> &lt;meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" id="viewport" name="viewport"&gt;</div><div class="line"> &lt;title&gt;&lt;/title&gt;</div><div class="line">&lt;script src="http://libs.baidu.com/jquery/1.10.2/jquery.min.js"&gt;&lt;/script&gt;</div><div class="line">&lt;script type="text/javascript"&gt; </div><div class="line">var countdown=60; </div><div class="line">function settime(obj) &#123; </div><div class="line">    if (countdown == 0) &#123; </div><div class="line">        obj.removeAttribute("disabled");    </div><div class="line">        obj.value="免费获取验证码"; </div><div class="line">        countdown = 60; </div><div class="line">        return;</div><div class="line">    &#125; else &#123; </div><div class="line">        obj.setAttribute("disabled", true); </div><div class="line">        obj.value="重新发送(" + countdown + ")"; </div><div class="line">        countdown--; </div><div class="line">    &#125; </div><div class="line">setTimeout(function() &#123; </div><div class="line">    settime(obj) &#125;</div><div class="line">    ,1000) </div><div class="line">&#125;</div><div class="line">  </div><div class="line">&lt;/script&gt;</div><div class="line"></div><div class="line">&lt;body&gt; </div><div class="line">&lt;input type="button" id="btn" value="免费获取验证码" onclick="settime(this)" /&gt; </div><div class="line"></div><div class="line">&lt;/body&gt;</div><div class="line">&lt;/html&gt;</div></pre></td></tr></table></figure><p></p>
+
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+    <section id="comment">
+        <div class="card">
+            <div class="card-content">
+                <!-- Duoshuo Comment BEGIN -->
+                <div class="ds-thread" data-thread-key="2016/11/26/验证码倒计时/" data-title="jQuery发送验证码60秒倒计时" data-url="http://bijun-steven.github.io/2016/11/26/验证码倒计时/"></div>
+
+                <script type="text/javascript">
+                    console.log(document.querySelector('.ds-thread'));
+                    var duoshuoQuery = {
+                        short_name: 'bijun-steven'
+                    };
+                    (function() {
+                        var ds = document.createElement('script');
+                        ds.type = 'text/javascript';
+                        ds.async = true;
+                        ds.src = (document.location.protocol == 'https:'
+                            ? 'https:'
+                            : 'http:') + '//static.duoshuo.com/embed.js';
+                        ds.charset = 'UTF-8';
+                        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);
+                    })();
+                </script>
+                <!-- Duoshuo Comment END -->
+            </div>
+        </div>
+    </section>
+
 
 
 </div>

@@ -1,0 +1,537 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+    
+
+    <title>原生JS实现购物车 | 梦开始的地方</title>
+    <meta name="author" content="steven">
+    
+    <meta name="description" content="最近学习商城网页制作，遇到了购物车这一模块，比较棘手，最后在网上找到了一篇用原生JS写的购物车代码，觉得非常易懂，于是就转载下来了html123456789101112131415161718192021222324252627282930313233343536373839404142434445">
+    
+    
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <meta property="og:title" content="原生JS实现购物车"/>
+    <meta property="og:site_name" content="勿忘初心"/>
+
+    
+    <meta property="og:image" content="undefined"/>
+    
+
+    <link rel="icon" type="image/png" href="/favicon.png">
+    <link rel="alternate" href="/atom.xml" title="勿忘初心" type="application/atom+xml">
+    <link rel="stylesheet" href="/css/lib/materialize.min.css">
+    <link rel="stylesheet" href="/css/lib/font-awesome.min.css">
+    <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+
+    
+        <link rel="stylesheet" href="/css/lib/prettify-tomorrow-night-eighties.css" type="text/css">
+    
+    <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+</head>
+
+
+<body>
+    <img src="/weixin_favicon.png" style="position: absolute; left: -9999px; opacity: 0; filter: alpha(opacity=0);">
+
+    <nav class="indigo">
+    <div class="nav-wrapper">
+        <a href="#" data-activates="main-menu" class="button-collapse">
+            <i class="fa fa-navicon"></i>
+        </a>
+        <div class="">
+            <a href="/" class="brand-logo hide-on-med-and-down">勿忘初心</a>
+            <ul class="right hide-on-med-and-down">
+                
+                    <li>
+                        <a class="menu-home " href="/" >
+                            <i class="fa fa-home "></i>
+                            
+                            首页
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a class="menu-archive " href="/archives" >
+                            <i class="fa fa-archive "></i>
+                            
+                            归档
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a class="menu-category category-menu" href="javascript:;" data-activates="category-menu" >
+                            <i class="fa fa-bookmark "></i>
+                            
+                            分类
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a class="menu-about " href="/about" >
+                            <i class="fa fa-user "></i>
+                            
+                            关于
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a class="menu-search modal-trigger " href="#search" >
+                            <i class="fa fa-search "></i>
+                            
+                            搜索
+                        </a>
+                    </li>
+                
+            </ul>
+            <div>
+    <ul class="side-nav indigo darken-1" id="main-menu">
+        
+        <li class="side-user">
+            <div class="row">
+                <div class="col s4 no-padding">
+                    <img class="avatar-image circle responsive-img" src="http://ww2.sinaimg.cn/small/74990035jw1f1rjkd681bj20rs0rsdhg.jpg" alt="User Avatar">
+                </div>
+                <div class="info col s8 valign-wrapper no-padding">
+                    <div class="valign">
+                        <p class="name">steven</p>
+                        <p class="desc">Web前端/iOS/技术宅</p>
+                    </div>
+                </div>
+            </div>
+        </li>
+        
+
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-home " href="/" >
+                    <i class="fa fa-home "></i>
+                    
+                    首页
+                </a>
+            </li>
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-archive " href="/archives" >
+                    <i class="fa fa-archive "></i>
+                    
+                    归档
+                </a>
+            </li>
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-category category-menu" href="javascript:;" data-activates="category-menu" >
+                    <i class="fa fa-bookmark "></i>
+                    
+                    分类
+                </a>
+            </li>
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-about " href="/about" >
+                    <i class="fa fa-user "></i>
+                    
+                    关于
+                </a>
+            </li>
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-search modal-trigger " href="#search" >
+                    <i class="fa fa-search "></i>
+                    
+                    搜索
+                </a>
+            </li>
+        
+    </ul>
+
+    <ul class="side-nav indigo darken-1" id="category-menu">
+    
+
+            
+
+    </ul>
+</div>
+
+        </div>
+    </div>
+</nav>
+
+<div id="search" class="modal search-modal">
+    <div class="row">
+        <div class="input-field col s12">
+              <input id="search-input" type="text">
+              <label for="search-input">搜索</label>
+        </div>
+
+    </div>
+    <div id="search-result" class="search-result col s12">
+
+    </div>
+</div>
+
+
+    <main>
+        <div class="container main-container">
+    <nav class="page-nav hide-on-small-only">
+    <div class="nav-wrapper indigo">
+        <span class="breadcrumb">当前位置（分类目录）</span>
+        
+            
+
+        
+
+        
+    </div>
+</nav>
+
+<article>
+    <div class="card">
+        <div class="card-content">
+            
+
+            <div class="article-title">
+                
+    
+        <h1>原生JS实现购物车</h1>
+    
+
+
+            </div>
+            <time class="pink-link-context" datetime="2016-03-15T13:43:29.000Z"><a href="/2016/03/15/shopCar/">2016-03-15</a></time>
+
+            
+    <div class="tags-row">
+        
+            <a href="/tags/js/" class="chip pink lighten-1">js</a>
+        
+    </div>
+
+
+            <div class="toc pink-link-context hide-on-med-and-down">
+    
+</div>
+
+
+            <div class="entry pink-link-context">
+                <p>最近学习商城网页制作，遇到了购物车这一模块，比较棘手，最后在网上找到了一篇用原生JS写的购物车代码，觉得非常易懂，于是就转载下来了<br>html<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div></pre></td><td class="code"><pre><div class="line">&lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"catbox"</span>&gt;</div><div class="line">    &lt;table id="cartTable"&gt;</div><div class="line">        &lt;thead&gt;</div><div class="line">        &lt;tr&gt;</div><div class="line">            &lt;th&gt;&lt;label&gt;</div><div class="line">                &lt;input class="check-all check" type="checkbox"&gt;&amp;nbsp;&amp;nbsp;全选&lt;/label&gt;&lt;/th&gt;</div><div class="line">            &lt;th&gt;商品&lt;/th&gt;</div><div class="line">            &lt;th&gt;单价&lt;/th&gt;</div><div class="line">            &lt;th&gt;数量&lt;/th&gt;</div><div class="line">            &lt;th&gt;小计&lt;/th&gt;</div><div class="line">            &lt;th&gt;操作&lt;/th&gt;</div><div class="line">        &lt;/tr&gt;</div><div class="line">        &lt;/thead&gt;</div><div class="line">        &lt;tbody&gt;</div><div class="line">        &lt;tr class="on"&gt;</div><div class="line">            &lt;td class="checkbox"&gt;&lt;input class="check-one check" type="checkbox"&gt;&lt;/td&gt;</div><div class="line">            &lt;td class="goods"&gt;&lt;img src="" alt=""&gt;&lt;span&gt;Casio/卡西欧 EX-TR350&lt;/span&gt;&lt;/td&gt;</div><div class="line">            &lt;td class="price"&gt;5999.88&lt;/td&gt;</div><div class="line">            &lt;td class="count"&gt;&lt;span class="reduce"&gt;&lt;/span&gt;</div><div class="line">                &lt;input class="count-input" type="text" value="1"&gt;</div><div class="line">                &lt;span class="add"&gt;+&lt;/span&gt;&lt;/td&gt;</div><div class="line">            &lt;td class="subtotal"&gt;5999.88&lt;/td&gt;</div><div class="line">            &lt;td class="operation"&gt;&lt;span class="delete"&gt;删除&lt;/span&gt;&lt;/td&gt;</div><div class="line">        &lt;/tr&gt;</div><div class="line">        &lt;tr class="on"&gt;</div><div class="line">            &lt;td class="checkbox"&gt;&lt;input class="check-one check" type="checkbox"&gt;&lt;/td&gt;</div><div class="line">            &lt;td class="goods"&gt;&lt;img src="" alt=""&gt;&lt;span&gt;Canon/佳能 PowerShot SX50 HS&lt;/span&gt;&lt;/td&gt;</div><div class="line">            &lt;td class="price"&gt;3888.50&lt;/td&gt;</div><div class="line">            &lt;td class="count"&gt;&lt;span class="reduce"&gt;&lt;/span&gt;</div><div class="line">                &lt;input class="count-input" type="text" value="1"&gt;</div><div class="line">                &lt;span class="add"&gt;+&lt;/span&gt;&lt;/td&gt;</div><div class="line">            &lt;td class="subtotal"&gt;3888.50&lt;/td&gt;</div><div class="line">            &lt;td class="operation"&gt;&lt;span class="delete"&gt;删除&lt;/span&gt;&lt;/td&gt;</div><div class="line">        &lt;/tr&gt;</div><div class="line">        &lt;tr class="on"&gt;</div><div class="line">            &lt;td class="checkbox"&gt;&lt;input class="check-one check" type="checkbox"&gt;&lt;/td&gt;</div><div class="line">            &lt;td class="goods"&gt;&lt;img src="" alt=""&gt;&lt;span&gt;Sony/索尼 DSC-WX300&lt;/span&gt;&lt;/td&gt;</div><div class="line">            &lt;td class="price"&gt;1428.50&lt;/td&gt;</div><div class="line">            &lt;td class="count"&gt;&lt;span class="reduce"&gt;&lt;/span&gt;</div><div class="line">                &lt;input class="count-input" type="text" value="1"&gt;</div><div class="line">                &lt;span class="add"&gt;+&lt;/span&gt;&lt;/td&gt;</div><div class="line">            &lt;td class="subtotal"&gt;1428.50&lt;/td&gt;</div><div class="line">            &lt;td class="operation"&gt;&lt;span class="delete"&gt;删除&lt;/span&gt;&lt;/td&gt;</div><div class="line">        &lt;/tr&gt;</div><div class="line">        &lt;tr class="on"&gt;</div><div class="line">            &lt;td class="checkbox"&gt;&lt;input class="check-one check" type="checkbox"&gt;&lt;/td&gt;</div><div class="line">            &lt;td class="goods"&gt;&lt;img src="" alt=""&gt;&lt;span&gt;Fujifilm/富士 instax mini 25&lt;/span&gt;&lt;/td&gt;</div><div class="line">            &lt;td class="price"&gt;640.60&lt;/td&gt;</div><div class="line">            &lt;td class="count"&gt;&lt;span class="reduce"&gt;&lt;/span&gt;</div><div class="line">                &lt;input class="count-input" type="text" value="1"&gt;</div><div class="line">                &lt;span class="add"&gt;+&lt;/span&gt;&lt;/td&gt;</div><div class="line">            &lt;td class="subtotal"&gt;640.60&lt;/td&gt;</div><div class="line">            &lt;td class="operation"&gt;&lt;span class="delete"&gt;删除&lt;/span&gt;&lt;/td&gt;</div><div class="line">        &lt;/tr&gt;</div><div class="line">        &lt;/tbody&gt;</div><div class="line">    &lt;/table&gt;</div><div class="line">    &lt;div class="foot" id="foot"&gt;</div><div class="line">        &lt;label class="fl select-all"&gt;&lt;input type="checkbox" class="check-all check"&gt;&amp;nbsp;&amp;nbsp;全选&lt;/label&gt;</div><div class="line">        &lt;a class="fl delete" id="deleteAll" href="javascript:;"&gt;删除&lt;/a&gt;</div><div class="line">        &lt;div class="fr closing" onclick="getTotal();"&gt;结 算&lt;/div&gt;</div><div class="line">        &lt;input type="hidden" id="cartTotalPrice"&gt;</div><div class="line">        &lt;div class="fr total"&gt;合计：￥&lt;span id="priceTotal"&gt;11957.48&lt;/span&gt;&lt;/div&gt;</div><div class="line">        &lt;div class="fr selected" id="selected"&gt;已选商品&lt;span id="selectedTotal"&gt;4&lt;/span&gt;件&lt;span class="arrow up"&gt;︽&lt;/span&gt;&lt;span class="arrow down"&gt;︾&lt;/span&gt;&lt;/div&gt;</div><div class="line">        &lt;div class="selected-view"&gt;</div><div class="line">            &lt;div id="selectedViewList" class="clearfix"&gt;&lt;div&gt;&lt;img src="http://www.jq22.com/demo/jquery-guc20151105/images/1.jpg"&gt;&lt;span class="del" index="0"&gt;取消选择&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;img src="http://www.jq22.com/demo/jquery-guc20151105/images/2.jpg"&gt;&lt;span class="del" index="1"&gt;取消选择&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;img src="http://www.jq22.com/demo/jquery-guc20151105/images/3.jpg"&gt;&lt;span class="del" index="2"&gt;取消选择&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;img src="http://www.jq22.com/demo/jquery-guc20151105/images/4.jpg"&gt;&lt;span class="del" index="3"&gt;取消选择&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;</div><div class="line">            &lt;span class="arrow"&gt;◆&lt;span&gt;◆&lt;/span&gt;&lt;/span&gt; &lt;/div&gt;</div><div class="line">    &lt;/div&gt;</div><div class="line">&lt;/div&gt;</div></pre></td></tr></table></figure></p>
+<p>css<br><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div></pre></td><td class="code"><pre><div class="line">&lt;style type="text/css"&gt;</div><div class="line">        *&#123;margin:0;padding:0;list-style-type:none;&#125;</div><div class="line">        a&#123;color:#666;text-decoration:none;&#125;</div><div class="line">        table&#123;border-collapse:collapse;border-spacing:0;border:0;&#125;</div><div class="line">        body&#123;color:#666;font:12px/180% Arial, Helvetica, sans-serif, "新宋体";&#125;</div><div class="line">        clearfix:after&#123;content:".";display:block;height:0;clear:both;visibility:hidden&#125;</div><div class="line">        .clearfix&#123;display:inline-table&#125;</div><div class="line">        *html .clearfix&#123;height:1%&#125;</div><div class="line">        .clearfix&#123;display:block&#125;</div><div class="line">        *+html .clearfix&#123;min-height:1%&#125;</div><div class="line">        .fl&#123;float:left;&#125;</div><div class="line">        .fr&#123;float:right;&#125;</div><div class="line">        .catbox&#123;width:940px;margin:100px auto;&#125;</div><div class="line">        .catbox table&#123;text-align:center;width:100%;&#125;</div><div class="line">        .catbox table th,.catbox table td&#123;border:1px solid #CADEFF;&#125;</div><div class="line">        .catbox table th&#123;background:#e2f2ff;border-top:3px solid #a7cbff;height:30px;&#125;</div><div class="line">        .catbox table td&#123;padding:10px;color:#444;&#125;</div><div class="line">        .catbox table tbody tr:hover&#123;background:RGB(238,246,255);&#125;</div><div class="line">        .checkbox&#123;width:60px;&#125;</div><div class="line">        .check-all&#123; vertical-align:middle;&#125;</div><div class="line">        .goods&#123;width:300px;&#125;</div><div class="line">        .goods span&#123;width:180px;margin-top:20px;text-align:left;float:left;&#125;</div><div class="line">        .goods img&#123;width:100px;height:80px;margin-right:10px;float:left;&#125;</div><div class="line">        .price&#123;width:130px;&#125;</div><div class="line">        .count&#123;width:90px;&#125;</div><div class="line">        .count .add, .count input, .count .reduce&#123;float:left;margin-right:-1px;position:relative;z-index:0;&#125;</div><div class="line">        .count .add, .count .reduce&#123;height:23px;width:17px;border:1px solid #e5e5e5;background:#f0f0f0;text-align:center;line-height:23px;color:#444;&#125;</div><div class="line">        .count .add:hover, .count .reduce:hover&#123;color:#f50;z-index:3;border-color:#f60;cursor:pointer;&#125;</div><div class="line">        .count input&#123;width:50px;height:25px;line-height:15px;border:1px solid #aaa;color:#343434;text-align:center;padding:4px 0;background-color:#fff;z-index:2;&#125;</div><div class="line">        .subtotal&#123;width:150px;color:red;font-weight:bold;&#125;</div><div class="line">        .operation span:hover,a:hover&#123;cursor:pointer;color:red;text-decoration:underline;&#125;</div><div class="line"></div><div class="line">        .foot&#123;margin-top:0px;color:#666;height:48px;border:1px solid #c8c8c8;border-top:0;background-color:#eaeaea;background-image:linear-gradient(RGB(241,241,241),RGB(226,226,226));position:relative;z-index:8;&#125;</div><div class="line">        .foot div, .foot a&#123;line-height:48px;height:48px;&#125;</div><div class="line">        .foot .select-all&#123;width:80px;height:48px;line-height:48px;color:#666;text-align:center;&#125;</div><div class="line">        .foot .delete&#123;padding-left:10px;&#125;</div><div class="line">        .foot .closing&#123;border-left:1px solid #c8c8c8;width:103px;text-align:center;color:#666;font-weight:bold;cursor:pointer;background-image:linear-gradient(RGB(241,241,241),RGB(226,226,226));&#125;</div><div class="line">        .foot .closing:hover&#123;background-image:linear-gradient(RGB(226,226,226),RGB(241,241,241));color:#333;&#125;</div><div class="line">        .foot .total&#123;margin:0 20px;cursor:pointer;&#125;</div><div class="line">        .foot  #priceTotal, .foot #selectedTotal&#123;color:red;font-family:"Microsoft Yahei";font-weight:bold;&#125;</div><div class="line">        .foot .selected&#123;cursor:pointer;&#125;</div><div class="line">        .foot .selected .arrow&#123;position:relative;top:-3px;margin-left:3px;&#125;</div><div class="line">        .foot .selected .down&#123;position:relative;top:3px;display:none;&#125;</div><div class="line">        .show .selected .down&#123;display:inline;&#125;</div><div class="line">        .show .selected .up&#123;display:none;&#125;</div><div class="line">        .foot .selected:hover .arrow&#123;color:red;&#125;</div><div class="line">        .foot .selected-view&#123;width:938px;border:1px solid #c8c8c8;position:absolute;height:auto;background:#ffffff;z-index:9;bottom:48px;left:-1px;display:none;&#125;</div><div class="line">        .show .selected-view&#123;display:block;&#125;</div><div class="line">        .foot .selected-view div&#123;height:auto;&#125;</div><div class="line">        .foot .selected-view .arrow&#123;font-size:16px;line-height:100%;color:#c8c8c8;position:absolute;right:330px;bottom:-9px;&#125;</div><div class="line">        .foot .selected-view .arrow span&#123;color:#ffffff;position:absolute;left:0px;bottom:1px;&#125;</div><div class="line"></div><div class="line">        #selectedViewList&#123;padding:10px 20px 10px 20px;&#125;</div><div class="line">        #selectedViewList div&#123;display:inline-block;position:relative;width:100px;height:80px;border:1px solid #ccc;margin:10px;float:left;&#125;</div><div class="line">        #selectedViewList div img&#123;width:100px;height:80px;margin-right:10px;float:left;&#125;</div><div class="line">        #selectedViewList div span&#123;display:none;color:#ffffff;font-size:12px;position:absolute;top:0px;right:0px;width:60px;height:18px;line-height:18px;text-align:center;background:#000;cursor:pointer;&#125;</div><div class="line">        #selectedViewList div:hover span&#123;display:block;&#125;</div><div class="line">    &lt;/style&gt;</div></pre></td></tr></table></figure></p>
+<p>js<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div><div class="line">151</div><div class="line">152</div><div class="line">153</div><div class="line">154</div><div class="line">155</div><div class="line">156</div><div class="line">157</div><div class="line">158</div><div class="line">159</div><div class="line">160</div><div class="line">161</div><div class="line">162</div><div class="line">163</div><div class="line">164</div><div class="line">165</div><div class="line">166</div><div class="line">167</div><div class="line">168</div><div class="line">169</div><div class="line">170</div><div class="line">171</div><div class="line">172</div><div class="line">173</div></pre></td><td class="code"><pre><div class="line">&lt;script&gt;</div><div class="line">    <span class="comment">/**</span></div><div class="line">     * Created by an www.jq22.com</div><div class="line">     */</div><div class="line">    <span class="built_in">window</span>.onload = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">        <span class="keyword">if</span> (!<span class="built_in">document</span>.getElementsByClassName) &#123;</div><div class="line">            <span class="built_in">document</span>.getElementsByClassName = <span class="function"><span class="keyword">function</span> (<span class="params">cls</span>) </span>&#123;</div><div class="line">                <span class="keyword">var</span> ret = [];</div><div class="line">                <span class="keyword">var</span> els = <span class="built_in">document</span>.getElementsByTagName(<span class="string">'*'</span>);</div><div class="line">                <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>, len = els.length; i &lt; len; i++) &#123;</div><div class="line"></div><div class="line">                    <span class="keyword">if</span> (els[i].className.indexOf(cls + <span class="string">' '</span>) &gt;=<span class="number">0</span> || els[i].className.indexOf(<span class="string">' '</span> + cls + <span class="string">' '</span>) &gt;=<span class="number">0</span> || els[i].className.indexOf(<span class="string">' '</span> + cls) &gt;=<span class="number">0</span>) &#123;</div><div class="line">                        ret.push(els[i]);</div><div class="line">                    &#125;</div><div class="line">                &#125;</div><div class="line">                <span class="keyword">return</span> ret;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="keyword">var</span> table = <span class="built_in">document</span>.getElementById(<span class="string">'cartTable'</span>); <span class="comment">// 购物车表格</span></div><div class="line">        <span class="keyword">var</span> selectInputs = <span class="built_in">document</span>.getElementsByClassName(<span class="string">'check'</span>); <span class="comment">// 所有勾选框</span></div><div class="line">        <span class="keyword">var</span> checkAllInputs = <span class="built_in">document</span>.getElementsByClassName(<span class="string">'check-all'</span>) <span class="comment">// 全选框</span></div><div class="line">        <span class="keyword">var</span> tr = table.children[<span class="number">1</span>].rows; <span class="comment">//行</span></div><div class="line">        <span class="keyword">var</span> selectedTotal = <span class="built_in">document</span>.getElementById(<span class="string">'selectedTotal'</span>); <span class="comment">//已选商品数目容器</span></div><div class="line">        <span class="keyword">var</span> priceTotal = <span class="built_in">document</span>.getElementById(<span class="string">'priceTotal'</span>); <span class="comment">//总计</span></div><div class="line">        <span class="keyword">var</span> deleteAll = <span class="built_in">document</span>.getElementById(<span class="string">'deleteAll'</span>); <span class="comment">// 删除全部按钮</span></div><div class="line">        <span class="keyword">var</span> selectedViewList = <span class="built_in">document</span>.getElementById(<span class="string">'selectedViewList'</span>); <span class="comment">//浮层已选商品列表容器</span></div><div class="line">        <span class="keyword">var</span> selected = <span class="built_in">document</span>.getElementById(<span class="string">'selected'</span>); <span class="comment">//已选商品</span></div><div class="line">        <span class="keyword">var</span> foot = <span class="built_in">document</span>.getElementById(<span class="string">'foot'</span>);</div><div class="line"></div><div class="line">        <span class="comment">// 更新总数和总价格，已选浮层</span></div><div class="line">        <span class="function"><span class="keyword">function</span> <span class="title">getTotal</span>(<span class="params"></span>) </span>&#123;</div><div class="line">            <span class="keyword">var</span> seleted = <span class="number">0</span>;</div><div class="line">            <span class="keyword">var</span> price = <span class="number">0</span>;</div><div class="line">            <span class="keyword">var</span> HTMLstr = <span class="string">''</span>;</div><div class="line">            <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>, len = tr.length; i &lt; len; i++) &#123;</div><div class="line">                <span class="keyword">if</span> (tr[i].getElementsByTagName(<span class="string">'input'</span>)[<span class="number">0</span>].checked) &#123;</div><div class="line">                    tr[i].className = <span class="string">'on'</span>;</div><div class="line">                    seleted += <span class="built_in">parseInt</span>(tr[i].getElementsByTagName(<span class="string">'input'</span>)[<span class="number">1</span>].value);</div><div class="line">                    price += <span class="built_in">parseFloat</span>(tr[i].cells[<span class="number">4</span>].innerHTML);</div><div class="line">                    HTMLstr += <span class="string">'&lt;div&gt;&lt;img src="'</span> + tr[i].getElementsByTagName(<span class="string">'img'</span>)[<span class="number">0</span>].src + <span class="string">'"&gt;&lt;span class="del" index="'</span> + i + <span class="string">'"&gt;取消选择&lt;/span&gt;&lt;/div&gt;'</span></div><div class="line">                &#125;</div><div class="line">                <span class="keyword">else</span> &#123;</div><div class="line">                    tr[i].className = <span class="string">''</span>;</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">            selectedTotal.innerHTML = seleted;</div><div class="line">            priceTotal.innerHTML = price.toFixed(<span class="number">2</span>);</div><div class="line">            selectedViewList.innerHTML = HTMLstr;</div><div class="line"></div><div class="line">            <span class="keyword">if</span> (seleted == <span class="number">0</span>) &#123;</div><div class="line">                foot.className = <span class="string">'foot'</span>;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="comment">// 计算单行价格</span></div><div class="line">        <span class="function"><span class="keyword">function</span> <span class="title">getSubtotal</span>(<span class="params">tr</span>) </span>&#123;</div><div class="line">            <span class="keyword">var</span> cells = tr.cells;</div><div class="line">            <span class="keyword">var</span> price = cells[<span class="number">2</span>]; <span class="comment">//单价</span></div><div class="line">            <span class="keyword">var</span> subtotal = cells[<span class="number">4</span>]; <span class="comment">//小计td</span></div><div class="line">            <span class="keyword">var</span> countInput = tr.getElementsByTagName(<span class="string">'input'</span>)[<span class="number">1</span>]; <span class="comment">//数目input</span></div><div class="line">            <span class="keyword">var</span> span = tr.getElementsByTagName(<span class="string">'span'</span>)[<span class="number">1</span>]; <span class="comment">//-号</span></div><div class="line">            <span class="comment">//写入HTML</span></div><div class="line">            subtotal.innerHTML = (<span class="built_in">parseInt</span>(countInput.value) * <span class="built_in">parseFloat</span>(price.innerHTML)).toFixed(<span class="number">2</span>);</div><div class="line">            <span class="comment">//如果数目只有一个，把-号去掉</span></div><div class="line">            <span class="keyword">if</span> (countInput.value == <span class="number">1</span>) &#123;</div><div class="line">                span.innerHTML = <span class="string">''</span>;</div><div class="line">            &#125;<span class="keyword">else</span>&#123;</div><div class="line">                span.innerHTML = <span class="string">'-'</span>;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="comment">// 点击选择框</span></div><div class="line">        <span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; selectInputs.length; i++ )&#123;</div><div class="line">            selectInputs[i].onclick = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">                <span class="keyword">if</span> (<span class="keyword">this</span>.className.indexOf(<span class="string">'check-all'</span>) &gt;= <span class="number">0</span>) &#123; <span class="comment">//如果是全选，则吧所有的选择框选中</span></div><div class="line">                    <span class="keyword">for</span> (<span class="keyword">var</span> j = <span class="number">0</span>; j &lt; selectInputs.length; j++) &#123;</div><div class="line">                        selectInputs[j].checked = <span class="keyword">this</span>.checked;</div><div class="line">                    &#125;</div><div class="line">                &#125;</div><div class="line">                <span class="keyword">if</span> (!<span class="keyword">this</span>.checked) &#123; <span class="comment">//只要有一个未勾选，则取消全选框的选中状态</span></div><div class="line">                    <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; checkAllInputs.length; i++) &#123;</div><div class="line">                        checkAllInputs[i].checked = <span class="literal">false</span>;</div><div class="line">                    &#125;</div><div class="line">                &#125;</div><div class="line">                getTotal();<span class="comment">//选完更新总计</span></div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="comment">// 显示已选商品弹层</span></div><div class="line">        selected.onclick = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">            <span class="keyword">if</span> (selectedTotal.innerHTML != <span class="number">0</span>) &#123;</div><div class="line">                foot.className = (foot.className == <span class="string">'foot'</span> ? <span class="string">'foot show'</span> : <span class="string">'foot'</span>);</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="comment">//已选商品弹层中的取消选择按钮</span></div><div class="line">        selectedViewList.onclick = <span class="function"><span class="keyword">function</span> (<span class="params">e</span>) </span>&#123;</div><div class="line">            <span class="keyword">var</span> e = e || <span class="built_in">window</span>.event;</div><div class="line">            <span class="keyword">var</span> el = e.srcElement;</div><div class="line">            <span class="keyword">if</span> (el.className==<span class="string">'del'</span>) &#123;</div><div class="line">                <span class="keyword">var</span> input =  tr[el.getAttribute(<span class="string">'index'</span>)].getElementsByTagName(<span class="string">'input'</span>)[<span class="number">0</span>]</div><div class="line">                input.checked = <span class="literal">false</span>;</div><div class="line">                input.onclick();</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="comment">//为每行元素添加事件</span></div><div class="line">        <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; tr.length; i++) &#123;</div><div class="line">            <span class="comment">//将点击事件绑定到tr元素</span></div><div class="line">            tr[i].onclick = <span class="function"><span class="keyword">function</span> (<span class="params">e</span>) </span>&#123;</div><div class="line">                <span class="keyword">var</span> e = e || <span class="built_in">window</span>.event;</div><div class="line">                <span class="keyword">var</span> el = e.target || e.srcElement; <span class="comment">//通过事件对象的target属性获取触发元素</span></div><div class="line">                <span class="keyword">var</span> cls = el.className; <span class="comment">//触发元素的class</span></div><div class="line">                <span class="keyword">var</span> countInout = <span class="keyword">this</span>.getElementsByTagName(<span class="string">'input'</span>)[<span class="number">1</span>]; <span class="comment">// 数目input</span></div><div class="line">                <span class="keyword">var</span> value = <span class="built_in">parseInt</span>(countInout.value); <span class="comment">//数目</span></div><div class="line">                <span class="comment">//通过判断触发元素的class确定用户点击了哪个元素</span></div><div class="line">                <span class="keyword">switch</span> (cls) &#123;</div><div class="line">                    <span class="keyword">case</span> <span class="string">'add'</span>: <span class="comment">//点击了加号</span></div><div class="line">                        countInout.value = value + <span class="number">1</span>;</div><div class="line">                        getSubtotal(<span class="keyword">this</span>);</div><div class="line">                        <span class="keyword">break</span>;</div><div class="line">                    <span class="keyword">case</span> <span class="string">'reduce'</span>: <span class="comment">//点击了减号</span></div><div class="line">                        <span class="keyword">if</span> (value &gt; <span class="number">1</span>) &#123;</div><div class="line">                            countInout.value = value - <span class="number">1</span>;</div><div class="line">                            getSubtotal(<span class="keyword">this</span>);</div><div class="line">                        &#125;</div><div class="line">                        <span class="keyword">break</span>;</div><div class="line">                    <span class="keyword">case</span> <span class="string">'delete'</span>: <span class="comment">//点击了删除</span></div><div class="line">                        <span class="keyword">var</span> conf = confirm(<span class="string">'确定删除此商品吗？'</span>);</div><div class="line">                        <span class="keyword">if</span> (conf) &#123;</div><div class="line">                            <span class="keyword">this</span>.parentNode.removeChild(<span class="keyword">this</span>);</div><div class="line">                        &#125;</div><div class="line">                        <span class="keyword">break</span>;</div><div class="line">                &#125;</div><div class="line">                getTotal();</div><div class="line">            &#125;</div><div class="line">            <span class="comment">// 给数目输入框绑定keyup事件</span></div><div class="line">            tr[i].getElementsByTagName(<span class="string">'input'</span>)[<span class="number">1</span>].onkeyup = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">                <span class="keyword">var</span> val = <span class="built_in">parseInt</span>(<span class="keyword">this</span>.value);</div><div class="line">                <span class="keyword">if</span> (<span class="built_in">isNaN</span>(val) || val &lt;= <span class="number">0</span>) &#123;</div><div class="line">                    val = <span class="number">1</span>;</div><div class="line">                &#125;</div><div class="line">                <span class="keyword">if</span> (<span class="keyword">this</span>.value != val) &#123;</div><div class="line">                    <span class="keyword">this</span>.value = val;</div><div class="line">                &#125;</div><div class="line">                getSubtotal(<span class="keyword">this</span>.parentNode.parentNode); <span class="comment">//更新小计</span></div><div class="line">                getTotal(); <span class="comment">//更新总数</span></div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="comment">// 点击全部删除</span></div><div class="line">        deleteAll.onclick = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">            <span class="keyword">if</span> (selectedTotal.innerHTML != <span class="number">0</span>) &#123;</div><div class="line">                <span class="keyword">var</span> con = confirm(<span class="string">'确定删除所选商品吗？'</span>); <span class="comment">//弹出确认框</span></div><div class="line">                <span class="keyword">if</span> (con) &#123;</div><div class="line">                    <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; tr.length; i++) &#123;</div><div class="line">                        <span class="comment">// 如果被选中，就删除相应的行</span></div><div class="line">                        <span class="keyword">if</span> (tr[i].getElementsByTagName(<span class="string">'input'</span>)[<span class="number">0</span>].checked) &#123;</div><div class="line">                            tr[i].parentNode.removeChild(tr[i]); <span class="comment">// 删除相应节点</span></div><div class="line">                            i--; <span class="comment">//回退下标位置</span></div><div class="line">                        &#125;</div><div class="line">                    &#125;</div><div class="line">                &#125;</div><div class="line">            &#125; <span class="keyword">else</span> &#123;</div><div class="line">                alert(<span class="string">'请选择商品！'</span>);</div><div class="line">            &#125;</div><div class="line">            getTotal(); <span class="comment">//更新总数</span></div><div class="line">        &#125;</div><div class="line">        <span class="built_in">console</span>.log(<span class="string">"\u767e\u5ea6\u641c\u7d22\u3010\u7d20\u6750\u5bb6\u56ed\u3011\u4e0b\u8f7d\u66f4\u591aJS\u7279\u6548\u4ee3\u7801"</span>);</div><div class="line">        <span class="comment">// 默认全选</span></div><div class="line">        checkAllInputs[<span class="number">0</span>].checked = <span class="literal">true</span>;</div><div class="line">        checkAllInputs[<span class="number">0</span>].onclick();</div><div class="line">    &#125;</div><div class="line">&lt;<span class="regexp">/script&gt;</span></div></pre></td></tr></table></figure></p>
+
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+    <section id="comment">
+        <div class="card">
+            <div class="card-content">
+                <!-- Duoshuo Comment BEGIN -->
+                <div class="ds-thread" data-thread-key="2016/03/15/shopCar/" data-title="原生JS实现购物车" data-url="http://bijun-steven.github.io/2016/03/15/shopCar/"></div>
+
+                <script type="text/javascript">
+                    console.log(document.querySelector('.ds-thread'));
+                    var duoshuoQuery = {
+                        short_name: 'bijun-steven'
+                    };
+                    (function() {
+                        var ds = document.createElement('script');
+                        ds.type = 'text/javascript';
+                        ds.async = true;
+                        ds.src = (document.location.protocol == 'https:'
+                            ? 'https:'
+                            : 'http:') + '//static.duoshuo.com/embed.js';
+                        ds.charset = 'UTF-8';
+                        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);
+                    })();
+                </script>
+                <!-- Duoshuo Comment END -->
+            </div>
+        </div>
+    </section>
+
+
+
+</div>
+
+        <div class="fixed-action-btn float-sitemap">
+    <a class="btn-floating btn-large pink">
+      <i class="fa fa-caret-square-o-up"></i>
+    </a>
+    <ul>
+      <li><a class="btn-return-top btn-floating waves-effect green" title="回到顶部"><i class="fa fa-arrow-circle-o-up"></i></a></li>
+      <li><a class="btn-floating waves-effect button-collapse yellow darken-1"  data-activates="main-menu" title="menu"><i class="fa fa-navicon"></i></a></li>
+    </ul>
+  </div>
+
+    </main>
+    <footer class="page-footer indigo darken-1">
+    
+    <div class="container">
+        <div class="row">
+            
+            <div class="social-group col m3 s12">
+                <h5 class="white-text">社交</h5>
+                
+                    <a class="social-link" href="http://weibo.com/1956184117" target="_blank">
+                        <i class="fa fa-2x fa-weibo"></i>
+                    </a>
+                
+                    <a class="social-link" href="https://github.com/raytaylorlin" target="_blank">
+                        <i class="fa fa-2x fa-github"></i>
+                    </a>
+                
+                    <a class="social-link" href="/atom.xml" target="_blank">
+                        <i class="fa fa-2x fa-rss"></i>
+                    </a>
+                
+            </div>
+            
+
+            
+            <div class="col m9 s12">
+                <h5 class="white-text">友情链接</h5>
+                
+                    <a class="social-link" href="http://gold.xitu.io/welcome/frontend/" target="_blank">高质量的技术社区:掘金网</a>
+                
+                    <a class="social-link" href="http://www.qdfuns.com/" target="_blank">前端工程师必备网站:前端网</a>
+                
+            </div>
+            
+        </div>
+    </div>
+    
+
+    <div class="footer-copyright pink-link-context">
+        <div class="container" style="text-align:center">
+            © 2016 example.com, All rights reserved.
+            
+        </div>
+    </div>
+</footer>
+
+
+    <noscript>
+    <div class="noscript">
+        <p class="center-align">当前网速较慢或者你使用的浏览器不支持博客特定功能，请尝试刷新或换用Chrome、Firefox等现代浏览器</p>
+    </div>
+</noscript>
+<div class="noscript">
+    <p class="center-align">当前网速较慢或者你使用的浏览器不支持博客特定功能，请尝试刷新或换用Chrome、Firefox等现代浏览器</p>
+</div>
+
+
+<script src="/js/jquery.min.js"></script>
+<script src="/js/materialize.min.js"></script>
+
+<script>
+    (function($) {
+        $(document).ready(function() {
+            // 隐藏禁用javascript（针对微信内置浏览器）的提示
+            $('.noscript').hide();
+
+            // 图片缩放效果
+            var $imgs = $('img').not('.slider-image').not('.avatar-image').not('.carousel-image').not('.card-cover-image').not('.qrcode');
+
+            // 给图片加上点击放大效果（materialbox插件）
+            $imgs.addClass('materialboxed').each(function(i, el) {
+                $(this).attr('data-caption', $(this).attr('alt') || ' ');
+            }).materialbox();
+
+            // 优化表格的显示
+            $('table').each(function() {
+                var $table = $(this);
+                // 除去多行代码的情况
+                if ($table.find('pre').length == 0) {
+                    $table.addClass('responsive-table striped bordered');
+                }
+            });
+
+            // 首页幻灯片
+            $('.slider').slider({indicators: true, full_width: true, interval: 8000});
+
+            $(".button-collapse").sideNav();
+            $(".category-menu").sideNav();
+
+            // 针对gallery post
+            $('.carousel').carousel({full_width: true});
+            $('.carousel-control.prev').click(function() {
+                $('.carousel').carousel('prev');
+            });
+            $('.carousel-control.next').click(function() {
+                $('.carousel').carousel('next');
+            });
+
+            // 文章目录
+            $('article').not('.simple-article').find('h1').add('h2').add('h3').add('h4').add('h5').add('h6').scrollSpy();
+            // 修正文章目录的left-border颜色
+            var color = $('.table-of-contents-text').css('color');
+            $('.table-of-contents-link').css('border-left-color', color);
+
+            // 针对移动端做的优化：FAB按钮点击一下收回
+            if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+                $('.fixed-action-btn').addClass('click-to-toggle');
+            }
+            // 回到顶部
+            $('.btn-return-top').click(function() {
+                $('body, html').animate({
+                    scrollTop: 0
+                }, 500);
+            });
+
+            // 重置读书页面的Tab标签页的颜色
+            $('li.tab a').hover(function() {
+                $(this).toggleClass('text-lighten-4');
+            });
+            $('.indicator').addClass('pink lighten-2');
+
+            
+            // 添加new标签
+            $('.menu-reading').append('<span class="new badge pink"></span>');
+            
+
+            // 搜索功能
+            $('.modal-trigger').leanModal({
+                // 打开搜索框时自动聚焦
+                ready: function() {
+                    if ($('#search').is(":visible")) {
+                        $('#search-input').focus();
+                    }
+                }
+            });
+            var searchXml = "search.xml";
+            if (searchXml.length == 0) {
+             	searchXml = "search.xml";
+            }
+            var searchPath = "/" + searchXml;
+            initSearch(searchPath, 'search-input', 'search-result');
+        });
+
+        // 初始化搜索与匹配函数
+        var initSearch = function(path, search_id, content_id) {
+            'use strict';
+            $.ajax({
+                url: path,
+                dataType: "xml",
+                success: function(xmlResponse) {
+                    // get the contents from search data
+                    var datas = $("entry", xmlResponse).map(function() {
+                        return {
+                            title: $("title", this).text(),
+                            content: $("content", this).text(),
+                            url: $("url", this).text()
+                        };
+                    }).get();
+                    var $input = document.getElementById(search_id);
+                    var $resultContent = document.getElementById(content_id);
+                    $input.addEventListener('input', function() {
+                        var str = '<ul class=\"search-result-list\">';
+                        var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                        $resultContent.innerHTML = "";
+                        if (this.value.trim().length <= 0) {
+                            return;
+                        }
+                        // perform local searching
+                        datas.forEach(function(data) {
+                            var isMatch = true;
+                            var content_index = [];
+                            var data_title = data.title.trim().toLowerCase();
+                            var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                            var data_url = data.url;
+                            var index_title = -1;
+                            var index_content = -1;
+                            var first_occur = -1;
+                            // only match artiles with not empty titles and contents
+                            if (data_title != '' && data_content != '') {
+                                keywords.forEach(function(keyword, i) {
+                                    index_title = data_title.indexOf(keyword);
+                                    index_content = data_content.indexOf(keyword);
+                                    if (index_title < 0 && index_content < 0) {
+                                        isMatch = false;
+                                    } else {
+                                        if (index_content < 0) {
+                                            index_content = 0;
+                                        }
+                                        if (i == 0) {
+                                            first_occur = index_content;
+                                        }
+                                    }
+                                });
+                            }
+                            // show search results
+                            if (isMatch) {
+                                keywords.forEach(function(keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    data_title = data_title.replace(regS, "<span class=\"search-keyword pink lighten-2\">" + keyword + "</span>");
+                                });
+
+                                str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                                var content = data.content.trim().replace(/<[^>]+>/g, "");
+                                if (first_occur >= 0) {
+                                    // cut out 100 characters
+                                    var start = first_occur - 20;
+                                    var end = first_occur + 80;
+                                    if (start < 0) {
+                                        start = 0;
+                                    }
+                                    if (start == 0) {
+                                        end = 100;
+                                    }
+                                    if (end > content.length) {
+                                        end = content.length;
+                                    }
+                                    var match_content = content.substring(start, end);
+                                    // highlight all keywords
+                                    keywords.forEach(function(keyword) {
+                                        var regS = new RegExp(keyword, "gi");
+                                        match_content = match_content.replace(regS, "<span class=\"search-keyword pink lighten-2\">" + keyword + "</span>");
+                                    });
+
+                                    str += "<p class=\"search-result\">..." + match_content + "...</p>"
+                                }
+                                str += "</li>";
+                            }
+                        });
+                        str += "</ul>";
+                        $resultContent.innerHTML = str;
+                    });
+                }
+            });
+        }
+    })(jQuery);
+</script>
+
+
+<script src="/js/prettify.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $("pre").addClass("prettyprint");
+        prettyPrint();
+    });
+</script>
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+});
+</script>
+<script type="text/javascript" async
+  src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+
+</body>
+</html>
