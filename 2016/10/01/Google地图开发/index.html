@@ -1,0 +1,525 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+    
+
+    <title>Google地图开发 | 梦开始的地方</title>
+    <meta name="author" content="steven">
+    
+    <meta name="description" content="常有的地图有谷歌、百度、必应等，这些都有提供api，下面以谷歌地图为例做说明。虽然谷歌被墙，但是谷歌有一个中国域名版本的，没有被墙，可以自由访问：http://www.google.cn/maps，估计很多人都不知道。首先来看下谷歌地图是怎么显示在页面的
+
+
+
+谷歌地图的组成
+只要做一下元素审查，就">
+    
+    
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <meta property="og:title" content="Google地图开发"/>
+    <meta property="og:site_name" content="勿忘初心"/>
+
+    
+    <meta property="og:image" content="undefined"/>
+    
+
+    <link rel="icon" type="image/png" href="/favicon.png">
+    <link rel="alternate" href="/atom.xml" title="勿忘初心" type="application/atom+xml">
+    <link rel="stylesheet" href="/css/lib/materialize.min.css">
+    <link rel="stylesheet" href="/css/lib/font-awesome.min.css">
+    <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+
+    
+        <link rel="stylesheet" href="/css/lib/prettify-tomorrow-night-eighties.css" type="text/css">
+    
+    <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+</head>
+
+
+<body>
+    <img src="/weixin_favicon.png" style="position: absolute; left: -9999px; opacity: 0; filter: alpha(opacity=0);">
+
+    <nav class="indigo">
+    <div class="nav-wrapper">
+        <a href="#" data-activates="main-menu" class="button-collapse">
+            <i class="fa fa-navicon"></i>
+        </a>
+        <div class="">
+            <a href="/" class="brand-logo hide-on-med-and-down">勿忘初心</a>
+            <ul class="right hide-on-med-and-down">
+                
+                    <li>
+                        <a class="menu-home " href="/" >
+                            <i class="fa fa-home "></i>
+                            
+                            首页
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a class="menu-archive " href="/archives" >
+                            <i class="fa fa-archive "></i>
+                            
+                            归档
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a class="menu-reading " href="/reading" >
+                            <i class="fa fa-book "></i>
+                            
+                            读书
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a class="menu-about " href="/about" >
+                            <i class="fa fa-user "></i>
+                            
+                            关于
+                        </a>
+                    </li>
+                
+            </ul>
+            <div>
+    <ul class="side-nav indigo darken-1" id="main-menu">
+        
+        <li class="side-user">
+            <div class="row">
+                <div class="col s4 no-padding">
+                    <img class="avatar-image circle responsive-img" src="http://ww2.sinaimg.cn/small/74990035jw1f1rjkd681bj20rs0rsdhg.jpg" alt="User Avatar">
+                </div>
+                <div class="info col s8 valign-wrapper no-padding">
+                    <div class="valign">
+                        <p class="name">steven</p>
+                        <p class="desc">Web前端/iOS/技术宅</p>
+                    </div>
+                </div>
+            </div>
+        </li>
+        
+
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-home " href="/" >
+                    <i class="fa fa-home "></i>
+                    
+                    首页
+                </a>
+            </li>
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-archive " href="/archives" >
+                    <i class="fa fa-archive "></i>
+                    
+                    归档
+                </a>
+            </li>
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-reading " href="/reading" >
+                    <i class="fa fa-book "></i>
+                    
+                    读书
+                </a>
+            </li>
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-about " href="/about" >
+                    <i class="fa fa-user "></i>
+                    
+                    关于
+                </a>
+            </li>
+        
+    </ul>
+
+    <ul class="side-nav indigo darken-1" id="category-menu">
+    
+
+            
+
+    </ul>
+</div>
+
+        </div>
+    </div>
+</nav>
+
+<div id="search" class="modal search-modal">
+    <div class="row">
+        <div class="input-field col s12">
+              <input id="search-input" type="text">
+              <label for="search-input">搜索</label>
+        </div>
+
+    </div>
+    <div id="search-result" class="search-result col s12">
+
+    </div>
+</div>
+
+
+    <main>
+        <div class="container main-container">
+    <nav class="page-nav hide-on-small-only">
+    <div class="nav-wrapper indigo">
+        <span class="breadcrumb">当前位置（分类目录）</span>
+        
+            
+
+        
+
+        
+    </div>
+</nav>
+
+<article>
+    <div class="card">
+        <div class="card-content">
+            
+
+            <div class="article-title">
+                
+    
+        <h1>Google地图开发</h1>
+    
+
+
+            </div>
+            <time class="pink-link-context" datetime="2016-10-01T01:49:07.000Z"><a href="/2016/10/01/Google地图开发/">2016-10-01</a></time>
+
+            
+    <div class="tags-row">
+        
+            <a href="/tags/其他/" class="chip pink lighten-1">其他</a>
+        
+    </div>
+
+
+            <div class="toc pink-link-context hide-on-med-and-down">
+    <ol class="section table-of-contents"><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#undefined"><span class="section table-of-contents-text">谷歌地图的组成</span></a></li><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#undefined"><span class="section table-of-contents-text">谷歌地图的使用</span></a><ol class="section table-of-contents-child"><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#undefined"><span class="section table-of-contents-text">引入谷歌地图</span></a></li></ol></li><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#undefined"><span class="section table-of-contents-text">添加一个Marker</span></a></li><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#undefined"><span class="section table-of-contents-text">使用原生HTML Marker</span></a></li><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#undefined"><span class="section table-of-contents-text">边界判断</span></a></li><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#undefined"><span class="section table-of-contents-text">绘制形状</span></a></li></ol>
+</div>
+
+
+            <div class="entry pink-link-context">
+                <p>常有的地图有谷歌、百度、必应等，这些都有提供api，下面以谷歌地图为例做说明。虽然谷歌被墙，但是谷歌有一个中国域名版本的，没有被墙，可以自由访问：<a href="http://www.google.cn/maps，估计很多人都不知道。首先来看下谷歌地图是怎么显示在页面的" target="_blank" rel="external">http://www.google.cn/maps，估计很多人都不知道。首先来看下谷歌地图是怎么显示在页面的</a></p>
+
+
+
+<p></p><h2>谷歌地图的组成</h2><p></p>
+<p>只要做一下元素审查，就可以发现谷歌地图的主体部份是用一张张的图片拼成的，只要缩放比例或者位置一改变，就会再去请求新的图片，也就是说地图的渲染是在后端进行的，后端把图片生成好发给前端，之所以没放在前端绘制主要应该是考虑了客户端的性能和兼容性。左上角和右下角的控制也是用div absolute定位上去的。&nbsp;</p><br><p><em id="__mceDel"><img src="https://lidaolin.github.io/img/dt1.jpg" alt="" width="721" height="382"></em></p><br><p>&nbsp;</p><br><h2>谷歌地图的使用</h2><br><h3>引入谷歌地图</h3><br><p>首先加载地图的api，你可以指定所用语言，如果没指定，地图将根据浏览器的语言（可通过请求的http头的Accept-Language字段）自动选用语言。还可以指定谷歌地图的版本，现在最新版是ver=3.25，还可以加上一些指定的地图的lib。必填的参数是key，如果没有key去谷歌地图的开发者页面申请一个即可。大陆版的跟正常版的在使用上目测没什么区别</p><br><pre>&lt;script src=”<a href="http://ditu.google.cn/maps/api/js?key=AIzaSyBp&amp;language=zh-CN&quot;&gt;&lt;/script&amp;gt" target="_blank" rel="external">http://ditu.google.cn/maps/api/js?key=AIzaSyBp&amp;language=zh-CN&quot;&gt;&lt;/script&amp;gt</a>; &lt;!– 中国版 –&gt;<br>&lt;!–正常版，需FQ  &lt;script src=”<a href="https://maps.googleapis.com/maps/api/js?key=AIzaSyBp&quot;&gt;&lt;/script&amp;gt" target="_blank" rel="external">https://maps.googleapis.com/maps/api/js?key=AIzaSyBp&quot;&gt;&lt;/script&amp;gt</a>; –&gt;</pre><br><br><p>然后在页面写一个div，作为地图的容器，指定地图的宽高</p><br><div class="cnblogs_code"><br><pre>&lt;div id=”map” style=”width:100%;height:500px”&gt;&lt;/div&gt;</pre><br></div><br><p>初始化谷歌地图，最主要的两个参数是传一个中心点和缩放倍数，如果你点地图右下角的+号，就会再放大一倍，这里的放大倍数就指这个</p><br><pre>var mapType = google.maps.MapTypeId.ROADMAP;<br>var lat = 39.915168, lng = 116.403875, zoom = 10;<br>var mapOptions = {<br>    center: new google.maps.LatLng(lat, lng),  <strong>//地图的中心点</strong><br>    zoom: zoom,               　　　　　　　　　　<strong>//地图缩放比例</strong><br>    mapTypeId: mapType,       　　　　　　　　　　//指定地图展示类型：卫星图像、普通道路<br>    scrollwheel: true          　　　　　　　　　 //是否允许滚轮滑动进行缩放<br>};<br>var map = new google.maps.Map(document.getElementById(“map”), mapOptions); //创建谷歌地图</pre><br><p>这样在你的页面就有一个以天安门为中心的地图了</p><br><p><img src="https://lidaolin.github.io/img/dt2.jpg" alt="" width="404" height="189"></p><br><p>接下来，给天安门添加一个地理标志，使用谷歌自带的marker</p><br><h2>添加一个Marker</h2><br><p>&nbsp;通过上面代码的new我们已经有了个map对象，然后再创建一个marker对象，把这个marker绑定到map上</p><br><pre>var marker = new google.maps.Marker({<br>    map: map,<br>    position: new google.maps.LatLng(lat, lng)<br>});</pre><br><br><p>在地图上就可以看到天安门上标记了一个地理位置图标</p><br><p><img src="https://lidaolin.github.io/img/dt3.png" alt=""></p><br><p>接下来希望点一下这个marker的时候就显示这个位置的具体地址，如下所示，首先创建一个InfoWindow，并把它绑定到上面的那个marker的上方展示，同时给marker添加一个点击事件，一点的时候就打开提示框：</p><br><pre>var infowindow = new google.maps.InfoWindow({content: “北京市天安门” }); //创建一个InfoWindow<br>infowindow.open(map, marker); //把这个infoWindow绑定在选定的marker上面<br>//使用谷歌地图定义的事件，给这个marker添加点击事件<br>google.maps.event.addListener(marker, “click”, function(){<br>    infowindow.open(map,marker);<br>});</pre><br><p>效果如下：</p><br><p><img src="https://lidaolin.github.io/img/dt4.png" alt=""></p><br><p>这里所有的样式都是谷歌自带的，假设这个marker的样式跟网站的风格不太一致，我想要自定义一个marker不用谷歌自带的，那怎么办呢？在上面new一个marker的时候可以再传一个icon的参数，自定义icon，同时这个icon需要使用svg的格式。</p><br><p>在PSD里面将UI里面的icon形状导成一个AI文件，然后再用AI导出svg，就有了icon的svg格式。打开svg文件，将里面的path、fill等作为地图icon的参数，如下：</p><br><div><br><pre>var locationMarker = {<br>    path: ‘M22 10.5c0 .895-.13 1.76-.35 2.588C20.025 20.723 13.137 28.032 11 28 9.05 28 3.2 21.28.926 14.71.334 13.42 0 11.997 0 10.5c0-.104.013-.206.017-.31C.014 10.117 0 10.04 0 9.967c-.005-.67.065-1.112.194-1.398C1.144 3.692 5.617 0 11 0c5.416 0 9.906 3.74 10.82 8.657.112.29.18.696.18 1.31 0 .083-.013.167-.015.25.003.095.015.188.015.283zM11 5.833c-2.705 0-4.898 2.09-4.898 4.667S8.295 15.167 11 15.167s4.898-2.09 4.898-4.667c0-2.578-2.193-4.667-4.898-4.667z’,<br>    fillColor: ‘#E84643’,<br>    fillOpacity: 1,<br>    strokeColor: ‘#E84643’,<br>};<br>var marker = new google.maps.Marker({map: map, <strong>icon: locationMarker</strong>， position: new google.maps.LatLng(lat, lng)});</pre><br><p>就可以将默认的marker样式换掉，如下所示，你也可以换成其它各种各样的形状，像房子、车等icon</p><br><p><img src="https://lidaolin.github.io/img/dt5.png" alt=""></p><br><p>&nbsp;</p><br><p>检查一下刚刚添加的marker，发现最后被谷歌地图转换成了一个canvas元素：</p><br><p>&nbsp;</p><br><p>到这里已经可以解决在地图显示北京哪里被水淹了的问题。就是在被水淹的位置添加一个个的marker，现在我希望点击marker的时候能够显示该处的图文受灾情况。可以使用上面介绍的InfoWindow，只要把参数{content: “北京市天安门” }，换成{content: “&lt;div class=’detail-info’&gt;…&lt;/div&gt;”}，然后写detail-info的样式即可。但是这样会有两个问题：</p><br><p>1. 不方便改变InfoWindow那个框的样式，例如没有一个直接的方法可以去掉右上角的x按钮</p><br><p>2. 假设有几百个地方被水淹了，也就是说得添加几百个marker，同时每个marker都得添加一个click事件，因为谷歌的事件没有marker事件委托，每个marker都得一个个加事件，一下子加几百个事件，这样就有点egg pain了。</p><br><p>所以说如果使用了上面的marker的方式，谷歌把它变成了一个canvas，以后所有的操作都得处处受制于谷歌的API，同时谷歌的API并不是十分的丰富和灵活。因此必须得另辟一条路，如果能够用原生的div放到谷歌地图里面那就简单多了，因为地图本身就是用div实现的，所以用原生的应该是可以的。其实只要用谷歌搜一搜就可以找到解决办法</p><br><h2>使用原生HTML Marker</h2><br><p>&nbsp;谷歌地图还提供了另外一个往地图里面加东西的<span class="s1">OverlayView，使用这个的原理就是创建一个OverlayView对象然后给它append一个div，把这个div的position置为absolute（相对于地图的容器container），然后再设置它在这个容器的left/top位置，关键就在于怎样根据当前marker的经纬度转换为在容器的像素位置。而这个对象已经提供了一个转换方法可以调用。将自定义的Marker封装成一个类，例如现在要做一个房源的地图展示，需要把房源标在地图上，自定义一个HouseMarker的类：</span></p><br><div>function&nbsp;HouseMarker(latlng, map, args) {</div><br><div>　　this.latlng = latlng;&nbsp;//for google map</div><br><div>　　this.setMap(map);&nbsp;//for google map</div><br><div>　　this.args = args;&nbsp;//自定义参数</div><br><div>}</div><br><p>再将这个HouseMarker的原型指向谷歌的OverlayView进行继承</p><br><div class="cnblogs_code"><br><pre>HouseMarker.prototype = new google.maps.OverlayView();</pre><br></div><br><p>然后实现这个原型的draw函数：</p><br><pre>HouseMarker.prototype.draw = function() {<br>    //创建一个div，把marker和详情框写在一起，方便后面的展示和隐藏<br>    $div = $(“&lt;div class=’marker-container’&gt;” +<br>　　　　　　　　“　　&lt;div class=”marker”&gt;&lt;/div&gt;” +<br>　　　　　　　　“　　&lt;div class=’detail-info’”&gt;&lt;/div&gt;” +<br>　　　　　　　　“&lt;/div&gt;”);<br>    //将div添加到它的dom元素里面<br>    var panes = this.getPanes();<br>    var div = $div[0];<br>    panes.overlayImage.appendChild(div);<br>    <strong>//根据经纬度计算div的像素位置</strong><br>    var point = this.getProjection().fromLatLngToDivPixel(this.latlng);<br>    div.style.left = (point.x - 20) + ‘px’;    //减掉marker宽度的一半，居中<br>    div.style.top = (point.y - 20) + ‘px’;    //减掉marker高度的一半，居中<br>};</pre><br><p>再调new HouseMarker，传进当前的经纬度和map对象，就可以在地图正确的位置上显示这个marker了。接下来就能够使用原生的js事件和css控制这个marker了，这样就很方便灵活了。特别是谷歌的mouse事件，即使是上一个marker盖住了下面的marker，鼠标移到上面那个marker时，仍然会触发下面那个marker的事件，这样就有点恶心了。而使用原生的mouse事件就没有这种情况。其实这个也是可以理解的，因为谷歌地图是用的一个canvas画布展示marker，在这个画布里面只根据鼠标的位置和marker的位置判断鼠标有没有进入marker里面，所以不管上面有没有被盖住，只要算出来的位置是符合的。</p><br><p>&nbsp;如下面所示，鼠标hover的时候就显示详细信息，如果这个详细信息刚好下面有个marker就会出现上面讨论的情况：</p><br><p><img src="https://lidaolin.github.io/img/dt6.png" alt="" width="454" height="210"></p><br><p>详见：”<a href="http://humaan.com/custom-html-markers-google-maps/" target="_blank" rel="external">http://humaan.com/custom-html-markers-google-maps/</a>“ Custom HTML Markers with Google Maps</p><br><p>第二步是的鼠标hover的时候展示详情框，最简单的就是用CSS控制即可，使用上面定义的DOM结构，初始化时让detail-info隐藏：</p><br><pre>.marker-container .detail-info{<br>    display: none<br>}</pre><br></div><br><p>然后再设置：</p><br><pre>.marker-container:hover .detail-info{<br>    display: block<br>}</pre><br><br><p>就可以了，不用一行JS</p><br><p>第二种办法是监听mouse事件，使用事件委托：</p><br><pre>$(“#map”).on(“mouseover”, “.marker-container”, function(){<br>    $(this).find(“.detail-info”).show();<br>});<br><br>$(“#map”).on(“mouseout”, “.marker-container”, function(){<br>    $(this).find(“.detail-info”).hide();<br>});</pre><br><p>用JS的进行显示和隐藏的好处是：可以对展示做一些后续的处理，这也是下面要提到的</p><br><p>我们已经初步解决了marker展示的问题，但其实还有一些问题：展示这些详细信息会出现超出可见区域的情况</p><br><h2>边界判断</h2><br><p>当这个marker比较靠边的时候，详情的框会超出显示范围：</p><br><p><img src="https://lidaolin.github.io/img/dt7.png" alt="" width="440" height="208"></p><br><p>&nbsp;</p><br><p>也就是说需要判断当前marker是否超出了地图容器能够正常显示的范围，如果超出了就要做下处理——如果太靠上就把详情展示在下面，如果太靠右详情框就不应该是和marker水平居中了，而是要往左移一移，同时把三角形的位置挪一挪。所以关键是要做一个边界判断，而做边界判断的前提是拿到marker在容器里面的left/top位置。</p><br><p>&nbsp;已经不可以再上使用上面获取位置的方法了，因为那个位置算好之后不会再变，不会跟着地图的拖动而发化变化，谷歌地图是借助transform等设置改变它的位置，而不是用position了。</p><br><p>但是可以拿到当前地图在这个容器里面的边界经纬度，最东、最西、最北、最南，也可以拿到这个容器的像素宽高，所以就可以知道一个像素对应地图多少经纬度，即像素/经纬度的比例ratio。同时marker的纬度是知道的，可以算一下它距离边界的经纬度dx, dy，dx除以ratio就能够换算像素值了。代码如下：</p><br><pre>var mapBounds = mapHandler.getBounds();      //调用谷歌的api获取容器经纬度边界并做一些处理<br>var xRatio = (mapBounds[1] - mapBounds[0]) / mapWidth,<br>      yRatio = (mapBounds[3] - mapBounds[2]) / mapHeight;<br>//marker的经纬度<br>var lat = marker.latlng.lat(),<br>      lng = marker.latlng.lng();<br>//转换marker的像素位置<br>var pos = {<br>    top:   -(+lat - mapBounds[3]) / yRatio,<br>    left:   (+lng - mapBounds[0]) / xRatio,<br>    bottom: (+lat - mapBounds[2]) / yRatio,<br>    right: -(+lng - mapBounds[1]) / xRatio<br>};<br>var posFlag = 0,<br>    maxLen = 150,<br>    maxLeftLen = 118;<br>//右边超出<br>if(pos.right &lt; maxLen) posFlag |= 1;<br>//上面超出<br>if(pos.top &lt; maxLen) posFlag |= 2;<br>//左边超出<br>if(pos.left &lt; maxLeftLen) posFlag |= 4;<br>//对超出的情况进行处理，代码略<br>switch(posFlag){<br>      case 1: //右<br>      case 2: //上<br>      case 3: //右上<br>      case 4: //左<br>      case 6: //左上<br>}</pre><br><p>还有一种情况是如果详情框太长了，超出了容器的一半，不管向上显示还是向下显示，marker刚好在正中间时，详情框都会超出显示范围。这种情况可以借助第二种解决办法，就是将地图移动一下，超出的就可以显示了。需要计算移动后的地图中心点在哪里，再调API提供的panTo就可以了，如下。难点是计算要正确</p><br><p><img src="https://lidaolin.github.io/img/dt8.gif" alt="" width="543" height="245"></p><br><p>&nbsp;</p><br><h2>绘制形状</h2><br><p>接下来再简单讨论一个高级话题，就是在谷歌地图上面绘制一个形状，然后获取该形状的地理位置。谷歌已经提供了一个叫DrawingManager的类，只要new一个对象，传些参数，就可以在地图上显示draw tool了，如下：</p><br><p><img src="https://lidaolin.github.io/img/dt9.png" alt="" width="541" height="255"></p><br><p>然后再监听这个manager的complete事件，在complete事件里面获取当前画的图形的范围，例如上面的圆可以获取到它的圆心和半径。详见：<a href="https://developers.google.com/maps/documentation/javascript/drawinglayer" target="_blank">Drawing Layer (Library)</a></p><br><p>然而谷歌提供的这个工具非常的简陋，你无法直接改变上面工具栏的icon，就连画的圆边界也是扭扭曲曲的，如上所示。只提供了完成事件，没有画时候的事件，所以你没办法在画的时候加一个不断变化的、显示所画范围多少公里的提示框。</p><br><p>因此另外一个解决办法是自已实现一个类似的工具，通过鼠标的mousedown、mousemove、mouseup事件搭配组合，结合上面推荐的画marker的方法，插入svg元素，动态改变它的path做到实时变化的效果。这样就很灵活了，想怎么搞就怎么搞，但是代码量应该也是挺大的。</p><br><p>&nbsp;</p><br><p>除此之外还有街景、3D控制的API，这里不再讨论，有兴趣自己查查谷歌的API。</p><br><p>&nbsp;</p><br><p>&nbsp;</p>
+
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+    <section id="comment">
+        <div class="card">
+            <div class="card-content">
+                <!-- Duoshuo Comment BEGIN -->
+                <div class="ds-thread" data-thread-key="2016/10/01/Google地图开发/" data-title="Google地图开发" data-url="http://bijun-steven.github.io/2016/10/01/Google地图开发/"></div>
+
+                <script type="text/javascript">
+                    console.log(document.querySelector('.ds-thread'));
+                    var duoshuoQuery = {
+                        short_name: 'bijun-steven'
+                    };
+                    (function() {
+                        var ds = document.createElement('script');
+                        ds.type = 'text/javascript';
+                        ds.async = true;
+                        ds.src = (document.location.protocol == 'https:'
+                            ? 'https:'
+                            : 'http:') + '//static.duoshuo.com/embed.js';
+                        ds.charset = 'UTF-8';
+                        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);
+                    })();
+                </script>
+                <!-- Duoshuo Comment END -->
+            </div>
+        </div>
+    </section>
+
+
+
+</div>
+
+        <div class="fixed-action-btn float-sitemap">
+    <a class="btn-floating btn-large pink">
+      <i class="fa fa-caret-square-o-up"></i>
+    </a>
+    <ul>
+      <li><a class="btn-return-top btn-floating waves-effect green" title="回到顶部"><i class="fa fa-arrow-circle-o-up"></i></a></li>
+      <li><a class="btn-floating waves-effect button-collapse yellow darken-1"  data-activates="main-menu" title="menu"><i class="fa fa-navicon"></i></a></li>
+    </ul>
+  </div>
+
+    </main>
+    <footer class="page-footer indigo darken-1">
+    
+    <div class="container">
+        <div class="row">
+            
+            <div class="social-group col m3 s12">
+                <h5 class="white-text">社交</h5>
+                
+                    <a class="social-link" href="http://weibo.com/u/3885282439?topnav=1&amp;wvr=6&amp;topsug=1&amp;is_all=1" target="_blank">
+                        <i class="fa fa-2x fa-weibo"></i>
+                    </a>
+                
+                    <a class="social-link" href="https://github.com/bijun-steven" target="_blank">
+                        <i class="fa fa-2x fa-github"></i>
+                    </a>
+                
+            </div>
+            
+
+            
+            <div class="col m9 s12">
+                <h5 class="white-text">友情链接</h5>
+                
+                    <a class="social-link" href="http://gold.xitu.io/welcome/frontend/" target="_blank">高质量的技术社区:掘金网</a>
+                
+                    <a class="social-link" href="http://www.qdfuns.com/" target="_blank">前端工程师必备网站:前端网</a>
+                
+            </div>
+            
+        </div>
+    </div>
+    
+
+    <div class="footer-copyright pink-link-context">
+        <div class="container" style="text-align:center">
+            © 2016 example.com, All rights reserved.
+            
+        </div>
+    </div>
+</footer>
+
+
+    <noscript>
+    <div class="noscript">
+        <p class="center-align">当前网速较慢或者你使用的浏览器不支持博客特定功能，请尝试刷新或换用Chrome、Firefox等现代浏览器</p>
+    </div>
+</noscript>
+<div class="noscript">
+    <p class="center-align">当前网速较慢或者你使用的浏览器不支持博客特定功能，请尝试刷新或换用Chrome、Firefox等现代浏览器</p>
+</div>
+
+
+<script src="/js/jquery.min.js"></script>
+<script src="/js/materialize.min.js"></script>
+
+<script>
+    (function($) {
+        $(document).ready(function() {
+            // 隐藏禁用javascript（针对微信内置浏览器）的提示
+            $('.noscript').hide();
+
+            // 图片缩放效果
+            var $imgs = $('img').not('.slider-image').not('.avatar-image').not('.carousel-image').not('.card-cover-image').not('.qrcode');
+
+            // 给图片加上点击放大效果（materialbox插件）
+            $imgs.addClass('materialboxed').each(function(i, el) {
+                $(this).attr('data-caption', $(this).attr('alt') || ' ');
+            }).materialbox();
+
+            // 优化表格的显示
+            $('table').each(function() {
+                var $table = $(this);
+                // 除去多行代码的情况
+                if ($table.find('pre').length == 0) {
+                    $table.addClass('responsive-table striped bordered');
+                }
+            });
+
+            // 首页幻灯片
+            $('.slider').slider({indicators: true, full_width: true, interval: 8000});
+
+            $(".button-collapse").sideNav();
+            $(".category-menu").sideNav();
+
+            // 针对gallery post
+            $('.carousel').carousel({full_width: true});
+            $('.carousel-control.prev').click(function() {
+                $('.carousel').carousel('prev');
+            });
+            $('.carousel-control.next').click(function() {
+                $('.carousel').carousel('next');
+            });
+
+            // 文章目录
+            $('article').not('.simple-article').find('h1').add('h2').add('h3').add('h4').add('h5').add('h6').scrollSpy();
+            // 修正文章目录的left-border颜色
+            var color = $('.table-of-contents-text').css('color');
+            $('.table-of-contents-link').css('border-left-color', color);
+
+            // 针对移动端做的优化：FAB按钮点击一下收回
+            if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+                $('.fixed-action-btn').addClass('click-to-toggle');
+            }
+            // 回到顶部
+            $('.btn-return-top').click(function() {
+                $('body, html').animate({
+                    scrollTop: 0
+                }, 500);
+            });
+
+            // 重置读书页面的Tab标签页的颜色
+            $('li.tab a').hover(function() {
+                $(this).toggleClass('text-lighten-4');
+            });
+            $('.indicator').addClass('pink lighten-2');
+
+            
+            // 添加new标签
+            $('.menu-reading').append('<span class="new badge pink"></span>');
+            
+
+            // 搜索功能
+            $('.modal-trigger').leanModal({
+                // 打开搜索框时自动聚焦
+                ready: function() {
+                    if ($('#search').is(":visible")) {
+                        $('#search-input').focus();
+                    }
+                }
+            });
+            var searchXml = "search.xml";
+            if (searchXml.length == 0) {
+             	searchXml = "search.xml";
+            }
+            var searchPath = "/" + searchXml;
+            initSearch(searchPath, 'search-input', 'search-result');
+        });
+
+        // 初始化搜索与匹配函数
+        var initSearch = function(path, search_id, content_id) {
+            'use strict';
+            $.ajax({
+                url: path,
+                dataType: "xml",
+                success: function(xmlResponse) {
+                    // get the contents from search data
+                    var datas = $("entry", xmlResponse).map(function() {
+                        return {
+                            title: $("title", this).text(),
+                            content: $("content", this).text(),
+                            url: $("url", this).text()
+                        };
+                    }).get();
+                    var $input = document.getElementById(search_id);
+                    var $resultContent = document.getElementById(content_id);
+                    $input.addEventListener('input', function() {
+                        var str = '<ul class=\"search-result-list\">';
+                        var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                        $resultContent.innerHTML = "";
+                        if (this.value.trim().length <= 0) {
+                            return;
+                        }
+                        // perform local searching
+                        datas.forEach(function(data) {
+                            var isMatch = true;
+                            var content_index = [];
+                            var data_title = data.title.trim().toLowerCase();
+                            var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                            var data_url = data.url;
+                            var index_title = -1;
+                            var index_content = -1;
+                            var first_occur = -1;
+                            // only match artiles with not empty titles and contents
+                            if (data_title != '' && data_content != '') {
+                                keywords.forEach(function(keyword, i) {
+                                    index_title = data_title.indexOf(keyword);
+                                    index_content = data_content.indexOf(keyword);
+                                    if (index_title < 0 && index_content < 0) {
+                                        isMatch = false;
+                                    } else {
+                                        if (index_content < 0) {
+                                            index_content = 0;
+                                        }
+                                        if (i == 0) {
+                                            first_occur = index_content;
+                                        }
+                                    }
+                                });
+                            }
+                            // show search results
+                            if (isMatch) {
+                                keywords.forEach(function(keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    data_title = data_title.replace(regS, "<span class=\"search-keyword pink lighten-2\">" + keyword + "</span>");
+                                });
+
+                                str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                                var content = data.content.trim().replace(/<[^>]+>/g, "");
+                                if (first_occur >= 0) {
+                                    // cut out 100 characters
+                                    var start = first_occur - 20;
+                                    var end = first_occur + 80;
+                                    if (start < 0) {
+                                        start = 0;
+                                    }
+                                    if (start == 0) {
+                                        end = 100;
+                                    }
+                                    if (end > content.length) {
+                                        end = content.length;
+                                    }
+                                    var match_content = content.substring(start, end);
+                                    // highlight all keywords
+                                    keywords.forEach(function(keyword) {
+                                        var regS = new RegExp(keyword, "gi");
+                                        match_content = match_content.replace(regS, "<span class=\"search-keyword pink lighten-2\">" + keyword + "</span>");
+                                    });
+
+                                    str += "<p class=\"search-result\">..." + match_content + "...</p>"
+                                }
+                                str += "</li>";
+                            }
+                        });
+                        str += "</ul>";
+                        $resultContent.innerHTML = str;
+                    });
+                }
+            });
+        }
+    })(jQuery);
+</script>
+
+
+<script src="/js/prettify.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $("pre").addClass("prettyprint");
+        prettyPrint();
+    });
+</script>
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+});
+</script>
+<script type="text/javascript" async
+  src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+
+</body>
+</html>

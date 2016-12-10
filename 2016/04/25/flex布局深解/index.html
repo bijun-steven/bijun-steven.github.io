@@ -1,0 +1,1073 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+    
+
+    <title>flex布局深解 | 梦开始的地方</title>
+    <meta name="author" content="steven">
+    
+    <meta name="description" content="弹性盒模型详解react native布局的基本
+前言Flexbox 是什么呢？就 W3C 官方给到的解释是，这是设计来实现更复杂的版面布局。那我自己对他的定义是，Flexbox 从本质上就是一个 Box-model 的延伸，我们都知道 Box-model 定义了一个元素的盒模型，然而 Flexbo">
+    
+    
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <meta property="og:title" content="flex布局深解"/>
+    <meta property="og:site_name" content="勿忘初心"/>
+
+    
+    <meta property="og:image" content="undefined"/>
+    
+
+    <link rel="icon" type="image/png" href="/favicon.png">
+    <link rel="alternate" href="/atom.xml" title="勿忘初心" type="application/atom+xml">
+    <link rel="stylesheet" href="/css/lib/materialize.min.css">
+    <link rel="stylesheet" href="/css/lib/font-awesome.min.css">
+    <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+
+    
+        <link rel="stylesheet" href="/css/lib/prettify-tomorrow-night-eighties.css" type="text/css">
+    
+    <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+</head>
+
+
+<body>
+    <img src="/weixin_favicon.png" style="position: absolute; left: -9999px; opacity: 0; filter: alpha(opacity=0);">
+
+    <nav class="indigo">
+    <div class="nav-wrapper">
+        <a href="#" data-activates="main-menu" class="button-collapse">
+            <i class="fa fa-navicon"></i>
+        </a>
+        <div class="">
+            <a href="/" class="brand-logo hide-on-med-and-down">勿忘初心</a>
+            <ul class="right hide-on-med-and-down">
+                
+                    <li>
+                        <a class="menu-home " href="/" >
+                            <i class="fa fa-home "></i>
+                            
+                            首页
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a class="menu-archive " href="/archives" >
+                            <i class="fa fa-archive "></i>
+                            
+                            归档
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a class="menu-reading " href="/reading" >
+                            <i class="fa fa-book "></i>
+                            
+                            读书
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a class="menu-about " href="/about" >
+                            <i class="fa fa-user "></i>
+                            
+                            关于
+                        </a>
+                    </li>
+                
+            </ul>
+            <div>
+    <ul class="side-nav indigo darken-1" id="main-menu">
+        
+        <li class="side-user">
+            <div class="row">
+                <div class="col s4 no-padding">
+                    <img class="avatar-image circle responsive-img" src="http://ww2.sinaimg.cn/small/74990035jw1f1rjkd681bj20rs0rsdhg.jpg" alt="User Avatar">
+                </div>
+                <div class="info col s8 valign-wrapper no-padding">
+                    <div class="valign">
+                        <p class="name">steven</p>
+                        <p class="desc">Web前端/iOS/技术宅</p>
+                    </div>
+                </div>
+            </div>
+        </li>
+        
+
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-home " href="/" >
+                    <i class="fa fa-home "></i>
+                    
+                    首页
+                </a>
+            </li>
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-archive " href="/archives" >
+                    <i class="fa fa-archive "></i>
+                    
+                    归档
+                </a>
+            </li>
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-reading " href="/reading" >
+                    <i class="fa fa-book "></i>
+                    
+                    读书
+                </a>
+            </li>
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-about " href="/about" >
+                    <i class="fa fa-user "></i>
+                    
+                    关于
+                </a>
+            </li>
+        
+    </ul>
+
+    <ul class="side-nav indigo darken-1" id="category-menu">
+    
+
+            
+
+    </ul>
+</div>
+
+        </div>
+    </div>
+</nav>
+
+<div id="search" class="modal search-modal">
+    <div class="row">
+        <div class="input-field col s12">
+              <input id="search-input" type="text">
+              <label for="search-input">搜索</label>
+        </div>
+
+    </div>
+    <div id="search-result" class="search-result col s12">
+
+    </div>
+</div>
+
+
+    <main>
+        <div class="container main-container">
+    <nav class="page-nav hide-on-small-only">
+    <div class="nav-wrapper indigo">
+        <span class="breadcrumb">当前位置（分类目录）</span>
+        
+            
+
+        
+
+        
+    </div>
+</nav>
+
+<article>
+    <div class="card">
+        <div class="card-content">
+            
+
+            <div class="article-title">
+                
+    
+        <h1>flex布局深解</h1>
+    
+
+
+            </div>
+            <time class="pink-link-context" datetime="2016-04-25T12:27:12.000Z"><a href="/2016/04/25/flex布局深解/">2016-04-25</a></time>
+
+            
+    <div class="tags-row">
+        
+            <a href="/tags/css/" class="chip pink lighten-1">css</a>
+        
+    </div>
+
+
+            <div class="toc pink-link-context hide-on-med-and-down">
+    <ol class="section table-of-contents"><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#弹性盒模型详解"><span class="section table-of-contents-text">弹性盒模型详解</span></a></li><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#前言"><span class="section table-of-contents-text">前言</span></a><ol class="section table-of-contents-child"><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#总之我们的弹性盒模型就是让我们的实现响应式布局更加优雅"><span class="section table-of-contents-text">总之，我们的弹性盒模型就是让我们的实现响应式布局更加优雅。</span></a></li></ol></li><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#1-语法"><span class="section table-of-contents-text">1. 语法</span></a><ol class="section table-of-contents-child"><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#11-语法基础概念"><span class="section table-of-contents-text">1.1 语法基础概念</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#12-容器属性设置"><span class="section table-of-contents-text">1.2 容器属性设置</span></a><ol class="section table-of-contents-child"><li class="section table-of-contents-item section table-of-contents-level-4"><a class="section table-of-contents-link" href="#121-flex-direction属性"><span class="section table-of-contents-text">1.2.1  flex-direction属性</span></a></li><li class="section table-of-contents-item section table-of-contents-level-4"><a class="section table-of-contents-link" href="#122-flex-wrap属性"><span class="section table-of-contents-text">1.2.2  flex-wrap属性</span></a></li><li class="section table-of-contents-item section table-of-contents-level-4"><a class="section table-of-contents-link" href="#123-flex-flow"><span class="section table-of-contents-text">1.2.3 flex-flow</span></a></li><li class="section table-of-contents-item section table-of-contents-level-4"><a class="section table-of-contents-link" href="#124-justify-content属性"><span class="section table-of-contents-text">1.2.4 justify-content属性</span></a></li><li class="section table-of-contents-item section table-of-contents-level-4"><a class="section table-of-contents-link" href="#125-align-items属性"><span class="section table-of-contents-text">1.2.5 align-items属性</span></a></li><li class="section table-of-contents-item section table-of-contents-level-4"><a class="section table-of-contents-link" href="#126-align-content属性"><span class="section table-of-contents-text">1.2.6 align-content属性</span></a></li></ol></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#13-项目的属性"><span class="section table-of-contents-text">1.3 项目的属性</span></a><ol class="section table-of-contents-child"><li class="section table-of-contents-item section table-of-contents-level-4"><a class="section table-of-contents-link" href="#131-order属性"><span class="section table-of-contents-text">1.3.1 order属性</span></a></li><li class="section table-of-contents-item section table-of-contents-level-4"><a class="section table-of-contents-link" href="#132-flex-grow属性"><span class="section table-of-contents-text">1.3.2 flex-grow属性</span></a></li><li class="section table-of-contents-item section table-of-contents-level-4"><a class="section table-of-contents-link" href="#133-flex-shrink属性"><span class="section table-of-contents-text">1.3.3 flex-shrink属性</span></a></li><li class="section table-of-contents-item section table-of-contents-level-4"><a class="section table-of-contents-link" href="#134-flex-basis属性"><span class="section table-of-contents-text">1.3.4 flex-basis属性</span></a></li><li class="section table-of-contents-item section table-of-contents-level-4"><a class="section table-of-contents-link" href="#135-flex属性"><span class="section table-of-contents-text">1.3.5 flex属性</span></a></li><li class="section table-of-contents-item section table-of-contents-level-4"><a class="section table-of-contents-link" href="#136-align-self属性"><span class="section table-of-contents-text">1.3.6 align-self属性</span></a></li></ol></li></ol></li><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#2-实战"><span class="section table-of-contents-text">2. 实战</span></a><ol class="section table-of-contents-child"><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#21-骰子"><span class="section table-of-contents-text">2.1 骰子</span></a><ol class="section table-of-contents-child"><li class="section table-of-contents-item section table-of-contents-level-4"><a class="section table-of-contents-link" href="#211-一个点"><span class="section table-of-contents-text">2.1.1 一个点</span></a></li><li class="section table-of-contents-item section table-of-contents-level-4"><a class="section table-of-contents-link" href="#212-两个点"><span class="section table-of-contents-text">2.1.2 两个点</span></a></li><li class="section table-of-contents-item section table-of-contents-level-4"><a class="section table-of-contents-link" href="#213-三个点"><span class="section table-of-contents-text">2.1.3 三个点</span></a></li><li class="section table-of-contents-item section table-of-contents-level-4"><a class="section table-of-contents-link" href="#214-四个点"><span class="section table-of-contents-text">2.1.4 四个点</span></a></li><li class="section table-of-contents-item section table-of-contents-level-4"><a class="section table-of-contents-link" href="#215-六个点"><span class="section table-of-contents-text">2.1.5 六个点</span></a></li><li class="section table-of-contents-item section table-of-contents-level-4"><a class="section table-of-contents-link" href="#216-九个点"><span class="section table-of-contents-text">2.1.6 九个点</span></a></li></ol></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#22-网格布局"><span class="section table-of-contents-text">2.2 网格布局</span></a><ol class="section table-of-contents-child"><li class="section table-of-contents-item section table-of-contents-level-4"><a class="section table-of-contents-link" href="#221-基本网格布局"><span class="section table-of-contents-text">2.2.1 基本网格布局</span></a></li><li class="section table-of-contents-item section table-of-contents-level-4"><a class="section table-of-contents-link" href="#222-百分比布局"><span class="section table-of-contents-text">2.2.2 百分比布局</span></a></li></ol></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#23-圣杯布局"><span class="section table-of-contents-text">2.3 圣杯布局</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#24-输入框的布局"><span class="section table-of-contents-text">2.4 输入框的布局</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#25-悬挂式布局"><span class="section table-of-contents-text">2.5 悬挂式布局</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#26-固定的底栏"><span class="section table-of-contents-text">2.6 固定的底栏</span></a></li></ol></li><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#附录"><span class="section table-of-contents-text">附录</span></a></li></ol>
+</div>
+
+
+            <div class="entry pink-link-context">
+                <h2 id="弹性盒模型详解"><a href="#弹性盒模型详解" class="headerlink" title="弹性盒模型详解"></a>弹性盒模型详解</h2><p>react native布局的基本</p>
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>Flexbox 是什么呢？</p><br><p>就 W3C 官方给到的解释是，这是设计来实现更复杂的版面布局。</p><br><p>那我自己对他的定义是，Flexbox 从本质上就是一个 Box-model 的延伸，我们都知道 Box-model 定义了一个元素的盒模型，然而 Flexbox 更进一步的去规范了这些盒模型之间彼此的相对关系。</p><br><p>而不需要去用一些很 cheat 的做法，去 hack 一些本来其实不应该用来做版面布局的属性。</p><br><p><img src="http://www.ruanyifeng.com/blogimg/asset/2015/bg2015071004.png" alt="" title=""></p>
+
+<p>Flexible boxes盒子按照宽和高分出了以下 8 点：</p>
+
+<ul><br><li>水平的主轴: <code>main axis</code></li><br><li>垂直的纵轴:<code>cross axis</code></li><br><li>纵轴的开始位置和边框的交点: <code>cross start</code></li><br><li>纵轴的结束位置和边框的交点: <code>cross end</code></li><br><li>主轴的开始位置和边框的交点: <code>main start</code></li><br><li>主轴的结束位置和边框的交点: <code>main end</code></li><br><li>单个项目占据主轴的空间距离: <code>main axis</code></li><br><li>单个项目占据纵轴的空间距离: <code>cross axis</code></li><br></ul>
+
+
+
+<h3 id="总之我们的弹性盒模型就是让我们的实现响应式布局更加优雅"><a name="t2"></a>总之，我们的弹性盒模型就是让我们的实现响应式布局更加优雅。</h3>
+
+<p><img src="http://img.blog.csdn.net/20160323213656207" alt="这里写图片描述" title=""></p>
+
+<p>同时给大家推荐几个网站。</p>
+
+<ul><br><li><a href="http://www.jianshu.com/collection/134d5825d813" target="_blank" rel="external">无耻的我，自己占一个坑</a></li><br><li><a href="https://segmentfault.com/a/1190000003090028" target="_blank" rel="external">18个学习 flexbox 的优质资源</a></li><br><li><a href="http://demo.agektmr.com/flexbox/" target="_blank" rel="external">Flexbox模拟器</a></li><br><li><a href="http://flexboxfroggy.com" target="_blank" rel="external">FLEXBOX小游戏</a></li><br></ul>
+
+
+
+<h2 id="1-语法"><a name="t3"></a>1. 语法</h2>
+
+
+
+<h3 id="11-语法基础概念"><a name="t4"></a>1.1 语法基础概念</h3>
+
+<p>任何一个容器都可以指定为Flex布局。</p>
+
+
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">.box&#123;</div><div class="line">     display: flex;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>行内元素也可以使用Flex布局。</p>
+
+
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">.box&#123;</div><div class="line">   display: inline-flex;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>同时需要注意，在不用的浏览器中，我们还需要在前面加上对应的浏览器前缀。</p>
+
+<pre>
+.box{
+    display: -webkit-flex; /* Safari */
+    display: flex;
+} 
+</pre>   
+
+<p>注意，设为Flex布局以后，子元素的float、clear和vertical-align属性将失效。</p>
+<h3 id="12-容器属性设置"><a name="t5"></a>1.2 容器属性设置</h3>
+
+<p>以下6个属性设置在容器上。</p>
+
+<ul><br><li>flex-direction</li><br><li>flex-wrap</li><br><li>flex-flow</li><br><li>justify-content</li><br><li>align-items</li><br><li>align-content</li><br></ul>
+
+
+
+<h4 id="121-flex-direction属性"><a name="t6"></a>1.2.1  flex-direction属性</h4>
+
+<p>flex-direction 属性决定主轴的方向（即项目的排列方向）。</p><br><pre><br>    .box {<br>      flex-direction: row | row-reverse | column | column-reverse;<br>    }<br></pre><br>     代码        |           样式<br> row默认值        | 主轴为水平方向，起点在左端.<br> row-reverse       | 主轴为水平方向，起点在右端.<br> column            | 主轴为垂直方向，起点在上沿.<br> column-reverse    | 主轴为垂直方向，起点在下沿.<br><br><p><img src="http://www.ruanyifeng.com/blogimg/asset/2015/bg2015071005.png" alt="" title=""></p>
+
+<h4 id="122-flex-wrap属性"><a name="t7"></a>1.2.2  flex-wrap属性</h4>
+
+<p>默认情况下，项目都排在一条线（又称”轴线”）上。</p>
+
+<p>flex-wrap属性定义，如果一条轴线排不下，如何换行。</p>
+
+
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">.box&#123;</div><div class="line">  flex-wrap: nowrap | wrap | wrap-reverse;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ol><br><li><p>nowrap（默认）：不换行。 <br><br><img src="http://www.ruanyifeng.com/blogimg/asset/2015/bg2015071007.png" alt="" title=""></p></li><br><li><p>wrap：换行，第一行在上方。 <br><br><img src="http://www.ruanyifeng.com/blogimg/asset/2015/bg2015071008.jpg" alt="" title=""></p></li><br><li><p>wrap-reverse：换行，第一行在下方。 <br><br><img src="http://www.ruanyifeng.com/blogimg/asset/2015/bg2015071009.jpg" alt="" title=""></p></li><br></ol>
+
+
+
+<h4 id="123-flex-flow"><a name="t8"></a>1.2.3 flex-flow</h4>
+
+<p>flex-flow属性是flex-direction属性和flex-wrap属性的简写形式，默认值为row nowrap。</p>
+
+
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">.box &#123;</div><div class="line"> 		flex-flow: &lt;flex-direction&gt; || &lt;flex-wrap&gt;;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="124-justify-content属性"><a name="t9"></a>1.2.4 justify-content属性</h4>
+
+<p>justify-content属性定义了项目在主轴上的对齐方式。</p>
+
+
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">.box &#123;</div><div class="line">  justify-content: flex-start | flex-end | center | space-between | space-around;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>它可能取5个值，具体对齐方式与轴的方向有关。下面假设主轴为从左到右。</p>
+
+<p>flex-start（默认值）     |     左对齐<br>flex-end               |    右对齐<br>center                |    居中<br>space-between         |    两端对齐，项目之间的间隔都相等。<br>space-around        |    每个项目两侧的间隔相等。所以，项目之间的间隔比项目与边框的间隔大一倍。</p>
+<p><img src="http://www.ruanyifeng.com/blogimg/asset/2015/bg2015071010.png" alt="" title=""></p>
+
+
+
+<h4 id="125-align-items属性"><a name="t10"></a>1.2.5 align-items属性</h4>
+
+<p>align-items属性定义项目在交叉轴上如何对齐。</p>
+
+
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">.box &#123;</div><div class="line">  align-items: flex-start | flex-end | center | baseline | stretch;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>它可能取5个值。具体的对齐方式与交叉轴的方向有关，下面假设交叉轴从上到下。</p>
+
+
+<p>flex-start     | 交叉轴的起点对齐。<br>flex-end       | 交叉轴的终点对齐。<br>center         | 交叉轴的中点对齐。<br>baseline       | 项目的第一行文字的基线对齐。<br>stretch(默认)| 如果项目未设置高度或设为auto，将占满整个容器的高度。</p>
+<p><img src="http://www.ruanyifeng.com/blogimg/asset/2015/bg2015071011.png" alt="" title=""></p>
+
+
+
+<h4 id="126-align-content属性"><a name="t11"></a>1.2.6 align-content属性</h4>
+
+<p>align-content属性定义了多根轴线的对齐方式。如果项目只有一根轴线，该属性不起作用。</p>
+
+
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">.box &#123;</div><div class="line">  align-content: flex-start | flex-end | center | space-between | space-around | stretch;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>flex-start 与交叉轴的起点对齐。<br>flex-end 与交叉轴的终点对齐。<br>center 与交叉轴的中点对齐。<br>space-between 与交叉轴两端对齐，轴线之间的间隔平均分布。<br>space-around 每根轴线两侧的间隔都相等。所以，轴线之间的间隔比轴线与边框的间隔大一倍。<br>stretch（默认值）轴线占满整个交叉轴。</p>
+<p><img src="http://www.ruanyifeng.com/blogimg/asset/2015/bg2015071012.png" alt="" title=""></p>
+
+
+
+<h3 id="13-项目的属性"><a name="t12"></a>1.3 项目的属性</h3>
+
+<p>以下6个属性设置在项目上。</p>
+
+<ul><br><li>order</li><br><li>flex-grow</li><br><li>flex-shrink</li><br><li>flex-basis</li><br><li>flex</li><br><li>align-self</li><br></ul>
+
+
+
+<h4 id="131-order属性"><a name="t13"></a>1.3.1 order属性</h4>
+
+<p>order属性定义项目的排列顺序。数值越小，排列越靠前，默认为0。</p>
+
+
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">.item &#123;</div><div class="line">  order: &lt;integer&gt;;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><img src="http://www.ruanyifeng.com/blogimg/asset/2015/bg2015071013.png" alt="" title=""></p>
+
+
+
+<h4 id="132-flex-grow属性"><a name="t14"></a>1.3.2 flex-grow属性</h4>
+
+<p>flex-grow属性定义项目的放大比例，默认为0，即如果存在剩余空间，也不放大。</p>
+
+
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">.item &#123;</div><div class="line">  flex-grow: &lt;number&gt;; /* default 0 */</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><img src="http://www.ruanyifeng.com/blogimg/asset/2015/bg2015071014.png" alt="" title=""></p>
+
+<p><strong>如果所有项目的flex-grow属性都为1，则它们将等分剩余空间（如果有的话）。如果一个项目的flex-grow属性为2，其他项目都为1，则前者占据的剩余空间将比其他项多一倍。</strong></p>
+
+
+
+<h4 id="133-flex-shrink属性"><a name="t15"></a>1.3.3 flex-shrink属性</h4>
+
+<p>flex-shrink属性定义了项目的缩小比例，默认为1，即如果空间不足，该项目将缩小。</p>
+
+
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">.item &#123;</div><div class="line">  flex-shrink: &lt;number&gt;; /* default 1 */</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong><a href="http://www.ruanyifeng.com/blogimg/asset/2015/bg2015071015.jpg" target="_blank" rel="external">http://www.ruanyifeng.com/blogimg/asset/2015/bg2015071015.jpg</a></strong></p>
+
+<p>如果所有项目的flex-shrink属性都为1，当空间不足时，都将等比例缩小。</p>
+
+<p>如果一个项目的flex-shrink属性为0，其他项目都为1，则空间不足时，前者不缩小。</p>
+
+<p><strong>负值对该属性无效。</strong></p>
+
+
+
+<h4 id="134-flex-basis属性"><a name="t16"></a>1.3.4 flex-basis属性</h4>
+
+<p>flex-basis属性定义了在分配多余空间之前，项目占据的主轴空间（main size）。浏览器根据这个属性，计算主轴是否有多余空间。它的默认值为auto，即项目的本来大小。</p>
+
+
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">.item &#123;</div><div class="line">  flex-basis: &lt;length&gt; | auto; /* default auto */</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>它可以设为跟width或height属性一样的值（比如350px），则项目将占据固定空间。</p>
+
+<p><strong>补充：</strong></p>
+
+<p>flex-basis:flex-basis可以理解为我们给子元素设置的宽度。</p>
+
+<p>默认值是auto,宽度设置为auto时，盒子的宽度取决你们元素的宽度。</p>
+
+<p><img src="http://cdn1.w3cplus.com/cdn/farfuture/hsdt0uIesK5HVflTGUfvjBEVkw6U4GZv_zzphkYwEr0/mtime:1427890871/sites/default/files/blogs/2015/1504/7840cd4a86ca14d6.png" alt="" title=""></p>
+
+
+
+<h4 id="135-flex属性"><a name="t17"></a>1.3.5 flex属性</h4>
+
+<p>flex属性是flex-grow, flex-shrink 和 flex-basis的简写，默认值为0 1 auto。后两个属性可选。</p>
+
+
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">.item &#123;</div><div class="line">  flex: none | [ &lt;&apos;flex-grow&apos;&gt; &lt;&apos;flex-shrink&apos;&gt;? || &lt;&apos;flex-basis&apos;&gt; ]</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>该属性有两个快捷值：auto (1 1 auto) 和 none (0 0 auto)。</p>
+
+<p>建议优先使用这个属性，而不是单独写三个分离的属性，因为浏览器会推算相关值。</p>
+
+<p><strong>补充：</strong> <br><br>grow和shrink是一对双胞胎，grow表示伸张因子，shrink表示是收缩因子。</p>
+
+<p>grow在flex容器下的子元素的宽度和比容器和小的时候起作用。</p>
+
+<p>grow定义了子元素的宽度增长因子，容器中除去子元素之和剩下的宽度会按照各个子元素的gorw值进行平分加大各个子元素上。</p>
+
+<table><br><thead><br><tr><br>  <th align="left">-</th><br>  <th align="left">-</th><br></tr><br></thead><br><tbody><tr><br>  <td align="left">计算容器还剩空间</td><br>  <td align="left">available_space(容器还剩的空间）=container_size(容器宽度)-flex_item_total(子元素宽度之和)</td><br></tr><br><tr><br>  <td align="left">计算增长单位</td><br>  <td align="left">grow_unit(增长单位)=available_space/flex_grow_total(子元素增长因子之和)</td><br></tr><br><tr><br>  <td align="left">得到子元素的宽度</td><br>  <td align="left">flex-item-width(子元素计算得到的宽度)=flex-basis+grow-unit*flex-grow</td><br></tr><br></tbody></table>
+
+
+<p><img src="http://cdn2.w3cplus.com/cdn/farfuture/OH9DuyiP8gSMGv0SDQOZX4gvagBnki1GTijp8PCCcQQ/mtime:1427890871/sites/default/files/blogs/2015/1504/4352df01c32c13f7.png" alt="" title=""></p>
+
+<p><strong>上面例子的计算</strong></p>
+
+
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">container-size=480px;  </div><div class="line">flex-item-total=100*3=300px;</div><div class="line">flex-grow-total=3+2+1=6</div><div class="line">available_space=480-300=180px;  </div><div class="line">grow_unit=180/6=30px;  </div><div class="line">子元素1的宽度为：</div><div class="line"></div><div class="line">flex_item_width1=100+3*30=190px;</div><div class="line">子元素2的宽度为：</div><div class="line"></div><div class="line">flex_item_width1=100+2*30=160px; </div><div class="line">子元素3的宽度为：</div><div class="line"></div><div class="line">flex_item_width1=100+30=130px;</div></pre></td></tr></table></figure>
+<p>shrink则是在宽度和比容器宽度大时候，才有用。按照shrink的值减去相应大小得到子元素的值。</p>
+
+<p>公式：</p>
+
+<p>overflow_space(溢出的宽度)</p>
+
+<table><br><thead><br><tr><br>  <th align="left">-</th><br>  <th align="left">-</th><br></tr><br></thead><br><tbody><tr><br>  <td align="left">计算溢出的宽度</td><br>  <td align="left">overflow-space=flex-item-total(子元素basis宽度之和)-container_width(容器宽度)</td><br></tr><br><tr><br>  <td align="left">得到计算的子元素的宽度</td><br>  <td align="left">item-basis:子元素设置的flex-basis；item-shrink:子元素的flex-shrink；item-shrink-sum:所有子元素flex_shrink的和。flex_item_width(计算的子元素的宽度)=item-basis –(overflow-space*(item-shrink/item-shrink-sum))</td><br></tr><br></tbody></table>
+
+
+<p><img src="http://cdn1.w3cplus.com/cdn/farfuture/aQ1AH7uk4Ayyn1nyZc1SYp6mbyEm5SYODsSa-4-LzsE/mtime:1427890873/sites/default/files/blogs/2015/1504/db17b8d99794bd9f.png" alt="" title=""></p>
+
+
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">container-width=480px; item-shrink分别为3，2，1.item-basis=200px;  overflow-space=120px;  </div><div class="line"></div><div class="line">   则：</div><div class="line"></div><div class="line">   flex_item1_width=200-(120*(3/6))=140px;</div><div class="line">   flex_item2_width=200-(120*(2/6))=160px; </div><div class="line">   flex_item3_width=200-(120*(1/6))=180px;</div></pre></td></tr></table></figure>
+<h4 id="136-align-self属性"><a name="t18"></a>1.3.6 align-self属性</h4>
+
+<p>align-self属性允许单个项目有与其他项目不一样的对齐方式，可覆盖align-items属性。</p>
+
+<p>默认值为auto，表示继承父元素的align-items属性，如果没有父元素，则等同于stretch。</p>
+
+
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">.item &#123;</div><div class="line">  align-self: auto | flex-start | flex-end | center | baseline | stretch;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><img src="http://www.ruanyifeng.com/blogimg/asset/2015/bg2015071016.png" alt="" title=""></p><br><p>该属性可能取6个值，除了auto，其他都与align-items属性完全一致。</p><br><h2 id="2-实战"><a name="t19"></a>2. 实战</h2><br><p><img src="http://www.ruanyifeng.com/blogimg/asset/2015/bg2015071327.png" alt="" title=""></p><br><h3 id="21-骰子"><a name="t20"></a>2.1 骰子</h3><br><p><img src="http://www.ruanyifeng.com/blogimg/asset/2015/bg2015071329.png" alt="" title=""></p><br><p>如果不加说明，本节的HTML模板一律如下。</p><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;div class=&quot;box&quot;&gt;</div><div class="line">     &lt;span class=&quot;item&quot;&gt;&lt;/span&gt;</div><div class="line">   &lt;/div&gt;</div></pre></td></tr></table></figure><br><br><p>上面代码中，div元素（代表骰子的一个面）是Flex容器，span元素（代表一个点）是Flex项目。</p><br><p>如果有多个项目，就要添加多个span元素，以此类推。</p><br><h4 id="211-一个点"><a name="t21"></a>2.1.1 一个点</h4><br><br><p>首先，只有左上角1个点的情况。Flex布局默认就是首行左对齐，所以一行代码就够了。</p>
+
+<p><img src="http://www.ruanyifeng.com/blogimg/asset/2015/bg2015071301.png" alt="" title=""></p>
+
+
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">.box &#123;</div><div class="line">  display: flex;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>设置项目的对齐方式，就能实现居中对齐和右对齐。</p>
+
+<p><img src="http://www.ruanyifeng.com/blogimg/asset/2015/bg2015071302.png" alt="" title=""></p>
+
+
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">.box &#123;</div><div class="line">  display: flex;</div><div class="line">  justify-content: center;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><img src="http://www.ruanyifeng.com/blogimg/asset/2015/bg2015071303.png" alt="" title=""></p>
+
+
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">.box &#123;</div><div class="line">  display: flex;</div><div class="line">  justify-content: flex-end;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>设置交叉轴对齐方式，可以垂直移动主轴。</p>
+
+<p><img src="http://www.ruanyifeng.com/blogimg/asset/2015/bg2015071304.png" alt="" title=""></p>
+
+
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">.box &#123;</div><div class="line">  display: flex;</div><div class="line">  align-items: center;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><img src="http://www.ruanyifeng.com/blogimg/asset/2015/bg2015071305.png" alt="" title=""></p>
+
+
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">.box &#123;</div><div class="line">  display: flex;</div><div class="line">  align-items: center;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><img src="http://www.ruanyifeng.com/blogimg/asset/2015/bg2015071305.png" alt="" title=""></p>
+
+
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">.box &#123;</div><div class="line">  display: flex;</div><div class="line">  justify-content: center;</div><div class="line">  align-items: center;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><img src="http://www.ruanyifeng.com/blogimg/asset/2015/bg2015071306.png" alt="" title=""></p>
+
+
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">.box &#123;</div><div class="line">  display: flex;</div><div class="line">  justify-content: center;</div><div class="line">  align-items: flex-end;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><img src="http://www.ruanyifeng.com/blogimg/asset/2015/bg2015071307.png" alt="" title=""></p>
+
+
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">.box &#123;</div><div class="line">  display: flex;</div><div class="line">  justify-content: flex-end;</div><div class="line">  align-items: flex-end;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="212-两个点"><a name="t22"></a>2.1.2 两个点</h4>
+
+<p><img src="http://www.ruanyifeng.com/blogimg/asset/2015/bg2015071308.png" alt="" title=""></p>
+
+
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">.box &#123;</div><div class="line">  display: flex;</div><div class="line">  justify-content: space-between;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><img src="http://www.ruanyifeng.com/blogimg/asset/2015/bg2015071309.png" alt="" title=""></p>
+
+
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">.box &#123;</div><div class="line">  display: flex;</div><div class="line">  flex-direction: column;</div><div class="line">  justify-content: space-between;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><img src="http://www.ruanyifeng.com/blogimg/asset/2015/bg2015071310.png" alt="" title=""></p>
+
+
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">.box &#123;</div><div class="line">  display: flex;</div><div class="line">  flex-direction: column;</div><div class="line">  justify-content: space-between;</div><div class="line">  align-items: center;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><img src="http://www.ruanyifeng.com/blogimg/asset/2015/bg2015071311.png" alt="" title=""></p>
+
+
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">.box &#123;</div><div class="line">  display: flex;</div><div class="line">  flex-direction: column;</div><div class="line">  justify-content: space-between;</div><div class="line">  align-items: flex-end;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><img src="http://www.ruanyifeng.com/blogimg/asset/2015/bg2015071312.png" alt="" title=""></p>
+
+
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">.box &#123;</div><div class="line">  display: flex;</div><div class="line">&#125;</div><div class="line"></div><div class="line">.item:nth-child(2) &#123;</div><div class="line">  align-self: center;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><img src="http://www.ruanyifeng.com/blogimg/asset/2015/bg2015071313.png" alt="" title=""></p>
+
+
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">.box &#123;</div><div class="line">  display: flex;</div><div class="line">  justify-content: space-between;</div><div class="line">&#125;</div><div class="line"></div><div class="line">.item:nth-child(2) &#123;</div><div class="line">  align-self: flex-end;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="213-三个点"><a name="t23"></a>2.1.3 三个点</h4>
+
+<p><img src="http://www.ruanyifeng.com/blogimg/asset/2015/bg2015071314.png" alt="" title=""></p>
+
+
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">.box &#123;</div><div class="line">  display: flex;</div><div class="line">&#125;</div><div class="line"></div><div class="line">.item:nth-child(2) &#123;</div><div class="line">  align-self: center;</div><div class="line">&#125;</div><div class="line"></div><div class="line">.item:nth-child(3) &#123;</div><div class="line">  align-self: flex-end;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="214-四个点"><a name="t24"></a>2.1.4 四个点</h4>
+
+<p><img src="http://www.ruanyifeng.com/blogimg/asset/2015/bg2015071315.png" alt="" title=""></p>
+
+
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">.box &#123;</div><div class="line">  display: flex;</div><div class="line">  flex-wrap: wrap;</div><div class="line">  justify-content: flex-end;</div><div class="line">  align-content: space-between;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><img src="http://www.ruanyifeng.com/blogimg/asset/2015/bg2015071316.png" alt="" title=""></p>
+
+<p>HTML代码如下。</p>
+
+
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">&lt;div class=&quot;box&quot;&gt;</div><div class="line">     &lt;div class=&quot;column&quot;&gt;</div><div class="line">       &lt;span class=&quot;item&quot;&gt;&lt;/span&gt;</div><div class="line">       &lt;span class=&quot;item&quot;&gt;&lt;/span&gt;</div><div class="line">     &lt;/div&gt;</div><div class="line">     &lt;div class=&quot;column&quot;&gt;</div><div class="line">       &lt;span class=&quot;item&quot;&gt;&lt;/span&gt;</div><div class="line">       &lt;span class=&quot;item&quot;&gt;&lt;/span&gt;</div><div class="line">     &lt;/div&gt;</div><div class="line">   &lt;/div&gt;</div></pre></td></tr></table></figure>
+<p>CSS代码如下。</p>
+
+
+
+<pre>
+    .box {
+        display: flex;
+        justify-content: space-between;
+    }
+    .box .column {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+</pre>
+
+
+
+
+<h4 id="215-六个点"><a name="t25"></a>2.1.5 六个点</h4>
+
+<p><img src="http://www.ruanyifeng.com/blogimg/asset/2015/bg2015071317.png" alt="" title=""></p>
+
+
+
+<pre>
+.box {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: space-between;
+}
+</pre>
+
+<p><img src="http://www.ruanyifeng.com/blogimg/asset/2015/bg2015071318.png" alt="" title=""></p>
+
+
+
+<pre>
+.box {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-content: space-between;
+}
+</pre>
+
+
+<p><img src="http://www.ruanyifeng.com/blogimg/asset/2015/bg2015071319.png" alt="" title=""></p>
+
+<p>HTML代码如下。</p>
+
+
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">&lt;div class=&quot;box&quot;&gt;</div><div class="line">     &lt;div class=&quot;row&quot;&gt;</div><div class="line">       &lt;span class=&quot;item&quot;&gt;&lt;/span&gt;</div><div class="line">       &lt;span class=&quot;item&quot;&gt;&lt;/span&gt;</div><div class="line">       &lt;span class=&quot;item&quot;&gt;&lt;/span&gt;</div><div class="line">     &lt;/div&gt;</div><div class="line">     &lt;div class=&quot;row&quot;&gt;</div><div class="line">       &lt;span class=&quot;item&quot;&gt;&lt;/span&gt;</div><div class="line">     &lt;/div&gt;</div><div class="line">     &lt;div class=&quot;row&quot;&gt;</div><div class="line">        &lt;span class=&quot;item&quot;&gt;&lt;/span&gt;</div><div class="line">        &lt;span class=&quot;item&quot;&gt;&lt;/span&gt;</div><div class="line">     &lt;/div&gt;</div><div class="line">   &lt;/div&gt;</div></pre></td></tr></table></figure>
+<p>CSS代码如下。</p>
+
+
+
+<pre> 
+    .box {
+      display: flex;
+      flex-wrap: wrap;
+    }
+
+    .row{
+      flex-basis: 100%;
+      display:flex;
+    }
+
+    .row:nth-child(2){
+      justify-content: center;
+    }
+
+    .row:nth-child(3){
+      justify-content: space-between;
+    }
+</pre>     
+
+
+
+
+<h4 id="216-九个点"><a name="t26"></a>2.1.6 九个点</h4>
+
+<p><img src="http://www.ruanyifeng.com/blogimg/asset/2015/bg2015071320.png" alt="" title=""></p>
+
+
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">.box &#123;</div><div class="line">  display: flex;</div><div class="line">  flex-wrap: wrap;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="22-网格布局"><a name="t27"></a>2.2 网格布局</h3>
+
+
+
+<h4 id="221-基本网格布局"><a name="t28"></a>2.2.1 基本网格布局</h4>
+
+<p>最简单的网格布局，就是平均分布。</p>
+
+<p>在容器里面平均分配空间，跟上面的骰子布局很像，但是需要设置项目的自动缩放。</p>
+
+<p><img src="http://www.ruanyifeng.com/blogimg/asset/2015/bg2015071321.png" alt="" title=""></p>
+
+<p>HTML代码如下。</p>
+
+
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&lt;div class=&quot;Grid&quot;&gt;</div><div class="line">     &lt;div class=&quot;Grid-cell&quot;&gt;...&lt;/div&gt;</div><div class="line">     &lt;div class=&quot;Grid-cell&quot;&gt;...&lt;/div&gt;</div><div class="line">     &lt;div class=&quot;Grid-cell&quot;&gt;...&lt;/div&gt;</div><div class="line">   &lt;/div&gt;</div></pre></td></tr></table></figure>
+<p>CSS代码如下。</p>
+
+
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">.Grid &#123;</div><div class="line">     display: flex;</div><div class="line">   &#125;</div><div class="line"></div><div class="line">   .Grid-cell &#123;</div><div class="line">     flex: 1;</div><div class="line">   &#125;</div></pre></td></tr></table></figure>
+<h4 id="222-百分比布局"><a name="t29"></a>2.2.2 百分比布局</h4>
+
+<p>某个网格的宽度为固定的百分比，其余网格平均分配剩余的空间。</p>
+
+<p><img src="http://www.ruanyifeng.com/blogimg/asset/2015/bg2015071322.png" alt="" title=""></p>
+
+<p>HTML代码如下。</p>
+
+
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&lt;div class=&quot;Grid&quot;&gt;</div><div class="line">     &lt;div class=&quot;Grid-cell u-1of4&quot;&gt;...&lt;/div&gt;</div><div class="line">     &lt;div class=&quot;Grid-cell&quot;&gt;...&lt;/div&gt;</div><div class="line">     &lt;div class=&quot;Grid-cell u-1of3&quot;&gt;...&lt;/div&gt;</div><div class="line">   &lt;/div&gt;</div></pre></td></tr></table></figure>
+<p>CSS代码如下。</p>
+
+
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">.Grid &#123;</div><div class="line">     display: flex;</div><div class="line">   &#125;</div><div class="line"></div><div class="line">   .Grid-cell &#123;</div><div class="line">     flex: 1;</div><div class="line">   &#125;</div><div class="line"></div><div class="line">   .Grid-cell.u-full &#123;</div><div class="line">     flex: 0 0 100%;</div><div class="line">   &#125;</div><div class="line"></div><div class="line">   .Grid-cell.u-1of2 &#123;</div><div class="line">     flex: 0 0 50%;</div><div class="line">   &#125;</div><div class="line"></div><div class="line">   .Grid-cell.u-1of3 &#123;</div><div class="line">     flex: 0 0 33.3333%;</div><div class="line">   &#125;</div><div class="line"></div><div class="line">   .Grid-cell.u-1of4 &#123;</div><div class="line">     flex: 0 0 25%;</div><div class="line">   &#125;</div></pre></td></tr></table></figure>
+<h3 id="23-圣杯布局"><a name="t30"></a>2.3 圣杯布局</h3>
+
+<p>圣杯布局（Holy Grail Layout）指的是一种最常见的网站布局。</p>
+
+<p>页面从上到下，分成三个部分：头部（header），躯干（body），尾部（footer）。</p>
+
+<p>其中躯干又水平分成三栏，从左到右为：导航、主栏、副栏。</p>
+
+<p><img src="http://www.ruanyifeng.com/blogimg/asset/2015/bg2015071323.png" alt="" title=""></p>
+
+<p>HTML代码如下。</p>
+
+
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">&lt;body    class=&quot;HolyGrail&quot;&gt;</div><div class="line">     &lt;header&gt;...&lt;/header&gt;</div><div class="line">     &lt;div class=&quot;HolyGrail-body&quot;&gt;</div><div class="line">       &lt;main class=&quot;HolyGrail-content&quot;&gt;...&lt;/main&gt;</div><div class="line">       &lt;nav class=&quot;HolyGrail-nav&quot;&gt;...&lt;/nav&gt;</div><div class="line">       &lt;aside class=&quot;HolyGrail-ads&quot;&gt;...&lt;/aside&gt;</div><div class="line">     &lt;/div&gt;</div><div class="line">     &lt;footer&gt;...&lt;/footer&gt;</div><div class="line">   &lt;/body&gt;</div></pre></td></tr></table></figure>
+<p>CSS代码如下。</p>
+
+
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line">.HolyGrail &#123;</div><div class="line">     display: flex;</div><div class="line">     min-height: 100vh;</div><div class="line">     flex-direction: column;</div><div class="line">   &#125;</div><div class="line"></div><div class="line">   header,</div><div class="line">   footer &#123;</div><div class="line">     flex: 1;</div><div class="line">   &#125;</div><div class="line"></div><div class="line">   .HolyGrail-body &#123;</div><div class="line">     display: flex;</div><div class="line">     flex: 1;</div><div class="line">   &#125;</div><div class="line"></div><div class="line">   .HolyGrail-content &#123;</div><div class="line">     flex: 1;</div><div class="line">   &#125;</div><div class="line"></div><div class="line">   .HolyGrail-nav, .HolyGrail-ads &#123;</div><div class="line">     /* 两个边栏的宽度设为12em */</div><div class="line">     flex: 0 0 12em;</div><div class="line">   &#125;</div><div class="line"></div><div class="line">   .HolyGrail-nav &#123;</div><div class="line">     /* 导航放到最左边 */</div><div class="line">     order: -1;</div><div class="line">   &#125;</div></pre></td></tr></table></figure>
+<p>如果是小屏幕，躯干的三栏自动变为垂直叠加。</p>
+
+
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">@media (max-width: 768px) &#123;</div><div class="line">     .HolyGrail-body &#123;</div><div class="line">       flex-direction: column;</div><div class="line">       flex: 1;</div><div class="line">     &#125;</div><div class="line">     .HolyGrail-nav,</div><div class="line">     .HolyGrail-ads,</div><div class="line">     .HolyGrail-content &#123;</div><div class="line">       flex: auto;</div><div class="line">     &#125;</div><div class="line">   &#125;</div></pre></td></tr></table></figure>
+<h3 id="24-输入框的布局"><a name="t31"></a>2.4 输入框的布局</h3>
+
+<p>我们常常需要在输入框的前方添加提示，后方添加按钮。</p>
+
+<p><img src="http://www.ruanyifeng.com/blogimg/asset/2015/bg2015071324.png" alt="" title=""></p>
+
+<p>HTML代码如下。</p>
+
+
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&lt;div class=&quot;InputAddOn&quot;&gt;</div><div class="line">     &lt;span class=&quot;InputAddOn-item&quot;&gt;...&lt;/span&gt;</div><div class="line">     &lt;input class=&quot;InputAddOn-field&quot;&gt;</div><div class="line">     &lt;button class=&quot;InputAddOn-item&quot;&gt;...&lt;/button&gt;</div><div class="line">   &lt;/div&gt;</div></pre></td></tr></table></figure>
+<p>CSS代码如下。</p>
+
+
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">.InputAddOn &#123;</div><div class="line">     display: flex;</div><div class="line">   &#125;</div><div class="line"></div><div class="line">   .InputAddOn-field &#123;</div><div class="line">     flex: 1;</div><div class="line">   &#125;</div></pre></td></tr></table></figure>
+<h3 id="25-悬挂式布局"><a name="t32"></a>2.5 悬挂式布局</h3>
+
+<p>有时，主栏的左侧或右侧，需要添加一个图片栏。</p>
+
+<p><img src="http://www.ruanyifeng.com/blogimg/asset/2015/bg2015071325.png" alt="" title=""></p>
+
+<p>HTML代码如下。</p>
+
+
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&lt;div class=&quot;Media&quot;&gt;</div><div class="line">     &lt;img class=&quot;Media-figure&quot; src=&quot;&quot; alt=&quot;&quot;&gt;</div><div class="line">     &lt;p class=&quot;Media-body&quot;&gt;...&lt;/p&gt;</div><div class="line">   &lt;/div&gt;</div></pre></td></tr></table></figure>
+<p>CSS代码如下。</p>
+
+
+
+<pre class="prettyprint" name="code"><code class="hljs css has-numbering">    
+    .Media {
+      display: flex;
+      align-items: flex-start;
+    }
+
+    .Media-figure {
+      margin-right: 1em;
+    }
+
+    .Media-body {
+      flex: 1;
+    }</code>
+</pre>
+
+
+
+<h3 id="26-固定的底栏"><a name="t33"></a>2.6 固定的底栏</h3>
+
+<p>有时，页面内容太少，无法占满一屏的高度，底栏就会抬高到页面的中间。</p>
+
+<p>这时可以采用Flex布局，让底栏总是出现在页面的底部。</p>
+
+<p><img src="http://www.ruanyifeng.com/blogimg/asset/2015/bg2015071326.png" alt="" title=""></p>
+
+<p>HTML代码如下。</p><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&lt;body class=&quot;Site&quot;&gt;</div><div class="line">     &lt;header&gt;...&lt;/header&gt;</div><div class="line">     &lt;main class=&quot;Site-content&quot;&gt;...&lt;/main&gt;</div><div class="line">     &lt;footer&gt;...&lt;/footer&gt;</div><div class="line">   &lt;/body&gt;</div></pre></td></tr></table></figure><br><br><p>CSS代码如下。</p>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">.Site &#123;</div><div class="line">     display: flex;</div><div class="line">     min-height: 100vh;</div><div class="line">     flex-direction: column;</div><div class="line">   &#125;</div><div class="line"></div><div class="line">   .Site-content &#123;</div><div class="line">     flex: 1;</div><div class="line">   &#125;</div></pre></td></tr></table></figure>
+<p>七，流式布局 <br><br>每行的项目数固定，会自动分行。</p>
+
+<p><img src="http://www.ruanyifeng.com/blogimg/asset/2015/bg2015071330.png" alt="" title=""></p>
+
+<p>CSS的写法。</p>
+
+
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">.parent &#123;</div><div class="line">     width: 200px;</div><div class="line">     height: 150px;</div><div class="line">     background-color: black;</div><div class="line">     display: flex;</div><div class="line">     flex-flow: row wrap;</div><div class="line">     align-content: flex-start;</div><div class="line">   &#125;</div><div class="line"></div><div class="line">   .child &#123;</div><div class="line">     box-sizing: border-box;</div><div class="line">     background-color: white;</div><div class="line">     flex: 0 0 25%;</div><div class="line">     height: 50px;</div><div class="line">     border: 1px solid red;</div><div class="line">   &#125;</div></pre></td></tr></table></figure>
+<h2 id="附录"><a name="t34"></a>附录</h2>
+
+<p>本文摘录网址：</p>
+
+<ol><br><li><a href="https://css-tricks.com/snippets/css/a-guide-to-flexbox/" target="_blank" rel="external">A Complete Guide to Flexbox</a></li><br><li><a href="http://www.ruanyifeng.com/blog/2015/07/flex-examples.html" target="_blank" rel="external">Flex 布局教程：实例篇</a></li><br><li><a href="http://www.ruanyifeng.com/blog/2015/07/flex-grammar.html" target="_blank" rel="external">Flex 布局教程：语法篇</a></li><br><li><a href="http://codepen.io/LandonSchropp/pen/KpzzGo" target="_blank" rel="external">骰子代码</a> </li><br><li><a href="http://www.w3cplus.com/css3/flexboxgeng-jia-you-ya-de-webbu-ju.html" target="_blank" rel="external">Flexible boxes更加优雅的Web布局</a></li><br><li><a href="http://blog.xsvoi.com/2016/01/27/Flexbox布局/" target="_blank" rel="external">Flexbox布局</a></li><br><li><a href="https://segmentfault.com/a/1190000003090028" target="_blank" rel="external">18个学习 flexbox 的优质资源</a></li><br><li><a href="http://demo.agektmr.com/flexbox/" target="_blank" rel="external">CSS Flexbox Please!</a></li><br><li><a href="http://flexboxfroggy.com" target="_blank" rel="external">FLEXBOX FROGGY</a></li><br></ol>
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+    <section id="comment">
+        <div class="card">
+            <div class="card-content">
+                <!-- Duoshuo Comment BEGIN -->
+                <div class="ds-thread" data-thread-key="2016/04/25/flex布局深解/" data-title="flex布局深解" data-url="http://bijun-steven.github.io/2016/04/25/flex布局深解/"></div>
+
+                <script type="text/javascript">
+                    console.log(document.querySelector('.ds-thread'));
+                    var duoshuoQuery = {
+                        short_name: 'bijun-steven'
+                    };
+                    (function() {
+                        var ds = document.createElement('script');
+                        ds.type = 'text/javascript';
+                        ds.async = true;
+                        ds.src = (document.location.protocol == 'https:'
+                            ? 'https:'
+                            : 'http:') + '//static.duoshuo.com/embed.js';
+                        ds.charset = 'UTF-8';
+                        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);
+                    })();
+                </script>
+                <!-- Duoshuo Comment END -->
+            </div>
+        </div>
+    </section>
+
+
+
+</div>
+
+        <div class="fixed-action-btn float-sitemap">
+    <a class="btn-floating btn-large pink">
+      <i class="fa fa-caret-square-o-up"></i>
+    </a>
+    <ul>
+      <li><a class="btn-return-top btn-floating waves-effect green" title="回到顶部"><i class="fa fa-arrow-circle-o-up"></i></a></li>
+      <li><a class="btn-floating waves-effect button-collapse yellow darken-1"  data-activates="main-menu" title="menu"><i class="fa fa-navicon"></i></a></li>
+    </ul>
+  </div>
+
+    </main>
+    <footer class="page-footer indigo darken-1">
+    
+    <div class="container">
+        <div class="row">
+            
+            <div class="social-group col m3 s12">
+                <h5 class="white-text">社交</h5>
+                
+                    <a class="social-link" href="http://weibo.com/u/3885282439?topnav=1&amp;wvr=6&amp;topsug=1&amp;is_all=1" target="_blank">
+                        <i class="fa fa-2x fa-weibo"></i>
+                    </a>
+                
+                    <a class="social-link" href="https://github.com/bijun-steven" target="_blank">
+                        <i class="fa fa-2x fa-github"></i>
+                    </a>
+                
+            </div>
+            
+
+            
+            <div class="col m9 s12">
+                <h5 class="white-text">友情链接</h5>
+                
+                    <a class="social-link" href="http://gold.xitu.io/welcome/frontend/" target="_blank">高质量的技术社区:掘金网</a>
+                
+                    <a class="social-link" href="http://www.qdfuns.com/" target="_blank">前端工程师必备网站:前端网</a>
+                
+            </div>
+            
+        </div>
+    </div>
+    
+
+    <div class="footer-copyright pink-link-context">
+        <div class="container" style="text-align:center">
+            © 2016 example.com, All rights reserved.
+            
+        </div>
+    </div>
+</footer>
+
+
+    <noscript>
+    <div class="noscript">
+        <p class="center-align">当前网速较慢或者你使用的浏览器不支持博客特定功能，请尝试刷新或换用Chrome、Firefox等现代浏览器</p>
+    </div>
+</noscript>
+<div class="noscript">
+    <p class="center-align">当前网速较慢或者你使用的浏览器不支持博客特定功能，请尝试刷新或换用Chrome、Firefox等现代浏览器</p>
+</div>
+
+
+<script src="/js/jquery.min.js"></script>
+<script src="/js/materialize.min.js"></script>
+
+<script>
+    (function($) {
+        $(document).ready(function() {
+            // 隐藏禁用javascript（针对微信内置浏览器）的提示
+            $('.noscript').hide();
+
+            // 图片缩放效果
+            var $imgs = $('img').not('.slider-image').not('.avatar-image').not('.carousel-image').not('.card-cover-image').not('.qrcode');
+
+            // 给图片加上点击放大效果（materialbox插件）
+            $imgs.addClass('materialboxed').each(function(i, el) {
+                $(this).attr('data-caption', $(this).attr('alt') || ' ');
+            }).materialbox();
+
+            // 优化表格的显示
+            $('table').each(function() {
+                var $table = $(this);
+                // 除去多行代码的情况
+                if ($table.find('pre').length == 0) {
+                    $table.addClass('responsive-table striped bordered');
+                }
+            });
+
+            // 首页幻灯片
+            $('.slider').slider({indicators: true, full_width: true, interval: 8000});
+
+            $(".button-collapse").sideNav();
+            $(".category-menu").sideNav();
+
+            // 针对gallery post
+            $('.carousel').carousel({full_width: true});
+            $('.carousel-control.prev').click(function() {
+                $('.carousel').carousel('prev');
+            });
+            $('.carousel-control.next').click(function() {
+                $('.carousel').carousel('next');
+            });
+
+            // 文章目录
+            $('article').not('.simple-article').find('h1').add('h2').add('h3').add('h4').add('h5').add('h6').scrollSpy();
+            // 修正文章目录的left-border颜色
+            var color = $('.table-of-contents-text').css('color');
+            $('.table-of-contents-link').css('border-left-color', color);
+
+            // 针对移动端做的优化：FAB按钮点击一下收回
+            if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+                $('.fixed-action-btn').addClass('click-to-toggle');
+            }
+            // 回到顶部
+            $('.btn-return-top').click(function() {
+                $('body, html').animate({
+                    scrollTop: 0
+                }, 500);
+            });
+
+            // 重置读书页面的Tab标签页的颜色
+            $('li.tab a').hover(function() {
+                $(this).toggleClass('text-lighten-4');
+            });
+            $('.indicator').addClass('pink lighten-2');
+
+            
+            // 添加new标签
+            $('.menu-reading').append('<span class="new badge pink"></span>');
+            
+
+            // 搜索功能
+            $('.modal-trigger').leanModal({
+                // 打开搜索框时自动聚焦
+                ready: function() {
+                    if ($('#search').is(":visible")) {
+                        $('#search-input').focus();
+                    }
+                }
+            });
+            var searchXml = "search.xml";
+            if (searchXml.length == 0) {
+             	searchXml = "search.xml";
+            }
+            var searchPath = "/" + searchXml;
+            initSearch(searchPath, 'search-input', 'search-result');
+        });
+
+        // 初始化搜索与匹配函数
+        var initSearch = function(path, search_id, content_id) {
+            'use strict';
+            $.ajax({
+                url: path,
+                dataType: "xml",
+                success: function(xmlResponse) {
+                    // get the contents from search data
+                    var datas = $("entry", xmlResponse).map(function() {
+                        return {
+                            title: $("title", this).text(),
+                            content: $("content", this).text(),
+                            url: $("url", this).text()
+                        };
+                    }).get();
+                    var $input = document.getElementById(search_id);
+                    var $resultContent = document.getElementById(content_id);
+                    $input.addEventListener('input', function() {
+                        var str = '<ul class=\"search-result-list\">';
+                        var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                        $resultContent.innerHTML = "";
+                        if (this.value.trim().length <= 0) {
+                            return;
+                        }
+                        // perform local searching
+                        datas.forEach(function(data) {
+                            var isMatch = true;
+                            var content_index = [];
+                            var data_title = data.title.trim().toLowerCase();
+                            var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                            var data_url = data.url;
+                            var index_title = -1;
+                            var index_content = -1;
+                            var first_occur = -1;
+                            // only match artiles with not empty titles and contents
+                            if (data_title != '' && data_content != '') {
+                                keywords.forEach(function(keyword, i) {
+                                    index_title = data_title.indexOf(keyword);
+                                    index_content = data_content.indexOf(keyword);
+                                    if (index_title < 0 && index_content < 0) {
+                                        isMatch = false;
+                                    } else {
+                                        if (index_content < 0) {
+                                            index_content = 0;
+                                        }
+                                        if (i == 0) {
+                                            first_occur = index_content;
+                                        }
+                                    }
+                                });
+                            }
+                            // show search results
+                            if (isMatch) {
+                                keywords.forEach(function(keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    data_title = data_title.replace(regS, "<span class=\"search-keyword pink lighten-2\">" + keyword + "</span>");
+                                });
+
+                                str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                                var content = data.content.trim().replace(/<[^>]+>/g, "");
+                                if (first_occur >= 0) {
+                                    // cut out 100 characters
+                                    var start = first_occur - 20;
+                                    var end = first_occur + 80;
+                                    if (start < 0) {
+                                        start = 0;
+                                    }
+                                    if (start == 0) {
+                                        end = 100;
+                                    }
+                                    if (end > content.length) {
+                                        end = content.length;
+                                    }
+                                    var match_content = content.substring(start, end);
+                                    // highlight all keywords
+                                    keywords.forEach(function(keyword) {
+                                        var regS = new RegExp(keyword, "gi");
+                                        match_content = match_content.replace(regS, "<span class=\"search-keyword pink lighten-2\">" + keyword + "</span>");
+                                    });
+
+                                    str += "<p class=\"search-result\">..." + match_content + "...</p>"
+                                }
+                                str += "</li>";
+                            }
+                        });
+                        str += "</ul>";
+                        $resultContent.innerHTML = str;
+                    });
+                }
+            });
+        }
+    })(jQuery);
+</script>
+
+
+<script src="/js/prettify.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $("pre").addClass("prettyprint");
+        prettyPrint();
+    });
+</script>
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+});
+</script>
+<script type="text/javascript" async
+  src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+
+</body>
+</html>

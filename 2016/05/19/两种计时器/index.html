@@ -7,13 +7,17 @@
 
     
 
-    <title>读书 | 梦开始的地方</title>
+    <title>两种计时器 | 梦开始的地方</title>
     <meta name="author" content="steven">
+    
+    <meta name="description" content="两种计时器setInterval();setTimeout(）;
+setInterval();循环计时器clearInterval();清除循环计时器setTimeout(）;设定延迟计时器clearTimeout();清除延迟计时器参数1是函数或者函数名，第二个参数是时间单位ms
+12345678">
     
     
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-    <meta property="og:title" content="读书"/>
+    <meta property="og:title" content="两种计时器"/>
     <meta property="og:site_name" content="勿忘初心"/>
 
     
@@ -158,159 +162,64 @@
 
 
     <main>
+        <div class="container main-container">
+    <nav class="page-nav hide-on-small-only">
+    <div class="nav-wrapper indigo">
+        <span class="breadcrumb">当前位置（分类目录）</span>
+        
+            
+
         
 
-<div class="container main-container">
+        
+    </div>
+</nav>
+
+<article>
+    <div class="card">
+        <div class="card-content">
+            
+
+            <div class="article-title">
+                
     
-        <div class="">
-            <div class="row">
-                <ul class="tabs ">
-                    
-                        <li class="tab col s4 ">
-                            <a class="pink-text " href="#readed">已读(2)</a>
-                        </li>
-                    
-                        <li class="tab col s4 ">
-                            <a class="pink-text " href="#reading">在读(1)</a>
-                        </li>
-                    
-                        <li class="tab col s4 ">
-                            <a class="pink-text " href="#wanted">想读(1)</a>
-                        </li>
-                    
-                </ul>
+        <h1>两种计时器</h1>
+    
+
+
             </div>
+            <time class="pink-link-context" datetime="2016-05-19T07:52:19.000Z"><a href="/2016/05/19/两种计时器/">2016-05-19</a></time>
 
             
-                <div id="readed" class="row" style="margin-top: 20px;">
-                    
-                    
-                        <div class="book-item col s12 m6">
-                            <div class="card small hoverable">
-                                <div class="card-image waves-effect waves-block waves-light">
-                                    <img class="card-cover-image activator" src="https://img3.doubanio.com/lpic/s28033372.jpg">
-                                </div>
-                                <div class="card-content pink-link-context">
-                                    <span class="card-title truncate activator grey-text text-darken-4">你不知道的JavaScript（上卷）
-                                    </span>
-                                    <p>评分: 7
-                                        <a class="external-link right" href="https://book.douban.com/subject/26351021/" target="_blank">
-
-                                            <i class="fa fa-external-link"></i>
-                                        </a>
-                                    </p>
-                                </div>
-
-                                <div class="card-reveal">
-                                    <span class="card-title grey-text text-darken-4">简评
-                                        <i class="fa fa-times-circle-o right"></i>
-                                    </span>
-
-                                    <p>让不求甚解的JavaScript开发者迎难而上，深入语言内部，弄清楚JavaScript每一个零部件的用途</p>
-                                </div>
-                            </div>
-                        </div>
-                    
-                        <div class="book-item col s12 m6">
-                            <div class="card small hoverable">
-                                <div class="card-image waves-effect waves-block waves-light">
-                                    <img class="card-cover-image activator" src="https://img3.doubanio.com/lpic/s24951890.jpg">
-                                </div>
-                                <div class="card-content pink-link-context">
-                                    <span class="card-title truncate activator grey-text text-darken-4">HTML &amp; CSS设计与构建网站
-                                    </span>
-                                    <p>评分: 8.5
-                                        <a class="external-link right" href="https://book.douban.com/subject/21338365/" target="_blank">
-
-                                            <i class="fa fa-external-link"></i>
-                                        </a>
-                                    </p>
-                                </div>
-
-                                <div class="card-reveal">
-                                    <span class="card-title grey-text text-darken-4">简评
-                                        <i class="fa fa-times-circle-o right"></i>
-                                    </span>
-
-                                    <p>每一页都在短小精悍的示例代码的引导下，简明直观、直截了当地阐述一个新主题。本书还提供关于如何组织和设计网页的实用信息，以便帮助您创建充满魅力、易于使用的网站。学习本书不要求您具有任何经验！</p>
-                                </div>
-                            </div>
-                        </div>
-                    
-                </div>
-            
-                <div id="reading" class="row" style="margin-top: 20px;">
-                    
-                    
-                        <div class="book-item col s12 m6">
-                            <div class="card small hoverable">
-                                <div class="card-image waves-effect waves-block waves-light">
-                                    <img class="card-cover-image activator" src="https://img3.doubanio.com/lpic/s4388771.jpg">
-                                </div>
-                                <div class="card-content pink-link-context">
-                                    <span class="card-title truncate activator grey-text text-darken-4">编写高质量代码
-                                    </span>
-                                    <p>评分: ???
-                                        <a class="external-link right" href="https://book.douban.com/subject/4881987/" target="_blank">
-
-                                            <i class="fa fa-external-link"></i>
-                                        </a>
-                                    </p>
-                                </div>
-
-                                <div class="card-reveal">
-                                    <span class="card-title grey-text text-darken-4">简评
-                                        <i class="fa fa-times-circle-o right"></i>
-                                    </span>
-
-                                    <p></p>
-                                </div>
-                            </div>
-                        </div>
-                    
-                </div>
-            
-                <div id="wanted" class="row" style="margin-top: 20px;">
-                    
-                    
-                        <div class="book-item col s12 m6">
-                            <div class="card small hoverable">
-                                <div class="card-image waves-effect waves-block waves-light">
-                                    <img class="card-cover-image activator" src="https://img3.doubanio.com/lpic/s27989530.jpg">
-                                </div>
-                                <div class="card-content pink-link-context">
-                                    <span class="card-title truncate activator grey-text text-darken-4">Web前端开发最佳实践
-                                    </span>
-                                    <p>评分: ???
-                                        <a class="external-link right" href="https://book.douban.com/subject/26305106/" target="_blank">
-
-                                            <i class="fa fa-external-link"></i>
-                                        </a>
-                                    </p>
-                                </div>
-
-                                <div class="card-reveal">
-                                    <span class="card-title grey-text text-darken-4">简评
-                                        <i class="fa fa-times-circle-o right"></i>
-                                    </span>
-
-                                    <p></p>
-                                </div>
-                            </div>
-                        </div>
-                    
-                </div>
-            
-
-        </div>
+    <div class="tags-row">
         
+            <a href="/tags/js/" class="chip pink lighten-1">js</a>
+        
+    </div>
+
+
+            <div class="toc pink-link-context hide-on-med-and-down">
+    <ol class="section table-of-contents"><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#两种计时器"><span class="section table-of-contents-text">两种计时器</span></a></li></ol>
+</div>
+
+
+            <div class="entry pink-link-context">
+                <h2 id="两种计时器"><a href="#两种计时器" class="headerlink" title="两种计时器"></a>两种计时器</h2><p>setInterval();<br>setTimeout(）;</p>
+<p>setInterval();循环计时器<br>clearInterval();清除循环计时器<br>setTimeout(）;设定延迟计时器<br>clearTimeout();清除延迟计时器<br>参数1是函数或者函数名，第二个参数是时间单位ms</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">&lt;!DOCTYPE html&gt;</div><div class="line">&lt;html&gt;</div><div class="line">&lt;head&gt;</div><div class="line">	&lt;meta charset=&quot;utf-8&quot;&gt;</div><div class="line">	&lt;title&gt;&lt;/title&gt;</div><div class="line">&lt;/head&gt;</div><div class="line">&lt;body&gt;</div><div class="line">	&lt;script type=&quot;text/javascript&quot;&gt;</div><div class="line">		// setInterval();循环计时器</div><div class="line">		// setInterval();循环计时器</div><div class="line">		// clearInterval();清除循环计时器</div><div class="line">		// clearTimeout();清除延迟计时器</div><div class="line">		// 参数1是函数或者函数名，第二个参数是时间单位ms</div><div class="line">		</div><div class="line">		setInterval(fn,1000);</div><div class="line">		function fn()&#123;</div><div class="line">			console.log(&quot;2&quot;);</div><div class="line">		&#125;</div><div class="line"></div><div class="line">		setInterval(function() &#123;</div><div class="line">			console.log(&quot;1&quot;);</div><div class="line">		&#125;,1)</div><div class="line"></div><div class="line">		// var timer =setInterval(fv,100);</div><div class="line">		// function fv()&#123;</div><div class="line">		// 	num ++;</div><div class="line">		// 	console.log(num);</div><div class="line">		// &#125;</div><div class="line">		// clearInterval(timer);</div><div class="line"></div><div class="line"></div><div class="line">		setTimeout(function()&#123;</div><div class="line">			console.log(&quot;9&quot;)</div><div class="line">		&#125;,10000)</div><div class="line">	&lt;/script&gt;</div><div class="line">&lt;/body&gt;</div><div class="line">&lt;/html&gt;</div></pre></td></tr></table></figure>
+            </div>
+        </div>
+    </div>
+</article>
+
+
 
 
     <section id="comment">
         <div class="card">
             <div class="card-content">
                 <!-- Duoshuo Comment BEGIN -->
-                <div class="ds-thread" data-thread-key="reading/index.html" data-title="读书" data-url="http://bijun-steven.github.io/reading/index.html"></div>
+                <div class="ds-thread" data-thread-key="2016/05/19/两种计时器/" data-title="两种计时器" data-url="http://bijun-steven.github.io/2016/05/19/两种计时器/"></div>
 
                 <script type="text/javascript">
                     console.log(document.querySelector('.ds-thread'));
@@ -334,7 +243,7 @@
     </section>
 
 
-    
+
 </div>
 
         <div class="fixed-action-btn float-sitemap">
