@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Bootstrap 实例 - 响应式的导航栏</title>
+  <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css"/>
+  <link rel="stylesheet" href="css/animate.min.css" type="text/css" />
+  <link href="images/favicon.ico" type="image/x-icon" rel="shortcut icon"/>
+  <script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
+  <script type="text/javascript" src="js/bootstrap.min.js" ></script>
+  <script type="text/javascript" src="js/wow.js"></script>
+  <script>new WOW().init();</script>
+  <style>
+    header{
+      position: relative;
+      z-index: 1000;
+      background: #000;
+    }
+    nav{
+      background: #000! important;
+      border:0px!important;
+      margin-bottom: 0px! important;
+    }
+    button{
+      background: transparent;
+      
+      margin-top: 40px! important;
+    }
+    button:hover{
+      background: white! important;
+    }
+    .navbar-toggle span{
+      background: #DAB866! important;
+    }
+    .logo{
+      width: 311px;
+      height: 100px;
+    }
+    .nav{
+      vertical-align: middle;
+      padding: 20px 0;
+      text-align: center;
+    }
+    .container-fluid:after{
+      display:block;
+      clear:both;
+      content:"";
+      visibility:hidden;
+      height:0
+    }
+    .container-fluid{
+      zoom:1
+    } 
+ 
+    .nav li a{
+      color: #DAB866! important;
+    }
+    .nav li a:hover{
+      color: white! important;
+    }
+    span{
+      display: block;
+    }
+    .active{
+      color: white;
+    }
+    .dropdown-menu{
+      background: #DAB866! important;
+      text-align: center;
+      border-radius: 5px! important;
+    }
+    .dropdown-menu li a:hover{
+      background: #DAB866! important;
+    }
+    .dropdown-menu li a{
+      color: white! important;
+    }
+    .dropdown-toggle{
+      background: #000! important;
+    }
+    .log-reg{
+      float: left;
+      line-height: 110px;
+    }
+    .log-reg a{
+      color: #DAB866;
+    }
+    .zhuan{
+      float: right;
+      line-height: 110px;
+      animation: spin 6s linear infinite;
+}
+
+  </style>
+</head>
+<body>
+<header>
+  <div class="container">
+    <nav class="navbar navbar-default" role="navigation">
+      <div class="container-fluid"> 
+        <div class="navbar-header" style="float:left">
+          <button type="button" class="navbar-toggle" data-toggle="collapse"
+              data-target="#example-navbar-collapse">
+            <span class="sr-only">切换导航</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a href="index.html" ><img class="navbar-brand fadeInLeft wow logo" src="images/logo.png"/></a>
+        </div>
+        <div class="collapse navbar-collapse fadeInRight wow" id="example-navbar-collapse" style="float:left">
+          <ul class="nav navbar-nav">
+            <li><a href="index.html" class="active">首　页<span>HOME</span></a></li>
+            <li class="dropdown">
+              <a href="service.html" class="dropdown-toggle" data-toggle="dropdown">
+                俱乐部服务 <b class="caret"></b><span>Rave Club Service</span>
+              </a>
+              <ul class="dropdown-menu">
+                <li><a href="lifeserver.html">生活服务</a></li>
+                <li><a href="service.html">出行服务</a></li>
+                <li><a href="business.html">事业服务</a></li>
+              </ul>
+            </li>
+            <li><a href="personal.html">私人定制<span>Yc Travel</span></a>
+            <li ><a href="member.html">会员申请<span>Membership Application</span></a></li>
+          </ul>
+        </div>
+        <div class="log-reg"><a href="">登录</a><a href="">注册</a></div>
+        <div class="zhuan"><img src="images/zhuan.png"/></div>
+    </div>
+  </nav>
+</div>
+</header>
+
+
+
+</body>
+</html>

@@ -7,13 +7,16 @@
 
     
 
-    <title>归档：2016 | 梦开始的地方</title>
+    <title>Vue.js中组件props数据传递简单示例 | 梦开始的地方</title>
     <meta name="author" content="steven">
+    
+    <meta name="description" content="Vue.js中的组件非常重要，我们首先还是先来理清其中比较简单的部分，用props传递数据。首先什么是props呢？1组件实例的作用域是孤立的。这意味着不能并且不应该在子组件的模板内直接引用父组件的数据。可以使用 props 把数据传给子组件。
+官方的解释，反正就是组件不让用父组件的data，也就是">
     
     
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-    
+    <meta property="og:title" content="Vue.js中组件props数据传递简单示例"/>
     <meta property="og:site_name" content="勿忘初心"/>
 
     
@@ -159,88 +162,92 @@
 
     <main>
         <div class="container main-container">
-    
-
-<nav class="page-nav hide-on-small-only">
+    <nav class="page-nav hide-on-small-only">
     <div class="nav-wrapper indigo">
-        <span class="breadcrumb">当前位置（归档）</span>
+        <span class="breadcrumb">当前位置（分类目录）</span>
+        
+            
+
         
 
         
     </div>
 </nav>
 
+<article>
+    <div class="card">
+        <div class="card-content">
+            
+
+            <div class="article-title">
+                
+    
+        <h1>Vue.js中组件props数据传递简单示例</h1>
+    
 
 
-    <ul class="collapsible mt-0" data-collapsible="accordion">
+            </div>
+            <time class="pink-link-context" datetime="2016-11-11T02:42:51.000Z"><a href="/2016/11/11/2016-11-11/">2016-11-11</a></time>
+
+            
+    <div class="tags-row">
         
+            <a href="/tags/vue/" class="chip pink lighten-1">vue</a>
         
-            <li>
-                <div class="collapsible-header active">
-                    <i class="fa fa-archive"></i>2016
-                </div>
-                <div class="collapsible-body">
-                    <div class="collection">
-                        
-                            <a href="/2016/11/26/验证码倒计时/" class="collection-item grey-text text-darken-1">
-                                <time datetime="2016-11-26T01:11:15.000Z">2016-11-26</time>
-                                <span>&nbsp;&nbsp;&nbsp;</span>
-                                jQuery发送验证码60秒倒计时
-                            </a>
-                        
-                            <a href="/2016/11/11/2016-11-11/" class="collection-item grey-text text-darken-1">
-                                <time datetime="2016-11-11T02:42:51.000Z">2016-11-11</time>
-                                <span>&nbsp;&nbsp;&nbsp;</span>
-                                Vue.js中组件props数据传递简单示例
-                            </a>
-                        
-                            <a href="/2016/04/25/ajax/" class="collection-item grey-text text-darken-1">
-                                <time datetime="2016-04-25T14:16:46.000Z">2016-04-25</time>
-                                <span>&nbsp;&nbsp;&nbsp;</span>
-                                ajax
-                            </a>
-                        
-                            <a href="/2016/03/15/shopCar/" class="collection-item grey-text text-darken-1">
-                                <time datetime="2016-03-15T13:43:29.000Z">2016-03-15</time>
-                                <span>&nbsp;&nbsp;&nbsp;</span>
-                                原生JS实现购物车
-                            </a>
-                        
-                            <a href="/2016/03/06/js点击下载/" class="collection-item grey-text text-darken-1">
-                                <time datetime="2016-03-06T13:06:08.000Z">2016-03-06</time>
-                                <span>&nbsp;&nbsp;&nbsp;</span>
-                                使用js实现点击按钮下载文件
-                            </a>
-                        
-                            <a href="/2016/02/23/cookie/" class="collection-item grey-text text-darken-1">
-                                <time datetime="2016-02-23T01:37:42.000Z">2016-02-23</time>
-                                <span>&nbsp;&nbsp;&nbsp;</span>
-                                js中利用cookie实现记住密码功能
-                            </a>
-                        
-                            <a href="/2016/02/11/正则表达式/" class="collection-item grey-text text-darken-1">
-                                <time datetime="2016-02-11T13:30:02.000Z">2016-02-11</time>
-                                <span>&nbsp;&nbsp;&nbsp;</span>
-                                9个常用的正则表达式
-                            </a>
-                        
-                            <a href="/2016/01/10/js冒泡/" class="collection-item grey-text text-darken-1">
-                                <time datetime="2016-01-10T03:08:37.000Z">2016-01-10</time>
-                                <span>&nbsp;&nbsp;&nbsp;</span>
-                                JS阻止冒泡方法
-                            </a>
-                        
-                            <a href="/2016/01/04/2016-01-04/" class="collection-item grey-text text-darken-1">
-                                <time datetime="2016-01-04T02:58:24.000Z">2016-01-04</time>
-                                <span>&nbsp;&nbsp;&nbsp;</span>
-                                移动端1px的边框
-                            </a>
-                        
-                    </div>
-                </div>
-            </li>
-        
-    </ul>
+    </div>
+
+
+            <div class="toc pink-link-context hide-on-med-and-down">
+    
+</div>
+
+
+            <div class="entry pink-link-context">
+                <p> Vue.js中的组件非常重要，我们首先还是先来理清其中比较简单的部分，用props传递数据。<br>首先什么是props呢？<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">组件实例的作用域是孤立的。这意味着不能并且不应该在子组件的模板内直接引用父组件的数据。可以使用 props 把数据传给子组件。</div></pre></td></tr></table></figure></p>
+<p>官方的解释，反正就是组件不让用父组件的data，也就是说不能把new Vue里写好的data当做公用的来用了，必须一步步的传递给子组件。OK，上代码看<br>首先是html部分，简单的写一个app<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;div id=<span class="string">"app3"</span>&gt;</div><div class="line">    &lt;my-component :showname="showname" :data="data" :shownone="shownone"&gt;&lt;/my-component&gt;</div><div class="line">&lt;/div&gt;</div></pre></td></tr></table></figure></p>
+<p>拉下来是js部分 </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line">&lt;script type=<span class="string">"text/javascript"</span>&gt;</div><div class="line">    <span class="keyword">var</span> mycom2 = Vue.extend(&#123;</div><div class="line">        <span class="attr">template</span>:<span class="string">'&#123;&#123;data.name&#125;&#125;&lt;br/&gt;&#123;&#123;data.age&#125;&#125;&lt;br/&gt;&#123;&#123;showname&#125;&#125;&lt;br/&gt;&#123;&#123;bname&#125;&#125;&lt;br/&gt;&#123;&#123;bdata.bchild&#125;&#125;'</span>,</div><div class="line">        <span class="attr">props</span>:[<span class="string">'showname'</span>,<span class="string">'data'</span>,<span class="string">'bname'</span>,<span class="string">'bdata'</span>]</div><div class="line">    &#125;);</div><div class="line">    <span class="keyword">var</span> bind_data = &#123;</div><div class="line">        <span class="attr">bname</span>:<span class="string">'外部绑定的名字在这里(来自mycom组件并且是外部定义的var，试试console里修改bind_data.bname=XXXX)'</span>,</div><div class="line">        <span class="attr">bdata</span>:&#123;</div><div class="line">            <span class="attr">bchild</span>:<span class="string">'外部的child(来自mycom组件并且是外部定义的var，试试console里修改bind_data.bdata.bchild=XXXX)'</span></div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">var</span> mycom = Vue.component(<span class="string">'my-component'</span>,&#123;</div><div class="line">        <span class="attr">template</span>:<span class="string">'&#123;&#123;showname&#125;&#125;：&lt;br/&gt;&lt;my-component2 :data="data" :bname="bname" :bdata="bdata" showname="直接显示名字(来自直接传递)"&gt;&lt;/my-component2&gt;&lt;br/&gt;shownone:&#123;&#123;shownone&#125;&#125;'</span>,</div><div class="line">        <span class="attr">props</span>:[<span class="string">'showname'</span>,<span class="string">'data'</span>],</div><div class="line">        <span class="attr">components</span>:&#123;</div><div class="line">            <span class="string">'my-component2'</span>:mycom2</div><div class="line">        &#125;,</div><div class="line">        <span class="attr">data</span>:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">            <span class="keyword">return</span> bind_data;</div><div class="line">        &#125;</div><div class="line">    &#125;);</div><div class="line">    <span class="keyword">new</span> Vue(&#123;</div><div class="line">        <span class="attr">el</span>:<span class="string">'#app3'</span>,</div><div class="line">        <span class="attr">data</span>:&#123;</div><div class="line">            <span class="string">'showname'</span>:<span class="string">'测试通信(来自vue)'</span>,</div><div class="line">            <span class="string">'data'</span>:&#123;</div><div class="line">                <span class="attr">name</span>:<span class="string">'名字(来自vue)'</span>,</div><div class="line">                <span class="attr">age</span>:<span class="string">'年龄(来自vue)'</span></div><div class="line">            &#125;,</div><div class="line">            <span class="string">'shownone'</span>:<span class="string">'这段显示不出来'</span></div><div class="line">        &#125;</div><div class="line">    &#125;)</div><div class="line">&lt;<span class="regexp">/script&gt;</span></div></pre></td></tr></table></figure>
+<p>1.先从下往上看，我们在Vue对象中定义了一个data，里面有三个字段，showname,data,shownone，在第一级组件my-component中显示showname,shownone，可以看出，如果不在mycom的props属性中加入shownone的话，shownone是无法显示的</p>
+<p>2.在mycom中，也定义了一个data，并且使用了外部变量bind_data，另外给mycom2传递的showname没有用:号，也就是不是绑定的数据，直接传递的字符串，同时将Vue对象中的data直接传递到下一层</p>
+<p>3.mycom2的模板就是把上几级传来的东西全部显示出来 </p>
+<p> 大家测试的时候，可以使用console来调试变量，可以修改mycom和mycom2中的props来体会效果。</p>
+<p>官方文档链接：<a href="http://cn.vuejs.org/guide/components.html#u52A8_u6001_Props" target="_blank" rel="external">http://cn.vuejs.org/guide/components.html#u52A8_u6001_Props</a> </p>
+
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+    <section id="comment">
+        <div class="card">
+            <div class="card-content">
+                <!-- Duoshuo Comment BEGIN -->
+                <div class="ds-thread" data-thread-key="2016/11/11/2016-11-11/" data-title="Vue.js中组件props数据传递简单示例" data-url="http://bijun-steven.github.io/2016/11/11/2016-11-11/"></div>
+
+                <script type="text/javascript">
+                    console.log(document.querySelector('.ds-thread'));
+                    var duoshuoQuery = {
+                        short_name: 'bijun-steven'
+                    };
+                    (function() {
+                        var ds = document.createElement('script');
+                        ds.type = 'text/javascript';
+                        ds.async = true;
+                        ds.src = (document.location.protocol == 'https:'
+                            ? 'https:'
+                            : 'http:') + '//static.duoshuo.com/embed.js';
+                        ds.charset = 'UTF-8';
+                        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);
+                    })();
+                </script>
+                <!-- Duoshuo Comment END -->
+            </div>
+        </div>
+    </section>
+
 
 
 </div>
